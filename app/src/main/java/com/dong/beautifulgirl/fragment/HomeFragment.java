@@ -40,6 +40,8 @@ public class HomeFragment extends Fragment {
     private String mParam2;
     private Context context;
     private View inflateView;
+    private ListView listView;
+    private PointViewPager pointViewPager;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -95,7 +97,7 @@ public class HomeFragment extends Fragment {
 
     private void initPointLoopViewpager(View view) {
         inflateView = View.inflate(context, R.layout.home_pointviewpager, null);
-        PointViewPager pointViewPager = inflateView.findViewById(R.id.home_pointviewpager);
+        pointViewPager = inflateView.findViewById(R.id.home_pointviewpager);
         if (pointViewPager != null) {
             LoopViewPager loopViewPager = pointViewPager.getLoopViewPager();
             PointView pointView = pointViewPager.getPointView();
@@ -132,11 +134,11 @@ public class HomeFragment extends Fragment {
 
 
     private void initListView(View view) {
-        ListView listView = view.findViewById(R.id.home_listview);
+        listView = view.findViewById(R.id.home_listview);
 
         List<String> list = new ArrayList<String>();
 
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 50; i++) {
             list.add(i+"");
         }
 
