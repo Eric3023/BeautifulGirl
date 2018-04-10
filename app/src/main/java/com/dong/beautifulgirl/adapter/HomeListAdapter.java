@@ -1,11 +1,8 @@
 package com.dong.beautifulgirl.adapter;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -49,7 +46,7 @@ public class HomeListAdapter extends BaseAdapter {
         ViewHolder viewHolder = null;
         if (view == null) {
             viewHolder = new ViewHolder();
-            view = View.inflate(context, R.layout.home_listview_item, null);
+            view = View.inflate(context, R.layout.item_home_listview, null);
             viewHolder.img = (ImageView) view.findViewById(R.id.home_listview_img);
             viewHolder.title = (TextView) view.findViewById(R.id.home_listview_title);
             viewHolder.content = (TextView) view.findViewById(R.id.home_listview_content);

@@ -14,7 +14,7 @@
         android:layout_marginLeft="@dimen/x10"
         android:gravity="center"
         android:text="所谓伊人"
-        android:textSize="@dimen/x18"
+        android:textSize="@dimen/x15"
         android:textColor="@android:color/white"/>
 
 </android.support.constraint.ConstraintLayout>

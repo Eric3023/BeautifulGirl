@@ -53,7 +53,10 @@ public class SplashActivity extends BaseActivity {
 
                     @Override
                     public void onNext(String s) {
-                        startComponent(GuideActivity.class);
+                        if(getIsFirstStart())
+                            startComponent(GuideActivity.class);
+                        else
+                            startComponent(MainActivity.class);
                         finish();
                     }
 
@@ -70,11 +73,19 @@ public class SplashActivity extends BaseActivity {
 
     }
 
-    /*
+    /**
+     * @return true第一次安装启动，false不是第一次安装启动
+     */
+    private boolean getIsFirstStart() {
+        return false;
+    }
+
+    /**
      * 初始化欢迎页启动图片
      */
     private void initView() {
         ImageView splashImg = findViewById(R.id.splash_img);
         Glide.with(this).load(R.drawable.splash_bg_animation).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).centerCrop().into(splashImg);
     }
+
 }

@@ -2,18 +2,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dong.beautifulgirl.fragment.HomeFragment">
+    tools:context="com.dong.beautifulgirl.recommendmodular.RecommendFragment">
 
-    <include
-        android:id="@+id/home_toptitle"
+    <include android:id="@+id/recommend_toptitle"
         layout="@layout/include_toptitle">
     </include>
 
-    <ListView
-        android:id="@+id/home_listview"
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recommend_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/home_toptitle">
-    </ListView>
+        android:layout_below="@id/recommend_toptitle">
+    </android.support.v7.widget.RecyclerView>
 
 </RelativeLayout>

@@ -13,6 +13,8 @@ import com.dong.beautifulgirl.fragment.HomeFragment;
 import com.dong.beautifulgirl.fragment.MesseageFragment;
 import com.dong.beautifulgirl.fragment.MineFragment;
 import com.dong.beautifulgirl.fragment.TopicFragment;
+import com.dong.beautifulgirl.recommendmodular.RecommendFragment;
+import com.dong.beautifulgirl.recommendmodular.RecommendPresent;
 import com.dong.beautifulgirl.util.ToastUtil;
 import com.dong.tabviewpager.widget.BottomTabFragmentViewPager;
 import com.dong.tabviewpager.widget.FragmentViewPager;
@@ -42,13 +44,14 @@ public class MainActivity extends BaseActivity{
      */
     private void initData() {
         Fragment homeFragment = HomeFragment.newInstance("home", "0");
-        Fragment topicFragment = TopicFragment.newInstance("topic", "1");
-        Fragment messeageFragment = MesseageFragment.newInstance("messeage", "2");
-        Fragment mineFragment = MineFragment.newInstance("mine", "3");
+        RecommendFragment recommendfragment = RecommendFragment.newInstance("recommend", "1");
+        Fragment findFragment = com.dong.beautifulgirl.findmodular.HomeFragment.newInstance("messeage", "2");
+        Fragment mineFragment = com.dong.beautifulgirl.minemodular.HomeFragment.newInstance("mine", "3");
 
         fragments.add(homeFragment);
-        fragments.add(topicFragment);
-        fragments.add(messeageFragment);
+        fragments.add(recommendfragment);
+        RecommendPresent recommendPresent = new RecommendPresent(recommendfragment);
+        fragments.add(findFragment);
         fragments.add(mineFragment);
     }
 
