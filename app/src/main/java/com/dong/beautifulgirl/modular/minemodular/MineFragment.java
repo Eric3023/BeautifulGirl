@@ -1,23 +1,25 @@
-package com.dong.beautifulgirl.fragment;
+package com.dong.beautifulgirl.modular.minemodular;
 
-import android.content.Context;
-import android.net.Uri;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.dong.beautifulgirl.R;
+import com.dong.beautifulgirl.util.ToastUtil;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * to handle interaction events.
  * Use the {@link MineFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MineFragment extends Fragment {
+public class MineFragment extends Fragment implements MineContract.View, MineAdapter.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -26,6 +28,12 @@ public class MineFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private MineContract.Presenter presenter;
+    private RecyclerView recyclerView;
+
+    private final int CLUM_NUM = 2;
+    private MineAdapter recommendAdapter;
 
     public MineFragment() {
         // Required empty public constructor
@@ -37,7 +45,7 @@ public class MineFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment MineFragment.
+     * @return A new instance of fragment RecommendFragment.
      */
     // TODO: Rename and change types and number of parameters
     public static MineFragment newInstance(String param1, String param2) {
@@ -61,17 +69,37 @@ public class MineFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_mine, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_recommend, container, false);
+
+        initView(view);
+
+        if (presenter != null)
+            presenter.start();
+
+        return view;
+    }
+
+    private void initView(View view) {
+        recyclerView = view.findViewById(R.id.recommend_recyclerview);
+        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(CLUM_NUM, StaggeredGridLayoutManager.VERTICAL);
+        recyclerView.setLayoutManager(layoutManager);
     }
 
     @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
+    public void RecommendDataChanged(List<MineBean> recommendBeans) {
+        recommendAdapter = new MineAdapter(recommendBeans);
+        recommendAdapter.setOnClickListener(this);
+        recyclerView.setAdapter(recommendAdapter);
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
+    public void setPresenter(MineContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public void onClick(List<MineBean> recommendBeans, int position) {
+        ToastUtil.toastLong(getContext(), "数据内容为：" + recommendBeans.get(position).getContent());
     }
 }

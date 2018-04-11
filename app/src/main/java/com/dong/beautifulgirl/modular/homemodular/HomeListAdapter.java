@@ -1,4 +1,4 @@
-package com.dong.beautifulgirl.adapter;
+package com.dong.beautifulgirl.modular.homemodular;
 
 import android.content.Context;
 import android.view.View;
@@ -18,17 +18,17 @@ import java.util.List;
 
 public class HomeListAdapter extends BaseAdapter {
 
-    private List<String> list;
+    private List<HomeBean> list;
     private Context context;
 
-    public HomeListAdapter(Context context, List<String> list) {
+    public HomeListAdapter(Context context, List<HomeBean> list) {
         this.context = context;
         this.list = list;
     }
 
     @Override
     public int getCount() {
-        return list!=null? list.size():0;
+        return list != null ? list.size() : 0;
     }
 
     @Override
@@ -54,9 +54,13 @@ public class HomeListAdapter extends BaseAdapter {
         } else {
             viewHolder = (ViewHolder) view.getTag();
         }
-        Picasso.get().load(R.drawable.guide_img2).resize((int)context.getResources().getDimension(R.dimen.x100),(int)context.getResources().getDimension(R.dimen.y50)).into(viewHolder.img);
-        viewHolder.title.setText("巴萨大使：阿图尔能在巴萨成功"+list.get(i));
-        viewHolder.content.setText("巴萨大使：阿图尔能在巴萨成功"+list.get(i));
+
+        HomeBean bean = list.get(i);
+        if (bean != null) {
+            Picasso.get().load(bean.getImgId()).resize((int) context.getResources().getDimension(R.dimen.x100), (int) context.getResources().getDimension(R.dimen.y50)).into(viewHolder.img);
+            viewHolder.title.setText(bean.getTitle());
+            viewHolder.content.setText(bean.getContent());
+        }
         return view;
     }
 }

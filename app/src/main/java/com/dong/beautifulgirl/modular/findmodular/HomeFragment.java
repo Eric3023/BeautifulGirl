@@ -1,4 +1,4 @@
-package com.dong.beautifulgirl.findmodular;
+package com.dong.beautifulgirl.modular.findmodular;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.dong.beautifulgirl.R;
-import com.dong.beautifulgirl.adapter.HomeListAdapter;
+import com.dong.beautifulgirl.modular.homemodular.HomeListAdapter;
 import com.dong.beautifulgirl.util.ToastUtil;
 import com.dong.pointviewpager.bean.LoopViewPagerBean;
 import com.dong.pointviewpager.listener.OnLoopPagerClickListener;
@@ -140,7 +140,7 @@ public class HomeFragment extends Fragment {
             list.add(i+"");
         }
 
-        HomeListAdapter adapter = new HomeListAdapter(context, list);
+        HomeListAdapter adapter = new HomeListAdapter(context, null);
 
         listView.addHeaderView(inflateView);
 

@@ -1,4 +1,4 @@
-package com.dong.beautifulgirl.model;
+package com.dong.beautifulgirl.http;
 
 /**
  * Created by Dong on 2018/3/13.

@@ -1,4 +1,4 @@
-package com.dong.beautifulgirl.recommendmodular;
+package com.dong.beautifulgirl.modular.minemodular;
 
 import android.util.Log;
 
@@ -8,17 +8,17 @@ import java.util.List;
  * Created by donghuadong on 2018/4/10.
  */
 
-public class RecommendPresent implements RecommendContract.Presenter, RecommendServerHelper.OnRecommendDataChangedListener{
+public class MinePresent implements MineContract.Presenter, MineServerHelper.OnRecommendDataChangedListener{
 
-    private RecommendContract.View view;
-    private RecommendServerHelper serverHelper;
+    private MineContract.View view;
+    private MineServerHelper serverHelper;
 
-    public RecommendPresent(RecommendContract.View view) {
+    public MinePresent(MineContract.View view) {
         this.view = view;
         if(view!=null)
             view.setPresenter(this);
 
-        serverHelper = new RecommendServerHelper();
+        serverHelper = new MineServerHelper();
         serverHelper.setOnRecommendDataChangedListener(this);
     }
 
@@ -33,7 +33,7 @@ public class RecommendPresent implements RecommendContract.Presenter, RecommendS
     }
 
     @Override
-    public void onRecommendDataChanged(List<RecommendBean> recommendBeans) {
+    public void onRecommendDataChanged(List<MineBean> recommendBeans) {
         Log.i("Dong", "获取Recommend数据："+recommendBeans.size());
         view.RecommendDataChanged(recommendBeans);
     }

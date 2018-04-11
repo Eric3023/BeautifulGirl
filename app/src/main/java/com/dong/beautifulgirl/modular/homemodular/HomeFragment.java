@@ -1,4 +1,4 @@
-package com.dong.beautifulgirl.minemodular;
+package com.dong.beautifulgirl.modular.homemodular;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.ListView;
 
 import com.dong.beautifulgirl.R;
-import com.dong.beautifulgirl.adapter.HomeListAdapter;
 import com.dong.beautifulgirl.util.ToastUtil;
 import com.dong.pointviewpager.bean.LoopViewPagerBean;
 import com.dong.pointviewpager.listener.OnLoopPagerClickListener;
@@ -27,7 +26,7 @@ import java.util.List;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements HomeContract.View{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -40,6 +39,8 @@ public class HomeFragment extends Fragment {
     private View inflateView;
     private ListView listView;
     private PointViewPager pointViewPager;
+
+    private HomeContract.Presenter presenter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -80,6 +81,9 @@ public class HomeFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         init(view);
+
+        if(presenter!= null)
+            presenter.start();
 
         return view;
     }
@@ -133,28 +137,17 @@ public class HomeFragment extends Fragment {
 
     private void initListView(View view) {
         listView = view.findViewById(R.id.home_listview);
-
-        List<String> list = new ArrayList<String>();
-
-        for (int i = 0; i < 50; i++) {
-            list.add(i+"");
-        }
-
-        HomeListAdapter adapter = new HomeListAdapter(context, list);
-
         listView.addHeaderView(inflateView);
+    }
 
+    @Override
+    public void setPresenter(HomeContract.Presenter presenter) {
+        this.presenter = presenter;
+    }
+
+    @Override
+    public void homeDataChanged(List<HomeBean> list) {
+        HomeListAdapter adapter = new HomeListAdapter(context, list);
         listView.setAdapter(adapter);
     }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-    }
-
 }

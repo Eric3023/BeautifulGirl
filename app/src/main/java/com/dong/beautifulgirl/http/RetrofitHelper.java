@@ -2,7 +2,6 @@ package com.dong.beautifulgirl.http;
 
 import android.content.Context;
 
-import com.dong.beautifulgirl.model.UrlConfig;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 

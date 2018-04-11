@@ -1,18 +1,15 @@
-package com.dong.beautifulgirl.recommendmodular;
+package com.dong.beautifulgirl.modular.recommendmodular;
 
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.dong.beautifulgirl.R;
-import com.dong.beautifulgirl.base.BasePresenter;
 import com.dong.beautifulgirl.util.ToastUtil;
 
 import java.util.List;

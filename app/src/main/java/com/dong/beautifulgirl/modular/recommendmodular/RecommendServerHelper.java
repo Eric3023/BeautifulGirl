@@ -1,4 +1,4 @@
-package com.dong.beautifulgirl.recommendmodular;
+package com.dong.beautifulgirl.modular.recommendmodular;
 
 import com.dong.beautifulgirl.R;
 

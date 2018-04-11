@@ -2,19 +2,18 @@ package com.dong.beautifulgirl.activity;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.ViewPager;
 import android.view.KeyEvent;
 
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.dong.beautifulgirl.R;
 import com.dong.beautifulgirl.base.BaseActivity;
-import com.dong.beautifulgirl.fragment.HomeFragment;
-import com.dong.beautifulgirl.fragment.MesseageFragment;
-import com.dong.beautifulgirl.fragment.MineFragment;
-import com.dong.beautifulgirl.fragment.TopicFragment;
-import com.dong.beautifulgirl.recommendmodular.RecommendFragment;
-import com.dong.beautifulgirl.recommendmodular.RecommendPresent;
+import com.dong.beautifulgirl.modular.homemodular.HomeFragment;
+import com.dong.beautifulgirl.modular.homemodular.HomePresenter;
+import com.dong.beautifulgirl.modular.minemodular.MineFragment;
+import com.dong.beautifulgirl.modular.minemodular.MinePresent;
+import com.dong.beautifulgirl.modular.recommendmodular.RecommendFragment;
+import com.dong.beautifulgirl.modular.recommendmodular.RecommendPresent;
 import com.dong.beautifulgirl.util.ToastUtil;
 import com.dong.tabviewpager.widget.BottomTabFragmentViewPager;
 import com.dong.tabviewpager.widget.FragmentViewPager;
@@ -43,16 +42,18 @@ public class MainActivity extends BaseActivity{
      * 初始化数据
      */
     private void initData() {
-        Fragment homeFragment = HomeFragment.newInstance("home", "0");
+        HomeFragment homeFragment = HomeFragment.newInstance("home", "0");
         RecommendFragment recommendfragment = RecommendFragment.newInstance("recommend", "1");
-        Fragment findFragment = com.dong.beautifulgirl.findmodular.HomeFragment.newInstance("messeage", "2");
-        Fragment mineFragment = com.dong.beautifulgirl.minemodular.HomeFragment.newInstance("mine", "3");
+        Fragment findFragment = com.dong.beautifulgirl.modular.findmodular.HomeFragment.newInstance("messeage", "2");
+        MineFragment mineFragment = MineFragment.newInstance("mine", "3");
 
         fragments.add(homeFragment);
+        HomePresenter homePresenter = new HomePresenter(homeFragment);
         fragments.add(recommendfragment);
         RecommendPresent recommendPresent = new RecommendPresent(recommendfragment);
         fragments.add(findFragment);
         fragments.add(mineFragment);
+        MinePresent minePresent = new MinePresent(mineFragment);
     }
 
     /*

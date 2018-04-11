@@ -1,18 +1,18 @@
-package com.dong.beautifulgirl.recommendmodular;
+package com.dong.beautifulgirl.modular.minemodular;
 
 /**
  * Created by donghuadong on 2018/4/10.
  */
 
-public class RecommendBean {
+public class MineBean {
 
     private int imgId;
     private String content;
 
-    public RecommendBean() {
+    public MineBean() {
     }
 
-    public RecommendBean(int imgId, String content) {
+    public MineBean(int imgId, String content) {
         this.imgId = imgId;
         this.content = content;
     }
