@@ -1,5 +1,7 @@
 package com.dong.beautifulgirl.modular.recommendmodular;
 
+import android.content.Context;
+
 import com.dong.beautifulgirl.base.BasePresenter;
 import com.dong.beautifulgirl.base.BaseView;
 
@@ -13,12 +15,12 @@ public interface RecommendContract {
 
     interface Presenter extends BasePresenter{
 
-        void loadRecommend();
+        void loadRecommend(Context context);
 
     }
 
     interface View extends BaseView<Presenter>{
-        void RecommendDataChanged(List<RecommendBean> recommendBeans);
+        void RecommendDataChanged(List<RecommendBean.ResultsBean> resultsBeans);
     }
 
 }

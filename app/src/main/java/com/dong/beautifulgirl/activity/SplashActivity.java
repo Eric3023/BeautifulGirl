@@ -39,7 +39,7 @@ public class SplashActivity extends BaseActivity {
         Observable.create(new ObservableOnSubscribe<String>() {
             @Override
             public void subscribe(ObservableEmitter<String> emitter) throws Exception {
-                Thread.sleep(1000*5);
+                Thread.sleep(1000*4);
                 emitter.onNext("success");
                 emitter.onComplete();
             }
@@ -85,7 +85,7 @@ public class SplashActivity extends BaseActivity {
      */
     private void initView() {
         ImageView splashImg = findViewById(R.id.splash_img);
-        Glide.with(this).load(R.drawable.splash_bg_animation).asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).centerCrop().into(splashImg);
+        Glide.with(this).load("http://img.soogif.com/c2Xb4JPu9M7A04ducDNx9Jm41gnisQSV.gif").asGif().diskCacheStrategy(DiskCacheStrategy.SOURCE).centerCrop().placeholder(R.drawable.img_default1).into(splashImg);
     }
 
 }

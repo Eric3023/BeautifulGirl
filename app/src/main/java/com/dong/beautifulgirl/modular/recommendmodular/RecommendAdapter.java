@@ -1,5 +1,6 @@
 package com.dong.beautifulgirl.modular.recommendmodular;
 
+import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +8,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.dong.beautifulgirl.R;
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -17,7 +20,8 @@ import java.util.List;
 
 public class RecommendAdapter extends RecyclerView.Adapter <RecommendAdapter.ViewHolder>{
 
-    private List<RecommendBean> recommendBeans;
+    private Context context;
+    private List<RecommendBean.ResultsBean> resultsBeans;
     private OnClickListener onClickListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -35,11 +39,12 @@ public class RecommendAdapter extends RecyclerView.Adapter <RecommendAdapter.Vie
     }
 
     public  interface   OnClickListener{
-        void onClick(List<RecommendBean> recommendBeans, int position);
+        void onClick(List<RecommendBean.ResultsBean> resultsBeans, int position);
     }
 
-    public RecommendAdapter(List<RecommendBean> recommendBeans) {
-        this.recommendBeans = recommendBeans;
+    public RecommendAdapter(Context context, List<RecommendBean.ResultsBean> resultsBeans) {
+        this.context = context;
+        this.resultsBeans = resultsBeans;
     }
 
     public void setOnClickListener(OnClickListener onClickListener) {
@@ -55,17 +60,25 @@ public class RecommendAdapter extends RecyclerView.Adapter <RecommendAdapter.Vie
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        if(recommendBeans!=null){
-            RecommendBean recommendBean = recommendBeans.get(position);
-            if(recommendBean!=null){
-                holder.imageView.setImageResource(recommendBean.getImgId());
-                holder.textView.setText(recommendBean.getContent());
+        if(resultsBeans!=null){
+            final RecommendBean.ResultsBean resultsBean = resultsBeans.get(position);
+            if(resultsBean!=null){
+                Picasso.get().load(resultsBean.getUrl()).resize((int) context.getResources().getDimension(R.dimen.x150), (int) context.getResources().getDimension(R.dimen.y80)).into(holder.imageView);
+
+                StringBuilder stringBuilder = new StringBuilder();
+                stringBuilder.append(resultsBean.getCreatedAt());
+                for (int j = 0; j < position% 3; j++) {
+                    stringBuilder.append("\n");
+                    stringBuilder.append(resultsBean.getCreatedAt());
+                }
+
+                holder.textView.setText(stringBuilder);
 
                 holder.view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
                         if(onClickListener!=null)
-                            onClickListener.onClick(recommendBeans, position);
+                            onClickListener.onClick(resultsBeans, position);
                     }
                 });
             }
@@ -75,6 +88,6 @@ public class RecommendAdapter extends RecyclerView.Adapter <RecommendAdapter.Vie
 
     @Override
     public int getItemCount() {
-        return recommendBeans!=null? recommendBeans.size(): 0;
+        return resultsBeans!=null? resultsBeans.size(): 0;
     }
 }

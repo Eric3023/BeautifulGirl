@@ -1,5 +1,6 @@
 package com.dong.beautifulgirl.modular.recommendmodular;
 
+import android.content.Context;
 import android.util.Log;
 
 import java.util.List;
@@ -23,18 +24,18 @@ public class RecommendPresent implements RecommendContract.Presenter, RecommendS
     }
 
     @Override
-    public void start() {
-        loadRecommend();
+    public void start(Context context) {
+        loadRecommend(context);
     }
 
     @Override
-    public void loadRecommend() {
-        serverHelper.loadRecommend();
+    public void loadRecommend(Context context) {
+        serverHelper.loadRecommend(context);
     }
 
     @Override
-    public void onRecommendDataChanged(List<RecommendBean> recommendBeans) {
-        Log.i("Dong", "获取Recommend数据："+recommendBeans.size());
-        view.RecommendDataChanged(recommendBeans);
+    public void onRecommendDataChanged(List<RecommendBean.ResultsBean> resultsBeans) {
+        Log.i("Dong", "获取Recommend数据："+resultsBeans.size());
+        view.RecommendDataChanged(resultsBeans);
     }
 }

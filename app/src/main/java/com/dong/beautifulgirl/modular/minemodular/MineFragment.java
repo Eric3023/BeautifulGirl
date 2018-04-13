@@ -1,6 +1,7 @@
 package com.dong.beautifulgirl.modular.minemodular;
 
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
@@ -8,9 +9,11 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.dong.beautifulgirl.R;
 import com.dong.beautifulgirl.util.ToastUtil;
+import com.dong.circleimageview.widget.CircleImageView;
 
 import java.util.List;
 
@@ -19,7 +22,7 @@ import java.util.List;
  * Use the {@link MineFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MineFragment extends Fragment implements MineContract.View, MineAdapter.OnClickListener {
+public class MineFragment extends Fragment implements MineContract.View{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -30,10 +33,8 @@ public class MineFragment extends Fragment implements MineContract.View, MineAda
     private String mParam2;
 
     private MineContract.Presenter presenter;
-    private RecyclerView recyclerView;
-
-    private final int CLUM_NUM = 2;
-    private MineAdapter recommendAdapter;
+    private CircleImageView circleImageView;
+    private TextView nameTextView;
 
     public MineFragment() {
         // Required empty public constructor
@@ -70,27 +71,30 @@ public class MineFragment extends Fragment implements MineContract.View, MineAda
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_recommend, container, false);
+        View view = inflater.inflate(R.layout.fragment_mine, container, false);
 
         initView(view);
 
         if (presenter != null)
-            presenter.start();
+            presenter.start(getContext());
 
         return view;
     }
 
     private void initView(View view) {
-        recyclerView = view.findViewById(R.id.recommend_recyclerview);
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(CLUM_NUM, StaggeredGridLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(layoutManager);
+        circleImageView = view.findViewById(R.id.mine_photo_circleImageView);
+        nameTextView = view.findViewById(R.id.mine_name_tv);
     }
 
     @Override
-    public void RecommendDataChanged(List<MineBean> recommendBeans) {
-        recommendAdapter = new MineAdapter(recommendBeans);
-        recommendAdapter.setOnClickListener(this);
-        recyclerView.setAdapter(recommendAdapter);
+    public void mineDataChanged(MineBean mineBean) {
+        circleImageView
+                .setResourceID(R.drawable.home_pager_default)
+                .setPath(mineBean.getHeadImgUrl())//圆形图片源为网络图片
+                .setEdge(true)//设置是否显示边缘圆环
+                .setEdgeColor(Color.WHITE)//设置边缘颜色
+                .setEdgeWidth((int) getResources().getDimension(R.dimen.x3));//设置边缘宽度
+        nameTextView.setText(mineBean.getName());
     }
 
     @Override
@@ -98,8 +102,5 @@ public class MineFragment extends Fragment implements MineContract.View, MineAda
         this.presenter = presenter;
     }
 
-    @Override
-    public void onClick(List<MineBean> recommendBeans, int position) {
-        ToastUtil.toastLong(getContext(), "数据内容为：" + recommendBeans.get(position).getContent());
-    }
+
 }

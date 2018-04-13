@@ -8,6 +8,8 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.dong.beautifulgirl.R;
 import com.dong.beautifulgirl.base.BaseActivity;
+import com.dong.beautifulgirl.modular.findmodular.FindFragment;
+import com.dong.beautifulgirl.modular.findmodular.FindPresenter;
 import com.dong.beautifulgirl.modular.homemodular.HomeFragment;
 import com.dong.beautifulgirl.modular.homemodular.HomePresenter;
 import com.dong.beautifulgirl.modular.minemodular.MineFragment;
@@ -17,6 +19,7 @@ import com.dong.beautifulgirl.modular.recommendmodular.RecommendPresent;
 import com.dong.beautifulgirl.util.ToastUtil;
 import com.dong.tabviewpager.widget.BottomTabFragmentViewPager;
 import com.dong.tabviewpager.widget.FragmentViewPager;
+import com.tencent.bugly.crashreport.CrashReport;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +47,7 @@ public class MainActivity extends BaseActivity{
     private void initData() {
         HomeFragment homeFragment = HomeFragment.newInstance("home", "0");
         RecommendFragment recommendfragment = RecommendFragment.newInstance("recommend", "1");
-        Fragment findFragment = com.dong.beautifulgirl.modular.findmodular.HomeFragment.newInstance("messeage", "2");
+        FindFragment findFragment = FindFragment.newInstance("find", "2");
         MineFragment mineFragment = MineFragment.newInstance("mine", "3");
 
         fragments.add(homeFragment);
@@ -52,6 +55,7 @@ public class MainActivity extends BaseActivity{
         fragments.add(recommendfragment);
         RecommendPresent recommendPresent = new RecommendPresent(recommendfragment);
         fragments.add(findFragment);
+        FindPresenter findPresenter = new FindPresenter(findFragment);
         fragments.add(mineFragment);
         MinePresent minePresent = new MinePresent(mineFragment);
     }
@@ -70,6 +74,8 @@ public class MainActivity extends BaseActivity{
         fragmentViewPager.setActivity(this)
                 .setBeans(fragments)
                 .initialise();
+        //预加载三个页面
+        fragmentViewPager.setOffscreenPageLimit(3);
 
         //初始化底部导航栏
         bottomNavigationBar.addItem(new BottomNavigationItem(R.drawable.ic_tab_home_selected,"主页").setInactiveIconResource(R.drawable.ic_tab_home).setActiveColor(getResources().getColor(R.color.colorblue)))

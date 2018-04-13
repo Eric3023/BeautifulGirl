@@ -1,4 +1,4 @@
-package com.dong.beautifulgirl.modular.homemodular;
+package com.dong.beautifulgirl.modular.findmodular;
 
 import android.content.Context;
 
@@ -11,18 +11,18 @@ import java.util.List;
  * Created by donghuadong on 2018/4/11.
  */
 
-public class HomeContract {
+public class FindContract {
 
     interface Presenter extends BasePresenter{
-        void loadHomeData(Context context);
+        void loadFindData(Context context);
 
-        void loadHomeHeadData(Context context);
+        void loadFindHeadData(Context context);
     }
 
     interface View extends BaseView<Presenter>{
 
-        void homeDataChanged(List<HomeBean.ResultsBean> list);
+        void findDataChanged(List<FindBean.ResultsBean> list);
 
-        void homeDataHeadChanged(List<HomeBean.ResultsBean> list);
+        void findDataHeadChanged(List<FindBean.ResultsBean> list);
     }
 }

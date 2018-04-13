@@ -3,6 +3,8 @@ package com.dong.beautifulgirl.modular.homemodular;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.ListView;
 
 import com.dong.beautifulgirl.R;
 import com.dong.beautifulgirl.util.ToastUtil;
+import com.dong.pointviewpager.adapter.LoopPagerAdapter;
 import com.dong.pointviewpager.bean.LoopViewPagerBean;
 import com.dong.pointviewpager.listener.OnLoopPagerClickListener;
 import com.dong.pointviewpager.widget.LoopViewPager;
@@ -26,7 +29,7 @@ import java.util.List;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment implements HomeContract.View{
+public class HomeFragment extends Fragment implements HomeContract.View {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -41,6 +44,11 @@ public class HomeFragment extends Fragment implements HomeContract.View{
     private PointViewPager pointViewPager;
 
     private HomeContract.Presenter presenter;
+    private LoopViewPager loopViewPager;
+    private PointView pointView;
+    private List<HomeBean.ResultsBean> listResultsBeans;
+    private List<LoopViewPagerBean> pagerBeans;
+    private HomeListAdapter adapter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -82,9 +90,8 @@ public class HomeFragment extends Fragment implements HomeContract.View{
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         init(view);
 
-        if(presenter!= null)
-            presenter.start();
-
+        if (presenter != null)
+            presenter.start(getContext());
         return view;
     }
 
@@ -96,13 +103,18 @@ public class HomeFragment extends Fragment implements HomeContract.View{
 
     }
 
+    @Override
+    public void onResume() {
+        Log.i("Dong","onResume");
+        super.onResume();
+    }
 
     private void initPointLoopViewpager(View view) {
-        inflateView = View.inflate(context, R.layout.home_pointviewpager, null);
+        inflateView = View.inflate(context, R.layout.inflate_home_pointviewpager, null);
         pointViewPager = inflateView.findViewById(R.id.home_pointviewpager);
         if (pointViewPager != null) {
-            LoopViewPager loopViewPager = pointViewPager.getLoopViewPager();
-            PointView pointView = pointViewPager.getPointView();
+            loopViewPager = pointViewPager.getLoopViewPager();
+            pointView = pointViewPager.getPointView();
 
             initLoopViewPager(loopViewPager);
             initPointView(pointView);
@@ -110,17 +122,12 @@ public class HomeFragment extends Fragment implements HomeContract.View{
     }
 
     private void initLoopViewPager(LoopViewPager loopViewPager) {
+        pagerBeans = new ArrayList<LoopViewPagerBean>();
         if (loopViewPager != null) {
-            loopViewPager.setAuto(true)
-                    .setAutoTime(5)
-                    .setLoop(true)
+            loopViewPager.setAuto(false)
+                    .setLoop(false)
+                    .setBeans(pagerBeans)
                     .setDefaultResouces(new int[]{R.drawable.home_pager_default})
-                    .setOnLoopPagerClickListener(new OnLoopPagerClickListener() {
-                        @Override
-                        public void onLoopPagerClick(int i, LoopViewPagerBean loopViewPagerBean) {
-                            ToastUtil.toastShort(context, "点击位置："+i);
-                        }
-                    })
                     .initialise();
         }
     }
@@ -138,6 +145,10 @@ public class HomeFragment extends Fragment implements HomeContract.View{
     private void initListView(View view) {
         listView = view.findViewById(R.id.home_listview);
         listView.addHeaderView(inflateView);
+
+        listResultsBeans = new ArrayList<HomeBean.ResultsBean>();
+        adapter = new HomeListAdapter(context, listResultsBeans);
+        listView.setAdapter(adapter);
     }
 
     @Override
@@ -146,8 +157,37 @@ public class HomeFragment extends Fragment implements HomeContract.View{
     }
 
     @Override
-    public void homeDataChanged(List<HomeBean> list) {
-        HomeListAdapter adapter = new HomeListAdapter(context, list);
-        listView.setAdapter(adapter);
+    public void homeDataChanged(List<HomeBean.ResultsBean> resultsBeans) {
+        this.listResultsBeans.addAll(resultsBeans);
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void homeDataHeadChanged(List<HomeBean.ResultsBean> list) {
+        if (list != null) {
+            for (int i = 0; i < list.size(); i++) {
+                HomeBean.ResultsBean resultsBean = list.get(i);
+
+                if (resultsBean != null) {
+                    LoopViewPagerBean bean = new LoopViewPagerBean();
+                    bean.setUrl(resultsBean.getUrl());
+                    bean.setObject(resultsBean);
+                    pagerBeans.add(bean);
+                }
+            }
+        }
+        if(loopViewPager!=null){
+//            LoopPagerAdapter adapter = loopViewPager.getLoopPagerAdapter();
+//            adapter.notifyDataSetChanged();
+
+            if (loopViewPager != null) {
+                loopViewPager.setAuto(true)
+                        .setLoop(true)
+                        .setAutoTime(5)
+                        .setBeans(pagerBeans)
+                        .setDefaultResouces(new int[]{R.drawable.home_pager_default})
+                        .initialise();
+            }
+        }
     }
 }

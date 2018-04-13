@@ -75,7 +75,7 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
         initView(view);
 
         if (presenter != null)
-            presenter.start();
+            presenter.start(getContext());
 
         return view;
     }
@@ -87,8 +87,8 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
     }
 
     @Override
-    public void RecommendDataChanged(List<RecommendBean> recommendBeans) {
-        recommendAdapter = new RecommendAdapter(recommendBeans);
+    public void RecommendDataChanged(List<RecommendBean.ResultsBean> resultsBeans) {
+        recommendAdapter = new RecommendAdapter(getContext(), resultsBeans);
         recommendAdapter.setOnClickListener(this);
         recyclerView.setAdapter(recommendAdapter);
     }
@@ -99,7 +99,7 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
     }
 
     @Override
-    public void onClick(List<RecommendBean> recommendBeans, int position) {
-        ToastUtil.toastLong(getContext(), "数据内容为：" + recommendBeans.get(position).getContent());
+    public void onClick(List<RecommendBean.ResultsBean> resultsBeans, int position) {
+        ToastUtil.toastLong(getContext(), "数据内容为：" + resultsBeans.get(position).getDesc());
     }
 }

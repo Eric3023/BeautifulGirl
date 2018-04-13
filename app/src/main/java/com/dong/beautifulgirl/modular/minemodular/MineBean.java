@@ -6,30 +6,30 @@ package com.dong.beautifulgirl.modular.minemodular;
 
 public class MineBean {
 
-    private int imgId;
-    private String content;
+    private String headImgUrl;
+    private String name;
 
     public MineBean() {
     }
 
-    public MineBean(int imgId, String content) {
-        this.imgId = imgId;
-        this.content = content;
+    public MineBean(String headImgUrl, String name) {
+        this.headImgUrl = headImgUrl;
+        this.name = name;
     }
 
-    public int getImgId() {
-        return imgId;
+    public String getHeadImgUrl() {
+        return headImgUrl;
     }
 
-    public void setImgId(int imgId) {
-        this.imgId = imgId;
+    public void setHeadImgUrl(String headImgUrl) {
+        this.headImgUrl = headImgUrl;
     }
 
-    public String getContent() {
-        return content;
+    public String getName() {
+        return name;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public void setName(String name) {
+        this.name = name;
     }
 }

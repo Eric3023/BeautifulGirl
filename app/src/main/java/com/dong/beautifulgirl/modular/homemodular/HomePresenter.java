@@ -1,5 +1,7 @@
 package com.dong.beautifulgirl.modular.homemodular;
 
+import android.content.Context;
+
 import com.dong.beautifulgirl.base.BasePresenter;
 
 import java.util.List;
@@ -22,18 +24,29 @@ public class HomePresenter implements HomeContract.Presenter, HomeServerHelper.O
     }
 
     @Override
-    public void start() {
-        loadHomeData();
+    public void start(Context context) {
+        loadHomeData(context);
+        loadHomeHeadData(context);
     }
 
 
     @Override
-    public void loadHomeData() {
-        homeServerHelper.loadHomeData();
+    public void loadHomeData(Context context) {
+        homeServerHelper.loadHomeData(context);
     }
 
     @Override
-    public void OnHomeDataChanged(List<HomeBean> homeBeans) {
-        view.homeDataChanged(homeBeans);
+    public void loadHomeHeadData(Context context) {
+        homeServerHelper.loadHomeHeadData(context);
+    }
+
+    @Override
+    public void OnHomeDataChanged(List<HomeBean.ResultsBean> resultsBeans) {
+        view.homeDataChanged(resultsBeans);
+    }
+
+    @Override
+    public void OnHomeDataHeadChanged(List<HomeBean.ResultsBean> resultsBeans) {
+        view.homeDataHeadChanged(resultsBeans);
     }
 }

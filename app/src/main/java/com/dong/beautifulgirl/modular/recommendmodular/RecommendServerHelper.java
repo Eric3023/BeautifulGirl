@@ -1,9 +1,17 @@
 package com.dong.beautifulgirl.modular.recommendmodular;
 
+import android.content.Context;
+
 import com.dong.beautifulgirl.R;
+import com.dong.beautifulgirl.http.HeadModel;
+import com.dong.beautifulgirl.modular.homemodular.HomeBean;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by donghuadong on 2018/4/10.
@@ -11,31 +19,55 @@ import java.util.List;
 
 public class RecommendServerHelper {
 
-    public static final int[] IMG_IDS = {R.drawable.guide_img1,R.drawable.guide_img2,R.drawable.guide_img3,R.drawable.guide_img4};
-    public static final String CONTENT = "这是详细说明---这是详细说明---";
+//    public static final int[] IMG_IDS = {R.drawable.guide_img1,R.drawable.guide_img2,R.drawable.guide_img3,R.drawable.guide_img4};
+//    public static final String CONTENT = "这是详细说明---这是详细说明---";
 
     private OnRecommendDataChangedListener listener;
+    private List<RecommendBean.ResultsBean> resultsBeans;
 
-    public void loadRecommend(){
+    public void loadRecommend(Context context){
 
-        List<RecommendBean> recommendBeans = new ArrayList<RecommendBean>();
+        resultsBeans = new ArrayList<RecommendBean.ResultsBean>();
 
-        StringBuilder stringBuilder = new StringBuilder();
+        HeadModel.getRecommendData(context, new Callback<RecommendBean>() {
+            @Override
+            public void onResponse(Call<RecommendBean> call, Response<RecommendBean> response) {
+                RecommendBean recommendBean = response.body();
+                if(recommendBean!=null){
+                    List<RecommendBean.ResultsBean> results = recommendBean.getResults();
+                    if(results!=null){
+                        resultsBeans.addAll(results);
+                        if(listener!=null)
+                            listener.onRecommendDataChanged(resultsBeans);
+                    }
 
-        for (int i = 0; i < 20; i++) {
-            if(i%3 == 0) {
-                stringBuilder = new StringBuilder();
+                }
             }
-            stringBuilder.append(CONTENT);
 
-            RecommendBean recommendBean = new RecommendBean();
-            recommendBean.setImgId(IMG_IDS[i%IMG_IDS.length]);
-            recommendBean.setContent(stringBuilder.toString());
-            recommendBeans.add(recommendBean);
-        }
+            @Override
+            public void onFailure(Call<RecommendBean> call, Throwable t) {
 
-        if(listener!=null)
-            listener.onRecommendDataChanged(recommendBeans);
+            }
+        });
+
+//        List<RecommendBean> recommendBeans = new ArrayList<RecommendBean>();
+//
+//        StringBuilder stringBuilder = new StringBuilder();
+//
+//        for (int i = 0; i < 20; i++) {
+//            if(i%3 == 0) {
+//                stringBuilder = new StringBuilder();
+//            }
+//            stringBuilder.append(CONTENT);
+//
+//            RecommendBean recommendBean = new RecommendBean();
+//            recommendBean.setImgId(IMG_IDS[i%IMG_IDS.length]);
+//            recommendBean.setContent(stringBuilder.toString());
+//            recommendBeans.add(recommendBean);
+//        }
+//
+//        if(listener!=null)
+//            listener.onRecommendDataChanged(recommendBeans);
     }
 
     public void setOnRecommendDataChangedListener(OnRecommendDataChangedListener listener) {
@@ -43,7 +75,7 @@ public class RecommendServerHelper {
     }
 
     public interface OnRecommendDataChangedListener{
-        void onRecommendDataChanged(List<RecommendBean> recommendBeans);
+        void onRecommendDataChanged(List<RecommendBean.ResultsBean> resultsBeans);
     }
 
 }

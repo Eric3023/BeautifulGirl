@@ -1,11 +1,16 @@
 package com.dong.beautifulgirl.modular.homemodular;
 
+import android.content.Context;
 import android.util.Log;
 
-import com.dong.beautifulgirl.R;
+import com.dong.beautifulgirl.http.HeadModel;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * Created by donghuadong on 2018/4/11.
@@ -13,35 +18,83 @@ import java.util.List;
 
 public class HomeServerHelper {
 
-    public static final int[] IMG_IDS = {R.drawable.guide_img1,R.drawable.guide_img2,R.drawable.guide_img3,R.drawable.guide_img4};
-    public static final String TITLE = "这是标题内容";
-    public static final String CONTENT = "这是详细说明---这是详细说明---";
+//    public static final int[] IMG_IDS = {R.drawable.guide_img1, R.drawable.guide_img2, R.drawable.guide_img3, R.drawable.guide_img4};
+//    public static final String TITLE = "这是标题内容";
+//    public static final String CONTENT = "这是详细说明---这是详细说明---";
 
     public OnHomeDataChangedListener onHomeDataChangedListener;
 
-    public void loadHomeData(){
+    public void loadHomeData(Context context) {
 
-        List<HomeBean> homeBeans = new ArrayList<HomeBean>();
-        for (int i = 0; i < 50; i++) {
-            HomeBean bean = new HomeBean();
-            bean.setImgId(IMG_IDS[i%IMG_IDS.length]);
-            bean.setTitle(TITLE);
-            bean.setContent(CONTENT);
+        HeadModel.getHomeData(context, new Callback<HomeBean>() {
+            @Override
+            public void onResponse(Call<HomeBean> call, Response<HomeBean> response) {
+                HomeBean homeBean = response.body();
+                if (homeBean != null) {
+                    Log.i("Dong", "加载Home数据：" + homeBean.getResults().size());
+                    List<HomeBean.ResultsBean> results = homeBean.getResults();
+                    if (onHomeDataChangedListener != null)
+                        onHomeDataChangedListener.OnHomeDataChanged(results);
+                }
+            }
 
-            homeBeans.add(bean);
-        }
+            @Override
+            public void onFailure(Call<HomeBean> call, Throwable t) {
 
-        Log.i("Dong", "加载Home数据："+homeBeans.size());
-        if(onHomeDataChangedListener!=null)
-            onHomeDataChangedListener.OnHomeDataChanged(homeBeans);
+            }
+        });
+
+//        for (int i = 0; i < 50; i++) {
+//            HomeBean.ResultsBean bean = new HomeBean.ResultsBean();
+//            bean.setCreatedAt(TITLE);
+//            bean.setDesc(CONTENT);
+//
+//            resultsBeans.add(bean);
+//        }
+//        if (onHomeDataChangedListener != null)
+//            onHomeDataChangedListener.OnHomeDataChanged(resultsBeans);
     }
+
+    public void loadHomeHeadData(Context context) {
+
+        HeadModel.getHomeHeadData(context, new Callback<HomeBean>() {
+            @Override
+            public void onResponse(Call<HomeBean> call, Response<HomeBean> response) {
+                HomeBean homeBean = response.body();
+                if (homeBean != null) {
+                    Log.i("Dong", "加载Home Head数据：" + homeBean.getResults().size());
+                    List<HomeBean.ResultsBean> results = homeBean.getResults();
+                    if (onHomeDataChangedListener != null)
+                        onHomeDataChangedListener.OnHomeDataHeadChanged(results);
+                }
+            }
+
+            @Override
+            public void onFailure(Call<HomeBean> call, Throwable t) {
+
+            }
+        });
+
+//        for (int i = 0; i < 50; i++) {
+//            HomeBean.ResultsBean bean = new HomeBean.ResultsBean();
+//            bean.setCreatedAt(TITLE);
+//            bean.setDesc(CONTENT);
+//
+//            resultsBeans.add(bean);
+//        }
+//        if (onHomeDataChangedListener != null)
+//            onHomeDataChangedListener.OnHomeDataChanged(resultsBeans);
+    }
+
 
     public void setOnHomeDataChangedListener(OnHomeDataChangedListener onHomeDataChangedListener) {
         this.onHomeDataChangedListener = onHomeDataChangedListener;
     }
 
-    public interface OnHomeDataChangedListener{
-        void OnHomeDataChanged(List<HomeBean> homeBeans);
+    public interface OnHomeDataChangedListener {
+        void OnHomeDataChanged(List<HomeBean.ResultsBean> resultsBeans);
+
+        void OnHomeDataHeadChanged(List<HomeBean.ResultsBean> resultsBeans);
     }
 
 }

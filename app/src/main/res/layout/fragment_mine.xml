@@ -1,14 +1,199 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dong.beautifulgirl.fragment.MineFragment">
+    android:orientation="vertical"
+    tools:context="com.dong.beautifulgirl.modular.minemodular.MineFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <include
+        android:id="@+id/mine_toptitle"
+        layout="@layout/include_toptitle">
+    </include>
+
+    <LinearLayout
+        android:id="@+id/mine_photo"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/y70"
+        android:orientation="vertical">
+
+        <com.dong.circleimageview.widget.CircleImageView
+            android:id="@+id/mine_photo_circleImageView"
+            android:layout_width="@dimen/y50"
+            android:layout_height="@dimen/y50"
+            android:layout_gravity="center_horizontal"/>
+        <TextView
+            android:id="@+id/mine_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textSize="@dimen/x15"
+            android:layout_marginTop="@dimen/y5"
+            android:textColor="@android:color/white"
+            android:textStyle="bold"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginTop="@dimen/y10"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Hello Mine Fragment" />
+        android:orientation="vertical"
+        android:background="#dddddd">
 
-</FrameLayout>
+        <LinearLayout
+            android:id="@+id/mine_data"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y30"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/y5"
+            android:paddingBottom="@dimen/y5"
+            android:paddingRight="@dimen/x10"
+            android:paddingLeft="@dimen/x10"
+            android:background="@android:color/white">
+            <ImageView
+                android:layout_width="@dimen/y20"
+                android:layout_height="@dimen/y20"
+                android:src="@drawable/ic_tab_home"
+                android:layout_gravity="center_vertical"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="个人资料"
+                android:textSize="@dimen/x16"
+                android:layout_marginLeft="@dimen/x20"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px">
+        </View>
+
+
+        <LinearLayout
+            android:id="@+id/mine_messeage"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y30"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/y5"
+            android:paddingBottom="@dimen/y5"
+            android:paddingRight="@dimen/x10"
+            android:paddingLeft="@dimen/x10"
+            android:background="@android:color/white">
+            <ImageView
+                android:layout_width="@dimen/y20"
+                android:layout_height="@dimen/y20"
+                android:src="@drawable/ic_tab_home"
+                android:layout_gravity="center_vertical"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="我的留言"
+                android:textSize="@dimen/x16"
+                android:layout_marginLeft="@dimen/x20"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px">
+        </View>
+
+        <LinearLayout
+            android:id="@+id/mine_star"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y30"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/y5"
+            android:paddingBottom="@dimen/y5"
+            android:paddingRight="@dimen/x10"
+            android:paddingLeft="@dimen/x10"
+            android:background="@android:color/white">
+            <ImageView
+                android:layout_width="@dimen/y20"
+                android:layout_height="@dimen/y20"
+                android:src="@drawable/ic_tab_home"
+                android:layout_gravity="center_vertical"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="我的收藏"
+                android:textSize="@dimen/x16"
+                android:layout_marginLeft="@dimen/x20"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px">
+        </View>
+
+        <LinearLayout
+            android:id="@+id/mine_information"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y30"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/y5"
+            android:paddingBottom="@dimen/y5"
+            android:paddingRight="@dimen/x10"
+            android:paddingLeft="@dimen/x10"
+            android:background="@android:color/white">
+            <ImageView
+                android:layout_width="@dimen/y20"
+                android:layout_height="@dimen/y20"
+                android:src="@drawable/ic_tab_home"
+                android:layout_gravity="center_vertical"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="我的消息"
+                android:textSize="@dimen/x16"
+                android:layout_marginLeft="@dimen/x20"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="10px">
+        </View>
+
+        <LinearLayout
+            android:id="@+id/mine_change_paassword"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y30"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/y5"
+            android:paddingBottom="@dimen/y5"
+            android:paddingRight="@dimen/x10"
+            android:paddingLeft="@dimen/x10"
+            android:background="@android:color/white">
+            <ImageView
+                android:layout_width="@dimen/y20"
+                android:layout_height="@dimen/y20"
+                android:src="@drawable/ic_tab_home"
+                android:layout_gravity="center_vertical"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:text="修改密码"
+                android:textSize="@dimen/x16"
+                android:layout_marginLeft="@dimen/x20"/>
+        </LinearLayout>
+
+
+        <Button
+            android:layout_width="@dimen/x280"
+            android:layout_height="@dimen/y30"
+            android:padding="@dimen/x5"
+            android:background="@color/colorblue"
+            android:text="切换账号"
+            android:textSize="@dimen/x18"
+            android:gravity="center"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="@dimen/y30"
+            android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -11,39 +11,27 @@ import java.util.List;
 
 public class MineServerHelper {
 
-    public static final int[] IMG_IDS = {R.drawable.guide_img1,R.drawable.guide_img2,R.drawable.guide_img3,R.drawable.guide_img4};
-    public static final String CONTENT = "这是详细说明---这是详细说明---";
+    private final String IMG_URL = "http://a.hiphotos.baidu.com/image/pic/item/902397dda144ad34e98003fedca20cf431ad8588.jpg";
+    private final String NAME = "Eric";
 
-    private OnRecommendDataChangedListener listener;
+    private OnMineDataChangedListener listener;
 
-    public void loadRecommend(){
+    public void loadMineData(){
 
-        List<MineBean> recommendBeans = new ArrayList<MineBean>();
-
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (int i = 0; i < 20; i++) {
-            if(i%3 == 0) {
-                stringBuilder = new StringBuilder();
-            }
-            stringBuilder.append(CONTENT);
-
-            MineBean recommendBean = new MineBean();
-            recommendBean.setImgId(IMG_IDS[i%IMG_IDS.length]);
-            recommendBean.setContent(stringBuilder.toString());
-            recommendBeans.add(recommendBean);
-        }
+        MineBean mineBean = new MineBean();
+        mineBean.setName(NAME);
+        mineBean.setHeadImgUrl(IMG_URL);
 
         if(listener!=null)
-            listener.onRecommendDataChanged(recommendBeans);
+            listener.onMineDataChanged(mineBean);
     }
 
-    public void setOnRecommendDataChangedListener(OnRecommendDataChangedListener listener) {
+    public void setOnRecommendDataChangedListener(OnMineDataChangedListener listener) {
         this.listener = listener;
     }
 
-    public interface OnRecommendDataChangedListener{
-        void onRecommendDataChanged(List<MineBean> recommendBeans);
+    public interface OnMineDataChangedListener{
+        void onMineDataChanged(MineBean mineBean);
     }
 
 }

@@ -13,12 +13,12 @@ public interface MineContract {
 
     interface Presenter extends BasePresenter{
 
-        void loadRecommend();
+        void loadMineData();
 
     }
 
     interface View extends BaseView<Presenter>{
-        void RecommendDataChanged(List<MineBean> recommendBeans);
+        void mineDataChanged(MineBean mineBean);
     }
 
 }
