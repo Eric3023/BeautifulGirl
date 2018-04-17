@@ -20,6 +20,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitHelper {
 
     private static volatile RetrofitHelper retrofitHelper = null;
+    private final int CACH_SIZE = 1024*1024*100;
 
     private RetrofitHelper() {
 
@@ -67,13 +68,15 @@ public class RetrofitHelper {
     }
 
     /*
-      再OKHttpClient中添加缓存,由于云端未设置缓存，此处无效
+      再OKHttpClient中添加缓存
      */
     public OkHttpClient createHttpClient(Context context){
-        File cachFile=new File(context.getExternalCacheDir(),"");
-        Cache cache=new Cache(cachFile,24*60*60*1000);
+        File cachFile=new File(context.getCacheDir(),"");
+        Cache cache=new Cache(cachFile,CACH_SIZE);
         OkHttpClient client=new OkHttpClient.Builder()
                 .addInterceptor(new CookieInterceptor())
+                .addNetworkInterceptor(new CachInterceptor())
+                .addInterceptor(new CachNoNetInterceptor(context))
                 .cache(cache)
                 .build();
         return  client;
