@@ -2,13 +2,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dong.beautifulgirl.fragment.TopicFragment">
+    tools:context="com.dong.beautifulgirl.modular.findmodular.FindFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <include
+        android:id="@+id/find_toptitle"
+        layout="@layout/include_toptitle">
+    </include>
+
+    <ListView
+        android:id="@+id/find_listview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="Hello Topic Fragment" />
+        android:layout_below="@id/find_toptitle">
+    </ListView>
 
 </FrameLayout>

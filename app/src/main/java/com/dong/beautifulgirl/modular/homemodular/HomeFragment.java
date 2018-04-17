@@ -177,6 +177,8 @@ public class HomeFragment extends Fragment implements HomeContract.View {
             }
         }
         if(loopViewPager!=null){
+
+//            //不改变循环，只改变数据源
 //            LoopPagerAdapter adapter = loopViewPager.getLoopPagerAdapter();
 //            adapter.notifyDataSetChanged();
 
@@ -184,10 +186,12 @@ public class HomeFragment extends Fragment implements HomeContract.View {
                 loopViewPager.setAuto(true)
                         .setLoop(true)
                         .setAutoTime(5)
-                        .setBeans(pagerBeans)
+                       .setBeans(pagerBeans)
                         .setDefaultResouces(new int[]{R.drawable.home_pager_default})
                         .initialise();
             }
+
+            pointView.setCount(10);
         }
     }
 }

@@ -2,11 +2,13 @@ package com.dong.beautifulgirl.http;
 
 import android.content.Context;
 
-import com.dong.beautifulgirl.test.TestBean;
 import com.dong.beautifulgirl.modular.findmodular.FindBean;
 import com.dong.beautifulgirl.modular.homemodular.HomeBean;
 import com.dong.beautifulgirl.modular.recommendmodular.RecommendBean;
 
+import io.reactivex.Observable;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.schedulers.Schedulers;
 import retrofit2.Callback;
 
 /**
@@ -15,45 +17,43 @@ import retrofit2.Callback;
 
 public class HeadModel {
 
-    public static void getTestData(Context context, Callback<TestBean> callback){
-        RetrofitHelper.getInstance()
-                .getService(context)
-                .getTestData()
-                .enqueue(callback);
-    }
-
-    public static void getHomeData(Context context, Callback<HomeBean> callback){
-        RetrofitHelper.getInstance()
+    public static Observable<HomeBean> getHomeData(Context context){
+        return RetrofitHelper.getInstance()
                 .getService(context)
                 .getHomeData()
-                .enqueue(callback);
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static void getHomeHeadData(Context context, Callback<HomeBean> callback){
-        RetrofitHelper.getInstance()
+    public static Observable<HomeBean> getHomeHeadData(Context context){
+        return RetrofitHelper.getInstance()
                 .getService(context)
                 .getHomeHeadData()
-                .enqueue(callback);
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static void getRecommendData(Context context, Callback<RecommendBean> callback){
-        RetrofitHelper.getInstance()
+    public static Observable<RecommendBean> getRecommendData(Context context){
+        return RetrofitHelper.getInstance()
                 .getService(context)
                 .getRecommendData()
-                .enqueue(callback);
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static void getFindData(Context context, Callback<FindBean> callback){
-        RetrofitHelper.getInstance()
+    public static Observable<FindBean> getFindData(Context context){
+        return RetrofitHelper.getInstance()
                 .getService(context)
                 .getFindData()
-                .enqueue(callback);
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static void getFindHeadData(Context context, Callback<FindBean> callback){
-        RetrofitHelper.getInstance()
+    public static Observable<FindBean> getFindHeadData(Context context){
+        return RetrofitHelper.getInstance()
                 .getService(context)
                 .getFindHeadData()
-                .enqueue(callback);
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
     }
 }

@@ -10,6 +10,7 @@ import java.io.File;
 import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
@@ -43,8 +44,8 @@ public class RetrofitHelper {
         return new Retrofit.Builder()
                 .baseUrl(UrlConfig.BASE_URL)
                 .client(createHttpClient(context))
-                .addConverterFactory(
-                        GsonConverterFactory.create(createGson()))
+                .addConverterFactory(GsonConverterFactory.create(createGson()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .build();
 
     }
@@ -72,6 +73,7 @@ public class RetrofitHelper {
         File cachFile=new File(context.getExternalCacheDir(),"");
         Cache cache=new Cache(cachFile,24*60*60*1000);
         OkHttpClient client=new OkHttpClient.Builder()
+                .addInterceptor(new CookieInterceptor())
                 .cache(cache)
                 .build();
         return  client;

@@ -9,6 +9,8 @@ import com.dong.beautifulgirl.modular.homemodular.HomeBean;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -29,26 +31,36 @@ public class RecommendServerHelper {
 
         resultsBeans = new ArrayList<RecommendBean.ResultsBean>();
 
-        HeadModel.getRecommendData(context, new Callback<RecommendBean>() {
-            @Override
-            public void onResponse(Call<RecommendBean> call, Response<RecommendBean> response) {
-                RecommendBean recommendBean = response.body();
-                if(recommendBean!=null){
-                    List<RecommendBean.ResultsBean> results = recommendBean.getResults();
-                    if(results!=null){
-                        resultsBeans.addAll(results);
-                        if(listener!=null)
-                            listener.onRecommendDataChanged(resultsBeans);
+        HeadModel.getRecommendData(context)
+                .subscribe(new Observer<RecommendBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
                     }
 
-                }
-            }
+                    @Override
+                    public void onNext(RecommendBean recommendBean) {
+                        if(recommendBean!=null){
+                            List<RecommendBean.ResultsBean> results = recommendBean.getResults();
+                            if(results!=null){
+                                resultsBeans.addAll(results);
+                                if(listener!=null)
+                                    listener.onRecommendDataChanged(resultsBeans);
+                            }
 
-            @Override
-            public void onFailure(Call<RecommendBean> call, Throwable t) {
+                        }
+                    }
 
-            }
-        });
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
 
 //        List<RecommendBean> recommendBeans = new ArrayList<RecommendBean>();
 //

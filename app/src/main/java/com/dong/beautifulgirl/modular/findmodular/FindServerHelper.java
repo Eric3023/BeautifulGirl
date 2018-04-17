@@ -9,6 +9,8 @@ import com.dong.beautifulgirl.http.HeadModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observer;
+import io.reactivex.disposables.Disposable;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -27,25 +29,35 @@ public class FindServerHelper {
 
     public void loadFindData(Context context){
 
-        HeadModel.getFindData(context, new Callback<FindBean>() {
-            @Override
-            public void onResponse(Call<FindBean> call, Response<FindBean> response) {
-                FindBean findBean = response.body();
-                if(findBean!=null){
-                    List<FindBean.ResultsBean> results = findBean.getResults();
-                    if(results!=null){
-                        Log.i("Dong","获取Find数据："+results.size());
-                        if(onFindDataChangedListener!=null)
-                            onFindDataChangedListener.OnFindDataChanged(results);
+        HeadModel.getFindData(context)
+                .subscribe(new Observer<FindBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
                     }
-                }
-            }
 
-            @Override
-            public void onFailure(Call<FindBean> call, Throwable t) {
+                    @Override
+                    public void onNext(FindBean findBean) {
+                        if(findBean!=null){
+                            List<FindBean.ResultsBean> results = findBean.getResults();
+                            if(results!=null){
+                                Log.i("Dong","获取Find数据："+results.size());
+                                if(onFindDataChangedListener!=null)
+                                    onFindDataChangedListener.OnFindDataChanged(results);
+                            }
+                        }
+                    }
 
-            }
-        });
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
 
 //        List<FindBean> homeBeans = new ArrayList<FindBean>();
 //        for (int i = 0; i < 50; i++) {
@@ -64,26 +76,35 @@ public class FindServerHelper {
 
     public void loadFindHeadData(Context context){
 
-        HeadModel.getFindHeadData(context, new Callback<FindBean>() {
-            @Override
-            public void onResponse(Call<FindBean> call, Response<FindBean> response) {
-                FindBean findBean = response.body();
-                if(findBean!=null){
-                    List<FindBean.ResultsBean> results = findBean.getResults();
-                    if(results!=null){
-                        Log.i("Dong","获取Find Head数据："+results.size());
-                        if(onFindDataChangedListener!=null)
-                            onFindDataChangedListener.OnFindDataHeadChanged(results);
+        HeadModel.getFindHeadData(context)
+                .subscribe(new Observer<FindBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
                     }
-                }
-            }
 
-            @Override
-            public void onFailure(Call<FindBean> call, Throwable t) {
+                    @Override
+                    public void onNext(FindBean findBean) {
+                        if(findBean!=null){
+                            List<FindBean.ResultsBean> results = findBean.getResults();
+                            if(results!=null){
+                                Log.i("Dong","获取Find Head数据："+results.size());
+                                if(onFindDataChangedListener!=null)
+                                    onFindDataChangedListener.OnFindDataHeadChanged(results);
+                            }
+                        }
+                    }
 
-            }
-        });
+                    @Override
+                    public void onError(Throwable e) {
 
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
     }
 
     public void setOnHomeDataChangedListener(OnFindDataChangedListener onFindDataChangedListener) {
