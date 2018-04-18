@@ -16,6 +16,15 @@
         <!--<item name="android:windowTranslucentStatus">false</item>-->
         <!--<item name="android:windowTranslucentNavigation">false</item>-->
         <!--<item name="android:statusBarColor">@color/colorAccent</item>-->
-        <!--<item name="android:navigationBarColor">@color/colorPrimary</item>-->
+
+        <!-- 允许使用transitions -->
+        <item name="android:windowContentTransitions">true</item>
+        <!--是否覆盖执行，其实可以理解成是否同步执行还是顺序执行-->
+        <item name="android:windowAllowEnterTransitionOverlap">false</item>
+        <item name="android:windowAllowReturnTransitionOverlap">false</item>
+
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/colorblue</item>
     </style>
 </resources>

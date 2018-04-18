@@ -4,10 +4,10 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "com.dong.beautifulgirl"
-        minSdkVersion 15
+        minSdkVersion 17
         targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
+        versionCode 20180418
+        versionName "1.0.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -50,7 +50,7 @@ dependencies {
     compile 'com.squareup.retrofit2:converter-gson:2.1.0'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     implementation 'io.reactivex.rxjava2:rxjava:2.1.10'
-    compile 'com.github.Eric3023:PointViewPager:v2.3.1'
+    compile 'com.github.Eric3023:PointViewPager:v2.3.2'
     compile 'com.github.Eric3023:TabViewPager:v1.0.0'
     compile 'com.github.bumptech.glide:glide:3.7.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'

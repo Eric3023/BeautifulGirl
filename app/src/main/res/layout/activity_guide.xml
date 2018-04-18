@@ -4,38 +4,39 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dong.beautifulgirl.activity.GuideActivity">
+    android:fitsSystemWindows="true"
+    tools:context="com.dong.beautifulgirl.modular.guidemodular.GuideActivity">
 
     <ImageView
         android:id="@+id/guide_bg_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@drawable/guide_bg_traditional"
-        android:scaleType="centerCrop"/>
+        android:scaleType="centerInside"/>
 
     <com.dong.pointviewpager.widget.PointViewPager
         android:id="@+id/guide_bg_vp"
-        android:layout_width="@dimen/x156"
-        android:layout_height="@dimen/y187"
+        android:layout_width="@dimen/x230"
+        android:layout_height="@dimen/y288"
         android:layout_marginBottom="@dimen/y5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/y3">
     </com.dong.pointviewpager.widget.PointViewPager>
 
     <Button
         android:id="@+id/guide_comfire_btn"
-        android:layout_width="@dimen/x84"
-        android:layout_height="@dimen/y16"
-        android:text="进入应用"
-        android:textColor="@android:color/white"
-        android:background="@color/colorPrimary"
+        android:layout_width="@dimen/x55"
+        android:layout_height="@dimen/x55"
+        android:background="@drawable/guide_btn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/guide_bg_vp"
-        android:layout_marginTop="@dimen/y2"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/y332"
+        android:layout_marginRight="@dimen/x2"
         android:visibility="gone"/>
 
 </android.support.constraint.ConstraintLayout>

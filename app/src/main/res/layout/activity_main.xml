@@ -4,9 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorblue"
     android:fitsSystemWindows="true"
-    tools:context="com.dong.beautifulgirl.activity.MainActivity">
+    tools:context="com.dong.beautifulgirl.modular.mainmodular.MainActivity">
 
     <com.dong.tabviewpager.widget.BottomTabFragmentViewPager
         android:id="@+id/main_viewpager"

@@ -2,11 +2,10 @@ package com.dong.beautifulgirl.base;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-
-import com.dong.beautifulgirl.activity.MainActivity;
 
 
 /**
@@ -23,11 +22,23 @@ public class BaseActivity extends AppCompatActivity {
         mContext = this;
     }
 
-    protected void startComponent(Class<?> cls) {
-        if(mContext!= null){
+    public void startComponent(Class<?> cls) {
+        if (mContext != null) {
             Intent intent = new Intent(mContext, cls);
             mContext.startActivity(intent);
         }
+    }
+
+    public void startComponent(Class<?> cls, Bundle options) {
+        if (mContext != null) {
+            Intent intent = new Intent(mContext, cls);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                mContext.startActivity(intent, options);
+            } else {
+                mContext.startActivity(intent);
+            }
+        }
+
     }
 
 }

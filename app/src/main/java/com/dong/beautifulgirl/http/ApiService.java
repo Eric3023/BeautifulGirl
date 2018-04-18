@@ -1,8 +1,8 @@
 package com.dong.beautifulgirl.http;
 
-import com.dong.beautifulgirl.modular.findmodular.FindBean;
-import com.dong.beautifulgirl.modular.homemodular.HomeBean;
-import com.dong.beautifulgirl.modular.recommendmodular.RecommendBean;
+import com.dong.beautifulgirl.modular.mainmodular.findmodular.FindBean;
+import com.dong.beautifulgirl.modular.mainmodular.homemodular.HomeBean;
+import com.dong.beautifulgirl.modular.mainmodular.recommendmodular.RecommendBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;

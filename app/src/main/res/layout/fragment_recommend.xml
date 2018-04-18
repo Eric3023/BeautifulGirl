@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".modular.recommendmodular.RecommendFragment">
+    tools:context=".modular.mainmodular.recommendmodular.RecommendFragment">
 
     <include android:id="@+id/recommend_toptitle"
         layout="@layout/include_toptitle">

@@ -13,6 +13,10 @@
         <item name="windowNoTitle">true</item>
         <!--隐藏状态栏-->
         <!--<item name="android:windowFullscreen">true</item>-->
+
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@color/colorblue</item>
     </style>
 
 </resources>

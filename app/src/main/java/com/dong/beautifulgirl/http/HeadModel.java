@@ -2,14 +2,13 @@ package com.dong.beautifulgirl.http;
 
 import android.content.Context;
 
-import com.dong.beautifulgirl.modular.findmodular.FindBean;
-import com.dong.beautifulgirl.modular.homemodular.HomeBean;
-import com.dong.beautifulgirl.modular.recommendmodular.RecommendBean;
+import com.dong.beautifulgirl.modular.mainmodular.findmodular.FindBean;
+import com.dong.beautifulgirl.modular.mainmodular.homemodular.HomeBean;
+import com.dong.beautifulgirl.modular.mainmodular.recommendmodular.RecommendBean;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
-import retrofit2.Callback;
 
 /**
  * Created by donghuadong on 2018/4/11.

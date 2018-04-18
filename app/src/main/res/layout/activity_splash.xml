@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dong.beautifulgirl.activity.SplashActivity">
+    tools:context="com.dong.beautifulgirl.modular.splashmodular.SplashActivity">
 
     <ImageView
         android:id="@+id/splash_img"

@@ -67,8 +67,8 @@ public class RetrofitHelper {
                 .create();
     }
 
-    /*
-      再OKHttpClient中添加缓存
+    /**
+     *OKHttpClient中添加拦截器
      */
     public OkHttpClient createHttpClient(Context context){
         File cachFile=new File(context.getCacheDir(),"");

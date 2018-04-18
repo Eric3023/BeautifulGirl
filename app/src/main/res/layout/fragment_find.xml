@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.dong.beautifulgirl.modular.findmodular.FindFragment">
+    tools:context=".modular.mainmodular.findmodular.FindFragment">
 
     <include
         android:id="@+id/find_toptitle"

@@ -1,36 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".modular.mainmodular.minemodular.MineFragment">
-
+    android:fitsSystemWindows="true"
+    tools:context="com.dong.beautifulgirl.modular.logicmodular.LogicActivity"
+    android:orientation="vertical">
 
     <include
-        android:id="@+id/mine_toptitle"
+        android:id="@+id/logic_toptitle"
         layout="@layout/include_toptitle">
     </include>
 
     <LinearLayout
-        android:id="@+id/mine_photo"
+        android:id="@+id/logic_photo"
         android:layout_width="match_parent"
         android:layout_height="@dimen/y70"
-        android:orientation="horizontal">
+        android:background="@color/colorblue"
+        android:orientation="vertical">
 
         <com.dong.circleimageview.widget.CircleImageView
-            android:id="@+id/mine_photo_circleImageView"
+            android:id="@+id/logic_photo_circleImageView"
             android:layout_width="@dimen/y50"
             android:layout_height="@dimen/y50"
-            android:layout_marginLeft="@dimen/x10"
-            android:layout_gravity="center_vertical"
-            android:transitionName="share photo img"/>
+            android:layout_gravity="center_horizontal"
+            android:transitionName="share photo img" />
         <TextView
-            android:id="@+id/mine_name_tv"
+            android:id="@+id/logic_name_tv"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:textSize="@dimen/x15"
-            android:layout_marginLeft="@dimen/x5"
-            android:layout_marginTop="@dimen/y45"
+            android:layout_marginTop="@dimen/y5"
             android:textColor="@android:color/white"
             android:textStyle="bold"
             android:transitionName="share photo tv"/>
@@ -44,7 +46,7 @@
         android:background="#dddddd">
 
         <LinearLayout
-            android:id="@+id/mine_data"
+            android:id="@+id/logic_data"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y30"
             android:orientation="horizontal"
@@ -74,7 +76,7 @@
 
 
         <LinearLayout
-            android:id="@+id/mine_messeage"
+            android:id="@+id/logic_messeage"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y30"
             android:orientation="horizontal"
@@ -103,7 +105,7 @@
         </View>
 
         <LinearLayout
-            android:id="@+id/mine_star"
+            android:id="@+id/logic_star"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y30"
             android:orientation="horizontal"
@@ -132,7 +134,7 @@
         </View>
 
         <LinearLayout
-            android:id="@+id/mine_information"
+            android:id="@+id/logic_information"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y30"
             android:orientation="horizontal"
@@ -161,7 +163,7 @@
         </View>
 
         <LinearLayout
-            android:id="@+id/mine_change_paassword"
+            android:id="@+id/logic_change_paassword"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y30"
             android:orientation="horizontal"
@@ -198,5 +200,6 @@
             android:layout_gravity="center_horizontal"/>
 
     </LinearLayout>
+
 
 </LinearLayout>
