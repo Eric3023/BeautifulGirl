@@ -20,11 +20,11 @@ public class RecommendServerHelper {
 //    public static final String CONTENT = "这是详细说明---这是详细说明---";
 
     private OnRecommendDataChangedListener listener;
-    private List<RecommendBean.ResultsBean> resultsBeans;
+    private List<RecommendBean.DataBean> resultsBeans;
 
     public void loadRecommend(Context context){
 
-        resultsBeans = new ArrayList<RecommendBean.ResultsBean>();
+        resultsBeans = new ArrayList<RecommendBean.DataBean>();
 
         HeadModel.getRecommendData(context)
                 .subscribe(new Observer<RecommendBean>() {
@@ -36,8 +36,10 @@ public class RecommendServerHelper {
                     @Override
                     public void onNext(RecommendBean recommendBean) {
                         if(recommendBean!=null){
-                            List<RecommendBean.ResultsBean> results = recommendBean.getResults();
+                            List<RecommendBean.DataBean> results = recommendBean.getData();
                             if(results!=null){
+                                if(results!=null&& results.size()>1)
+                                    results.remove(results.size()-1);
                                 resultsBeans.addAll(results);
                                 if(listener!=null)
                                     listener.onRecommendDataChanged(resultsBeans);
@@ -82,7 +84,7 @@ public class RecommendServerHelper {
     }
 
     public interface OnRecommendDataChangedListener{
-        void onRecommendDataChanged(List<RecommendBean.ResultsBean> resultsBeans);
+        void onRecommendDataChanged(List<RecommendBean.DataBean> resultsBeans);
     }
 
 }

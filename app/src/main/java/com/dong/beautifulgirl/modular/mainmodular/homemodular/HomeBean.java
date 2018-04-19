@@ -7,67 +7,224 @@ import java.util.List;
  */
 
 public class HomeBean{
+
     /**
-     * error : false
-     * results : [{"_id":"5a0d0c97421aa90fe2f02c60","createdAt":"2017-11-16T11:57:11.4Z","desc":"11-16","publishedAt":"2017-11-16T12:01:05.619Z","source":"chrome","type":"福利","url":"http://7xi8d6.com1.z0.glb.clouddn.com/20171116115656_vnsrab_Screenshot.jpeg","used":true,"who":"代码家"},{"_id":"5a0a5141421aa90fef203525","createdAt":"2017-11-14T10:13:21.137Z","desc":"11-14","publishedAt":"2017-11-14T10:43:36.180Z","source":"chrome","type":"福利","url":"http://7xi8d6.com1.z0.glb.clouddn.com/20171114101305_NIAzCK_rakukoo_14_11_2017_10_12_58_703.jpeg","used":true,"who":"daimajia"},{"_id":"5a08ea7b421aa90fe7253628","createdAt":"2017-11-13T08:42:35.306Z","desc":"11-13","publishedAt":"2017-11-13T12:10:58.643Z","source":"chrome","type":"福利","url":"http://7xi8d6.com1.z0.glb.clouddn.com/20171113084220_LuJgqv_sakura.gun_13_11_2017_8_42_12_311.jpeg","used":true,"who":"daimajia"},{"_id":"5a03b502421aa90fe7253618","createdAt":"2017-11-09T09:53:06.802Z","desc":"11-9","publishedAt":"2017-11-10T08:10:02.838Z","source":"chrome","type":"福利","url":"http://7xi8d6.com1.z0.glb.clouddn.com/20171109095254_dOw5qh_bluenamchu_9_11_2017_9_52_47_256.jpeg","used":true,"who":"daimajia"},{"_id":"5a011452421aa90fe7253606","createdAt":"2017-11-07T10:02:58.73Z","desc":"11-7","publishedAt":"2017-11-08T11:00:50.559Z","source":"chrome","type":"福利","url":"http://7xi8d6.com1.z0.glb.clouddn.com/20171107100244_0fbENB_yyannwong_7_11_2017_10_2_5_982.jpeg","used":true,"who":"daimajia"},{"_id":"59fa7379421aa90fe50c01cc","createdAt":"2017-11-02T09:23:05.497Z","desc":"11-2","publishedAt":"2017-11-06T12:40:39.976Z","source":"chrome","type":"福利","url":"http://7xi8d6.com1.z0.glb.clouddn.com/20171102092251_AY0l4b_alrisaa_2_11_2017_9_22_44_335.jpeg","used":true,"who":"daimajia"},{"_id":"59f9674c421aa90fe50c01c6","createdAt":"2017-11-01T14:18:52.937Z","desc":"11-1","publishedAt":"2017-11-01T14:20:59.209Z","source":"chrome","type":"福利","url":"http://7xi8d6.com1.z0.glb.clouddn.com/20171101141835_yQYTXc_enakorin_1_11_2017_14_16_45_351.jpeg","used":true,"who":"daimajia"},{"_id":"59f7e677421aa90fe72535de","createdAt":"2017-10-31T10:56:55.988Z","desc":"10-31","publishedAt":"2017-10-31T12:25:55.217Z","source":"chrome","type":"福利","url":"http://7xi8d6.com1.z0.glb.clouddn.com/2017-10-31-nozomisasaki_official_31_10_2017_10_49_17_24.jpg","used":true,"who":"代码家"},{"_id":"59f2aabb421aa90fef2034d5","createdAt":"2017-10-27T11:40:43.793Z","desc":"10-27","publishedAt":"2017-10-27T12:02:30.376Z","source":"chrome","type":"福利","url":"http://7xi8d6.com1.z0.glb.clouddn.com/20171027114026_v8VFwP_joanne_722_27_10_2017_11_40_17_370.jpeg","used":true,"who":"daimajia"},{"_id":"59f0054a421aa90fe2f02bf4","createdAt":"2017-10-25T11:30:18.697Z","desc":"2017-10-25","publishedAt":"2017-10-25T11:39:10.950Z","source":"chrome","type":"福利","url":"http://7xi8d6.com1.z0.glb.clouddn.com/20171025112955_lmesMu_katyteiko_25_10_2017_11_29_43_270.jpeg","used":true,"who":"代码家"}]
+     * tag1 : 鏄庢槦
+     * tag2 : 鍏ㄩ儴
+     * totalNum : 18461
+     * start_index : 0
+     * return_number : 1
+     * data : [{"id":"9418731238","setId":"-1","pn":0,"abs":"鏄庢槦","desc":"寮犳澃璋㈠娴极濠氱ぜ鐜板満http://www.tianmi520.com/s/7930?win=jenny","tags":["寮犳澃"],"tag":"鍏ㄩ儴","date":"2016-10-25","like_num":"","is_single":"","fashion_id":"","dress_id":"","fushi_obj_num":"","fushi_obj_array":"null","dress_buy_link":"","dress_price":"","dress_tag":"","dress_num":"","dress_discount":"","dress_other":"","dress_extend_type":"","dress_extend_name":"","children_vote":"","dislike_num":"","image_url":"http://g.hiphotos.baidu.com/image/pic/item/eaf81a4c510fd9f931440668272dd42a2834a464.jpg","image_width":600,"image_height":791,"download_url":"http://g.hiphotos.baidu.com/image/pic/item/eaf81a4c510fd9f931440668272dd42a2834a464.jpg","thumbnail_url":"http://imgt8.bdstatic.com/it/u=2,828796646&fm=25&gp=0.jpg","thumbnail_width":230,"thumbnail_height":303,"thumb_large_width":310,"thumb_large_height":408,"thumb_large_url":"http://imgt8.bdstatic.com/it/u=2,828796646&fm=19&gp=0.jpg","site_name":"","site_logo":"","site_url":"http://huaban.com","from_url":"http://huaban.com/pins/38906721/","obj_url":"http://img.hb.aicdn.com/f3b4d6dc379fb379bb875802875b83c8ec9cb3761db98-4EpaOD","share_url":"http://g.hiphotos.baidu.com/image/s%3D550%3Bc%3Dwantu%2C8%2C95/sign=3357d03138f33a879a6d001ff6677305/eaf81a4c510fd9f931440668272dd42a2834a464.jpg?referer=d7c3adde74094b3682852edd043a","download_num":0,"collect_num":0,"start_index":0,"return_number":1,"album_di":"","can_album_id":"","album_obj_num":"0","user_id":"851009258","app_id":"","colum":"鏄庢槦","photo_id":"9418731238","is_album":0,"is_vip":0,"from_name":0,"hostname":"huaban.com","parent_tag":"","desc_info":"","other_urls":[],"isAdapted":1},{}]
      */
 
-    private boolean error;
-    private List<HomeBean.ResultsBean> results;
+    private String tag1;
+    private String tag2;
+    private int totalNum;
+    private int start_index;
+    private int return_number;
+    private List<DataBean> data;
 
-    public boolean isError() {
-        return error;
+    public String getTag1() {
+        return tag1;
     }
 
-    public void setError(boolean error) {
-        this.error = error;
+    public void setTag1(String tag1) {
+        this.tag1 = tag1;
     }
 
-    public List<HomeBean.ResultsBean> getResults() {
-        return results;
+    public String getTag2() {
+        return tag2;
     }
 
-    public void setResults(List<HomeBean.ResultsBean> results) {
-        this.results = results;
+    public void setTag2(String tag2) {
+        this.tag2 = tag2;
     }
 
-    public static class ResultsBean {
+    public int getTotalNum() {
+        return totalNum;
+    }
+
+    public void setTotalNum(int totalNum) {
+        this.totalNum = totalNum;
+    }
+
+    public int getStart_index() {
+        return start_index;
+    }
+
+    public void setStart_index(int start_index) {
+        this.start_index = start_index;
+    }
+
+    public int getReturn_number() {
+        return return_number;
+    }
+
+    public void setReturn_number(int return_number) {
+        this.return_number = return_number;
+    }
+
+    public List<DataBean> getData() {
+        return data;
+    }
+
+    public void setData(List<DataBean> data) {
+        this.data = data;
+    }
+
+    public static class DataBean {
         /**
-         * _id : 5a0d0c97421aa90fe2f02c60
-         * createdAt : 2017-11-16T11:57:11.4Z
-         * desc : 11-16
-         * publishedAt : 2017-11-16T12:01:05.619Z
-         * source : chrome
-         * type : 福利
-         * url : http://7xi8d6.com1.z0.glb.clouddn.com/20171116115656_vnsrab_Screenshot.jpeg
-         * used : true
-         * who : 代码家
+         * id : 9418731238
+         * setId : -1
+         * pn : 0
+         * abs : 鏄庢槦
+         * desc : 寮犳澃璋㈠娴极濠氱ぜ鐜板満http://www.tianmi520.com/s/7930?win=jenny
+         * tags : ["寮犳澃"]
+         * tag : 鍏ㄩ儴
+         * date : 2016-10-25
+         * like_num :
+         * is_single :
+         * fashion_id :
+         * dress_id :
+         * fushi_obj_num :
+         * fushi_obj_array : null
+         * dress_buy_link :
+         * dress_price :
+         * dress_tag :
+         * dress_num :
+         * dress_discount :
+         * dress_other :
+         * dress_extend_type :
+         * dress_extend_name :
+         * children_vote :
+         * dislike_num :
+         * image_url : http://g.hiphotos.baidu.com/image/pic/item/eaf81a4c510fd9f931440668272dd42a2834a464.jpg
+         * image_width : 600
+         * image_height : 791
+         * download_url : http://g.hiphotos.baidu.com/image/pic/item/eaf81a4c510fd9f931440668272dd42a2834a464.jpg
+         * thumbnail_url : http://imgt8.bdstatic.com/it/u=2,828796646&fm=25&gp=0.jpg
+         * thumbnail_width : 230
+         * thumbnail_height : 303
+         * thumb_large_width : 310
+         * thumb_large_height : 408
+         * thumb_large_url : http://imgt8.bdstatic.com/it/u=2,828796646&fm=19&gp=0.jpg
+         * site_name :
+         * site_logo :
+         * site_url : http://huaban.com
+         * from_url : http://huaban.com/pins/38906721/
+         * obj_url : http://img.hb.aicdn.com/f3b4d6dc379fb379bb875802875b83c8ec9cb3761db98-4EpaOD
+         * share_url : http://g.hiphotos.baidu.com/image/s%3D550%3Bc%3Dwantu%2C8%2C95/sign=3357d03138f33a879a6d001ff6677305/eaf81a4c510fd9f931440668272dd42a2834a464.jpg?referer=d7c3adde74094b3682852edd043a
+         * download_num : 0
+         * collect_num : 0
+         * start_index : 0
+         * return_number : 1
+         * album_di :
+         * can_album_id :
+         * album_obj_num : 0
+         * user_id : 851009258
+         * app_id :
+         * colum : 鏄庢槦
+         * photo_id : 9418731238
+         * is_album : 0
+         * is_vip : 0
+         * from_name : 0
+         * hostname : huaban.com
+         * parent_tag :
+         * desc_info :
+         * other_urls : []
+         * isAdapted : 1
          */
 
-        private String _id;
-        private String createdAt;
+        private String id;
+        private String setId;
+        private int pn;
+        private String abs;
         private String desc;
-        private String publishedAt;
-        private String source;
-        private String type;
-        private String url;
-        private boolean used;
-        private String who;
+        private String tag;
+        private String date;
+        private String like_num;
+        private String is_single;
+        private String fashion_id;
+        private String dress_id;
+        private String fushi_obj_num;
+        private String fushi_obj_array;
+        private String dress_buy_link;
+        private String dress_price;
+        private String dress_tag;
+        private String dress_num;
+        private String dress_discount;
+        private String dress_other;
+        private String dress_extend_type;
+        private String dress_extend_name;
+        private String children_vote;
+        private String dislike_num;
+        private String image_url;
+        private int image_width;
+        private int image_height;
+        private String download_url;
+        private String thumbnail_url;
+        private int thumbnail_width;
+        private int thumbnail_height;
+        private int thumb_large_width;
+        private int thumb_large_height;
+        private String thumb_large_url;
+        private String site_name;
+        private String site_logo;
+        private String site_url;
+        private String from_url;
+        private String obj_url;
+        private String share_url;
+        private int download_num;
+        private int collect_num;
+        private int start_index;
+        private int return_number;
+        private String album_di;
+        private String can_album_id;
+        private String album_obj_num;
+        private String user_id;
+        private String app_id;
+        private String colum;
+        private String photo_id;
+        private int is_album;
+        private int is_vip;
+        private int from_name;
+        private String hostname;
+        private String parent_tag;
+        private String desc_info;
+        private int isAdapted;
+        private List<String> tags;
+        private List<?> other_urls;
 
-        public String get_id() {
-            return _id;
+        public String getId() {
+            return id;
         }
 
-        public void set_id(String _id) {
-            this._id = _id;
+        public void setId(String id) {
+            this.id = id;
         }
 
-        public String getCreatedAt() {
-            return createdAt;
+        public String getSetId() {
+            return setId;
         }
 
-        public void setCreatedAt(String createdAt) {
-            this.createdAt = createdAt;
+        public void setSetId(String setId) {
+            this.setId = setId;
+        }
+
+        public int getPn() {
+            return pn;
+        }
+
+        public void setPn(int pn) {
+            this.pn = pn;
+        }
+
+        public String getAbs() {
+            return abs;
+        }
+
+        public void setAbs(String abs) {
+            this.abs = abs;
         }
 
         public String getDesc() {
@@ -78,52 +235,436 @@ public class HomeBean{
             this.desc = desc;
         }
 
-        public String getPublishedAt() {
-            return publishedAt;
+        public String getTag() {
+            return tag;
         }
 
-        public void setPublishedAt(String publishedAt) {
-            this.publishedAt = publishedAt;
+        public void setTag(String tag) {
+            this.tag = tag;
         }
 
-        public String getSource() {
-            return source;
+        public String getDate() {
+            return date;
         }
 
-        public void setSource(String source) {
-            this.source = source;
+        public void setDate(String date) {
+            this.date = date;
         }
 
-        public String getType() {
-            return type;
+        public String getLike_num() {
+            return like_num;
         }
 
-        public void setType(String type) {
-            this.type = type;
+        public void setLike_num(String like_num) {
+            this.like_num = like_num;
         }
 
-        public String getUrl() {
-            return url;
+        public String getIs_single() {
+            return is_single;
         }
 
-        public void setUrl(String url) {
-            this.url = url;
+        public void setIs_single(String is_single) {
+            this.is_single = is_single;
         }
 
-        public boolean isUsed() {
-            return used;
+        public String getFashion_id() {
+            return fashion_id;
         }
 
-        public void setUsed(boolean used) {
-            this.used = used;
+        public void setFashion_id(String fashion_id) {
+            this.fashion_id = fashion_id;
         }
 
-        public String getWho() {
-            return who;
+        public String getDress_id() {
+            return dress_id;
         }
 
-        public void setWho(String who) {
-            this.who = who;
+        public void setDress_id(String dress_id) {
+            this.dress_id = dress_id;
+        }
+
+        public String getFushi_obj_num() {
+            return fushi_obj_num;
+        }
+
+        public void setFushi_obj_num(String fushi_obj_num) {
+            this.fushi_obj_num = fushi_obj_num;
+        }
+
+        public String getFushi_obj_array() {
+            return fushi_obj_array;
+        }
+
+        public void setFushi_obj_array(String fushi_obj_array) {
+            this.fushi_obj_array = fushi_obj_array;
+        }
+
+        public String getDress_buy_link() {
+            return dress_buy_link;
+        }
+
+        public void setDress_buy_link(String dress_buy_link) {
+            this.dress_buy_link = dress_buy_link;
+        }
+
+        public String getDress_price() {
+            return dress_price;
+        }
+
+        public void setDress_price(String dress_price) {
+            this.dress_price = dress_price;
+        }
+
+        public String getDress_tag() {
+            return dress_tag;
+        }
+
+        public void setDress_tag(String dress_tag) {
+            this.dress_tag = dress_tag;
+        }
+
+        public String getDress_num() {
+            return dress_num;
+        }
+
+        public void setDress_num(String dress_num) {
+            this.dress_num = dress_num;
+        }
+
+        public String getDress_discount() {
+            return dress_discount;
+        }
+
+        public void setDress_discount(String dress_discount) {
+            this.dress_discount = dress_discount;
+        }
+
+        public String getDress_other() {
+            return dress_other;
+        }
+
+        public void setDress_other(String dress_other) {
+            this.dress_other = dress_other;
+        }
+
+        public String getDress_extend_type() {
+            return dress_extend_type;
+        }
+
+        public void setDress_extend_type(String dress_extend_type) {
+            this.dress_extend_type = dress_extend_type;
+        }
+
+        public String getDress_extend_name() {
+            return dress_extend_name;
+        }
+
+        public void setDress_extend_name(String dress_extend_name) {
+            this.dress_extend_name = dress_extend_name;
+        }
+
+        public String getChildren_vote() {
+            return children_vote;
+        }
+
+        public void setChildren_vote(String children_vote) {
+            this.children_vote = children_vote;
+        }
+
+        public String getDislike_num() {
+            return dislike_num;
+        }
+
+        public void setDislike_num(String dislike_num) {
+            this.dislike_num = dislike_num;
+        }
+
+        public String getImage_url() {
+            return image_url;
+        }
+
+        public void setImage_url(String image_url) {
+            this.image_url = image_url;
+        }
+
+        public int getImage_width() {
+            return image_width;
+        }
+
+        public void setImage_width(int image_width) {
+            this.image_width = image_width;
+        }
+
+        public int getImage_height() {
+            return image_height;
+        }
+
+        public void setImage_height(int image_height) {
+            this.image_height = image_height;
+        }
+
+        public String getDownload_url() {
+            return download_url;
+        }
+
+        public void setDownload_url(String download_url) {
+            this.download_url = download_url;
+        }
+
+        public String getThumbnail_url() {
+            return thumbnail_url;
+        }
+
+        public void setThumbnail_url(String thumbnail_url) {
+            this.thumbnail_url = thumbnail_url;
+        }
+
+        public int getThumbnail_width() {
+            return thumbnail_width;
+        }
+
+        public void setThumbnail_width(int thumbnail_width) {
+            this.thumbnail_width = thumbnail_width;
+        }
+
+        public int getThumbnail_height() {
+            return thumbnail_height;
+        }
+
+        public void setThumbnail_height(int thumbnail_height) {
+            this.thumbnail_height = thumbnail_height;
+        }
+
+        public int getThumb_large_width() {
+            return thumb_large_width;
+        }
+
+        public void setThumb_large_width(int thumb_large_width) {
+            this.thumb_large_width = thumb_large_width;
+        }
+
+        public int getThumb_large_height() {
+            return thumb_large_height;
+        }
+
+        public void setThumb_large_height(int thumb_large_height) {
+            this.thumb_large_height = thumb_large_height;
+        }
+
+        public String getThumb_large_url() {
+            return thumb_large_url;
+        }
+
+        public void setThumb_large_url(String thumb_large_url) {
+            this.thumb_large_url = thumb_large_url;
+        }
+
+        public String getSite_name() {
+            return site_name;
+        }
+
+        public void setSite_name(String site_name) {
+            this.site_name = site_name;
+        }
+
+        public String getSite_logo() {
+            return site_logo;
+        }
+
+        public void setSite_logo(String site_logo) {
+            this.site_logo = site_logo;
+        }
+
+        public String getSite_url() {
+            return site_url;
+        }
+
+        public void setSite_url(String site_url) {
+            this.site_url = site_url;
+        }
+
+        public String getFrom_url() {
+            return from_url;
+        }
+
+        public void setFrom_url(String from_url) {
+            this.from_url = from_url;
+        }
+
+        public String getObj_url() {
+            return obj_url;
+        }
+
+        public void setObj_url(String obj_url) {
+            this.obj_url = obj_url;
+        }
+
+        public String getShare_url() {
+            return share_url;
+        }
+
+        public void setShare_url(String share_url) {
+            this.share_url = share_url;
+        }
+
+        public int getDownload_num() {
+            return download_num;
+        }
+
+        public void setDownload_num(int download_num) {
+            this.download_num = download_num;
+        }
+
+        public int getCollect_num() {
+            return collect_num;
+        }
+
+        public void setCollect_num(int collect_num) {
+            this.collect_num = collect_num;
+        }
+
+        public int getStart_index() {
+            return start_index;
+        }
+
+        public void setStart_index(int start_index) {
+            this.start_index = start_index;
+        }
+
+        public int getReturn_number() {
+            return return_number;
+        }
+
+        public void setReturn_number(int return_number) {
+            this.return_number = return_number;
+        }
+
+        public String getAlbum_di() {
+            return album_di;
+        }
+
+        public void setAlbum_di(String album_di) {
+            this.album_di = album_di;
+        }
+
+        public String getCan_album_id() {
+            return can_album_id;
+        }
+
+        public void setCan_album_id(String can_album_id) {
+            this.can_album_id = can_album_id;
+        }
+
+        public String getAlbum_obj_num() {
+            return album_obj_num;
+        }
+
+        public void setAlbum_obj_num(String album_obj_num) {
+            this.album_obj_num = album_obj_num;
+        }
+
+        public String getUser_id() {
+            return user_id;
+        }
+
+        public void setUser_id(String user_id) {
+            this.user_id = user_id;
+        }
+
+        public String getApp_id() {
+            return app_id;
+        }
+
+        public void setApp_id(String app_id) {
+            this.app_id = app_id;
+        }
+
+        public String getColum() {
+            return colum;
+        }
+
+        public void setColum(String colum) {
+            this.colum = colum;
+        }
+
+        public String getPhoto_id() {
+            return photo_id;
+        }
+
+        public void setPhoto_id(String photo_id) {
+            this.photo_id = photo_id;
+        }
+
+        public int getIs_album() {
+            return is_album;
+        }
+
+        public void setIs_album(int is_album) {
+            this.is_album = is_album;
+        }
+
+        public int getIs_vip() {
+            return is_vip;
+        }
+
+        public void setIs_vip(int is_vip) {
+            this.is_vip = is_vip;
+        }
+
+        public int getFrom_name() {
+            return from_name;
+        }
+
+        public void setFrom_name(int from_name) {
+            this.from_name = from_name;
+        }
+
+        public String getHostname() {
+            return hostname;
+        }
+
+        public void setHostname(String hostname) {
+            this.hostname = hostname;
+        }
+
+        public String getParent_tag() {
+            return parent_tag;
+        }
+
+        public void setParent_tag(String parent_tag) {
+            this.parent_tag = parent_tag;
+        }
+
+        public String getDesc_info() {
+            return desc_info;
+        }
+
+        public void setDesc_info(String desc_info) {
+            this.desc_info = desc_info;
+        }
+
+        public int getIsAdapted() {
+            return isAdapted;
+        }
+
+        public void setIsAdapted(int isAdapted) {
+            this.isAdapted = isAdapted;
+        }
+
+        public List<String> getTags() {
+            return tags;
+        }
+
+        public void setTags(List<String> tags) {
+            this.tags = tags;
+        }
+
+        public List<?> getOther_urls() {
+            return other_urls;
+        }
+
+        public void setOther_urls(List<?> other_urls) {
+            this.other_urls = other_urls;
         }
     }
 }

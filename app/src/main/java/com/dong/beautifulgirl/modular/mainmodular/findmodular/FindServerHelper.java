@@ -34,9 +34,11 @@ public class FindServerHelper {
                     @Override
                     public void onNext(FindBean findBean) {
                         if(findBean!=null){
-                            List<FindBean.ResultsBean> results = findBean.getResults();
+                            List<FindBean.DataBean> results = findBean.getData();
                             if(results!=null){
                                 Log.i("Dong","获取Find数据："+results.size());
+                                if(results.size()>1)
+                                    results.remove(results.size()-1);
                                 if(onFindDataChangedListener!=null)
                                     onFindDataChangedListener.OnFindDataChanged(results);
                             }
@@ -81,9 +83,11 @@ public class FindServerHelper {
                     @Override
                     public void onNext(FindBean findBean) {
                         if(findBean!=null){
-                            List<FindBean.ResultsBean> results = findBean.getResults();
+                            List<FindBean.DataBean> results = findBean.getData();
                             if(results!=null){
                                 Log.i("Dong","获取Find Head数据："+results.size());
+                                if(results.size()>1)
+                                    results.remove(results.size()-1);
                                 if(onFindDataChangedListener!=null)
                                     onFindDataChangedListener.OnFindDataHeadChanged(results);
                             }
@@ -107,8 +111,8 @@ public class FindServerHelper {
     }
 
     public interface OnFindDataChangedListener{
-        void OnFindDataChanged(List<FindBean.ResultsBean> resultsBeans);
-        void OnFindDataHeadChanged(List<FindBean.ResultsBean> resultsBeans);
+        void OnFindDataChanged(List<FindBean.DataBean> resultsBeans);
+        void OnFindDataHeadChanged(List<FindBean.DataBean> resultsBeans);
     }
 
 }

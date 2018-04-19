@@ -21,8 +21,8 @@ public class HomeContract {
 
     interface View extends BaseView<Presenter>{
 
-        void homeDataChanged(List<HomeBean.ResultsBean> list);
+        void homeDataChanged(List<HomeBean.DataBean> list);
 
-        void homeDataHeadChanged(List<HomeBean.ResultsBean> list);
+        void homeDataHeadChanged(List<HomeBean.DataBean> list);
     }
 }

@@ -34,6 +34,7 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
 
     private final int CLUM_NUM = 2;
     private RecommendAdapter recommendAdapter;
+    private StaggeredGridLayoutManager layoutManager;
 
     public RecommendFragment() {
         // Required empty public constructor
@@ -82,15 +83,29 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
 
     private void initView(View view) {
         recyclerView = view.findViewById(R.id.recommend_recyclerview);
-        StaggeredGridLayoutManager layoutManager = new StaggeredGridLayoutManager(CLUM_NUM, StaggeredGridLayoutManager.VERTICAL);
+        layoutManager = new StaggeredGridLayoutManager(CLUM_NUM, StaggeredGridLayoutManager.VERTICAL);
+        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         recyclerView.setLayoutManager(layoutManager);
     }
 
     @Override
-    public void RecommendDataChanged(List<RecommendBean.ResultsBean> resultsBeans) {
+    public void RecommendDataChanged(List<RecommendBean.DataBean> resultsBeans) {
         recommendAdapter = new RecommendAdapter(getContext(), resultsBeans);
         recommendAdapter.setOnClickListener(this);
         recyclerView.setAdapter(recommendAdapter);
+
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+            }
+
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                layoutManager.invalidateSpanAssignments();
+            }
+        });
     }
 
     @Override
@@ -99,7 +114,7 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
     }
 
     @Override
-    public void onClick(List<RecommendBean.ResultsBean> resultsBeans, int position) {
+    public void onClick(List<RecommendBean.DataBean> resultsBeans, int position) {
         ToastUtil.toastLong(getContext(), "数据内容为：" + resultsBeans.get(position).getDesc());
     }
 }

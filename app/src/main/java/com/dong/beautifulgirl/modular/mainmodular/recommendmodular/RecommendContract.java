@@ -20,7 +20,7 @@ public interface RecommendContract {
     }
 
     interface View extends BaseView<Presenter>{
-        void RecommendDataChanged(List<RecommendBean.ResultsBean> resultsBeans);
+        void RecommendDataChanged(List<RecommendBean.DataBean> resultsBeans);
     }
 
 }

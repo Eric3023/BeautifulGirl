@@ -20,7 +20,7 @@ import java.util.List;
 public class RecommendAdapter extends RecyclerView.Adapter <RecommendAdapter.ViewHolder>{
 
     private Context context;
-    private List<RecommendBean.ResultsBean> resultsBeans;
+    private List<RecommendBean.DataBean> resultsBeans;
     private OnClickListener onClickListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -38,10 +38,10 @@ public class RecommendAdapter extends RecyclerView.Adapter <RecommendAdapter.Vie
     }
 
     public  interface   OnClickListener{
-        void onClick(List<RecommendBean.ResultsBean> resultsBeans, int position);
+        void onClick(List<RecommendBean.DataBean> resultsBeans, int position);
     }
 
-    public RecommendAdapter(Context context, List<RecommendBean.ResultsBean> resultsBeans) {
+    public RecommendAdapter(Context context, List<RecommendBean.DataBean> resultsBeans) {
         this.context = context;
         this.resultsBeans = resultsBeans;
     }
@@ -60,17 +60,12 @@ public class RecommendAdapter extends RecyclerView.Adapter <RecommendAdapter.Vie
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         if(resultsBeans!=null){
-            final RecommendBean.ResultsBean resultsBean = resultsBeans.get(position);
+            final RecommendBean.DataBean resultsBean = resultsBeans.get(position);
             if(resultsBean!=null){
-                Picasso.get().load(resultsBean.getUrl()).resize((int) context.getResources().getDimension(R.dimen.x150), (int) context.getResources().getDimension(R.dimen.y80)).into(holder.imageView);
+                Picasso.get().load(resultsBean.getImage_url()).into(holder.imageView);
 
                 StringBuilder stringBuilder = new StringBuilder();
-                stringBuilder.append(resultsBean.getCreatedAt());
-                for (int j = 0; j < position% 3; j++) {
-                    stringBuilder.append("\n");
-                    stringBuilder.append(resultsBean.getCreatedAt());
-                }
-
+                stringBuilder.append(resultsBean.getDesc());
                 holder.textView.setText(stringBuilder);
 
                 holder.view.setOnClickListener(new View.OnClickListener() {

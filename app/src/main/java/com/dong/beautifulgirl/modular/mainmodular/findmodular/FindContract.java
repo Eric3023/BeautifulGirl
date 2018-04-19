@@ -21,8 +21,8 @@ public class FindContract {
 
     interface View extends BaseView<Presenter>{
 
-        void findDataChanged(List<FindBean.ResultsBean> list);
+        void findDataChanged(List<FindBean.DataBean> list);
 
-        void findDataHeadChanged(List<FindBean.ResultsBean> list);
+        void findDataHeadChanged(List<FindBean.DataBean> list);
     }
 }

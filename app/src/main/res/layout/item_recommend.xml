@@ -6,9 +6,9 @@
 
     <ImageView
         android:id="@+id/item_recommend_img"
-        android:layout_width="@dimen/x150"
-        android:layout_height="@dimen/y80"
-        android:scaleType="fitXY"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
         android:layout_margin="@dimen/x5"
         android:layout_gravity="center_horizontal">
     </ImageView>

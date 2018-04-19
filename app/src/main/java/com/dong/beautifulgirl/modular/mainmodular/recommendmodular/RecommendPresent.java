@@ -34,7 +34,7 @@ public class RecommendPresent implements RecommendContract.Presenter, RecommendS
     }
 
     @Override
-    public void onRecommendDataChanged(List<RecommendBean.ResultsBean> resultsBeans) {
+    public void onRecommendDataChanged(List<RecommendBean.DataBean> resultsBeans) {
         Log.i("Dong", "获取Recommend数据："+resultsBeans.size());
         view.RecommendDataChanged(resultsBeans);
     }

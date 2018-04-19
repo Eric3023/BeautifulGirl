@@ -29,12 +29,12 @@ public class FindPresenter implements FindContract.Presenter, FindServerHelper.O
 
 
     @Override
-    public void OnFindDataChanged(List<FindBean.ResultsBean> resultsBeans) {
+    public void OnFindDataChanged(List<FindBean.DataBean> resultsBeans) {
         view.findDataChanged(resultsBeans);
     }
 
     @Override
-    public void OnFindDataHeadChanged(List<FindBean.ResultsBean> resultsBeans) {
+    public void OnFindDataHeadChanged(List<FindBean.DataBean> resultsBeans) {
         view.findDataHeadChanged(resultsBeans);
     }
 

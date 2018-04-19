@@ -18,10 +18,10 @@ import java.util.List;
 
 public class HomeListAdapter extends BaseAdapter {
 
-    private List<HomeBean.ResultsBean> list;
+    private List<HomeBean.DataBean> list;
     private Context context;
 
-    public HomeListAdapter(Context context, List<HomeBean.ResultsBean> list) {
+    public HomeListAdapter(Context context, List<HomeBean.DataBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -55,11 +55,11 @@ public class HomeListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        HomeBean.ResultsBean bean = list.get(i);
+        HomeBean.DataBean bean = list.get(i);
         if (bean != null) {
-            Picasso.get().load(bean.getUrl()).resize((int) context.getResources().getDimension(R.dimen.x100), (int) context.getResources().getDimension(R.dimen.y50)).into(viewHolder.img);
-            viewHolder.title.setText(bean.getCreatedAt());
-            viewHolder.content.setText(bean.getPublishedAt());
+            Picasso.get().load(bean.getImage_url()).resize((int) context.getResources().getDimension(R.dimen.x100), (int) context.getResources().getDimension(R.dimen.y50)).into(viewHolder.img);
+            viewHolder.title.setText(bean.getAbs());
+            viewHolder.content.setText(bean.getTag());
         }
         return view;
     }

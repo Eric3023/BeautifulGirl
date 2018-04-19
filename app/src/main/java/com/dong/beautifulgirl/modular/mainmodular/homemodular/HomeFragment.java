@@ -42,7 +42,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     private HomeContract.Presenter presenter;
     private LoopViewPager loopViewPager;
     private PointView pointView;
-    private List<HomeBean.ResultsBean> listResultsBeans;
+    private List<HomeBean.DataBean> listResultsBeans;
     private List<LoopViewPagerBean> pagerBeans;
     private HomeListAdapter adapter;
 
@@ -142,7 +142,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         listView = view.findViewById(R.id.home_listview);
         listView.addHeaderView(inflateView);
 
-        listResultsBeans = new ArrayList<HomeBean.ResultsBean>();
+        listResultsBeans = new ArrayList<HomeBean.DataBean>();
         adapter = new HomeListAdapter(context, listResultsBeans);
         listView.setAdapter(adapter);
     }
@@ -153,20 +153,21 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     }
 
     @Override
-    public void homeDataChanged(List<HomeBean.ResultsBean> resultsBeans) {
+    public void homeDataChanged(List<HomeBean.DataBean> resultsBeans) {
         this.listResultsBeans.addAll(resultsBeans);
         adapter.notifyDataSetChanged();
     }
 
     @Override
-    public void homeDataHeadChanged(List<HomeBean.ResultsBean> list) {
+    public void homeDataHeadChanged(List<HomeBean.DataBean> list) {
         if (list != null) {
             for (int i = 0; i < list.size(); i++) {
-                HomeBean.ResultsBean resultsBean = list.get(i);
+                HomeBean.DataBean resultsBean = list.get(i);
 
                 if (resultsBean != null) {
                     LoopViewPagerBean bean = new LoopViewPagerBean();
-                    bean.setUrl(resultsBean.getUrl());
+                    bean.setUrl(resultsBean.getImage_url());
+                    bean.setResourceID(R.drawable.img_default0);
                     bean.setObject(resultsBean);
                     pagerBeans.add(bean);
                 }

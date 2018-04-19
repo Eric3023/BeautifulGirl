@@ -16,7 +16,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/y5"
-        android:layout_marginLeft="@dimen/x10"
+        android:padding="@dimen/x10"
         android:orientation="vertical">
 
         <TextView
@@ -34,6 +34,7 @@
             android:maxLines="2"
             android:layout_marginTop="@dimen/y5"
             android:textSize="@dimen/x10"
+            android:visibility="gone"
             android:textColor="@android:color/white"/>
     </LinearLayout>
 

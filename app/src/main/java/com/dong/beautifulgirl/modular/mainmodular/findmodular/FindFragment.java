@@ -44,7 +44,7 @@ public class FindFragment extends Fragment implements FindContract.View {
     private FindContract.Presenter presenter;
     private LoopViewPager loopViewPager;
 
-    private List<FindBean.ResultsBean> resultsBeans;
+    private List<FindBean.DataBean> resultsBeans;
     private FindListAdapter adapter;
     private List<LoopViewPagerBean> beans;
 
@@ -143,7 +143,7 @@ public class FindFragment extends Fragment implements FindContract.View {
         listView = view.findViewById(R.id.home_listview);
         listView.addHeaderView(inflateView);
 
-        resultsBeans = new ArrayList<FindBean.ResultsBean>();
+        resultsBeans = new ArrayList<FindBean.DataBean>();
         adapter = new FindListAdapter(context, resultsBeans);
         listView.setAdapter(adapter);
     }
@@ -154,20 +154,20 @@ public class FindFragment extends Fragment implements FindContract.View {
     }
 
     @Override
-    public void findDataChanged(List<FindBean.ResultsBean> resultsBeans) {
+    public void findDataChanged(List<FindBean.DataBean> resultsBeans) {
         this.resultsBeans.addAll(resultsBeans);
         adapter.notifyDataSetChanged();
     }
 
     @Override
-    public void findDataHeadChanged(List<FindBean.ResultsBean> list) {
+    public void findDataHeadChanged(List<FindBean.DataBean> list) {
         if (list != null) {
             for (int i = 0; i < list.size(); i++) {
-                FindBean.ResultsBean resultsBean = list.get(i);
+                FindBean.DataBean resultsBean = list.get(i);
 
                 if (resultsBean != null) {
                     LoopViewPagerBean bean = new LoopViewPagerBean();
-                    bean.setUrl(resultsBean.getUrl());
+                    bean.setUrl(resultsBean.getImage_url());
                     bean.setObject(resultsBean);
                     beans.add(bean);
                 }

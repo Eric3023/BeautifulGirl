@@ -39,12 +39,12 @@ public class HomePresenter implements HomeContract.Presenter, HomeServerHelper.O
     }
 
     @Override
-    public void OnHomeDataChanged(List<HomeBean.ResultsBean> resultsBeans) {
+    public void OnHomeDataChanged(List<HomeBean.DataBean> resultsBeans) {
         view.homeDataChanged(resultsBeans);
     }
 
     @Override
-    public void OnHomeDataHeadChanged(List<HomeBean.ResultsBean> resultsBeans) {
+    public void OnHomeDataHeadChanged(List<HomeBean.DataBean> resultsBeans) {
         view.homeDataHeadChanged(resultsBeans);
     }
 }

@@ -4,7 +4,9 @@ import android.content.Context;
 import android.util.Log;
 
 import com.dong.beautifulgirl.http.HeadModel;
+import com.dong.beautifulgirl.http.UrlConfig;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observer;
@@ -15,6 +17,10 @@ import io.reactivex.disposables.Disposable;
  */
 
 public class HomeServerHelper {
+
+    private int pageNum = 0;
+    private int resourceNum = 20;
+    private final String TAG = "小清新";
 
 //    public static final int[] IMG_IDS = {R.drawable.guide_img1, R.drawable.guide_img2, R.drawable.guide_img3, R.drawable.guide_img4};
 //    public static final String TITLE = "这是标题内容";
@@ -34,8 +40,10 @@ public class HomeServerHelper {
                     @Override
                     public void onNext(HomeBean homeBean) {
                         if (homeBean != null) {
-                            Log.i("Dong", "加载Home数据：" + homeBean.getResults().size());
-                            List<HomeBean.ResultsBean> results = homeBean.getResults();
+                            Log.i("Dong", "加载Home数据：" + homeBean.getData().size());
+                            List<HomeBean.DataBean> results = homeBean.getData();
+                            if(results!=null&&results.size()>0)
+                                results.remove(results.size()-1);
                             if (onHomeDataChangedListener != null)
                                 onHomeDataChangedListener.OnHomeDataChanged(results);
                         }
@@ -75,8 +83,11 @@ public class HomeServerHelper {
                     @Override
                     public void onNext(HomeBean homeBean) {
                         if (homeBean != null) {
-                            Log.i("Dong", "加载Home Head数据：" + homeBean.getResults().size());
-                            List<HomeBean.ResultsBean> results = homeBean.getResults();
+                            Log.i("Dong", "加载Home Head数据：" + homeBean.getData().size());
+                            List<HomeBean.DataBean> results = homeBean.getData();
+
+                            if(results!=null&&results.size()>0)
+                                results.remove(results.size()-1);
                             if (onHomeDataChangedListener != null)
                                 onHomeDataChangedListener.OnHomeDataHeadChanged(results);
                         }
@@ -111,9 +122,9 @@ public class HomeServerHelper {
 
     public interface OnHomeDataChangedListener {
 
-        void OnHomeDataChanged(List<HomeBean.ResultsBean> resultsBeans);
+        void OnHomeDataChanged(List<HomeBean.DataBean> resultsBeans);
 
-        void OnHomeDataHeadChanged(List<HomeBean.ResultsBean> resultsBeans);
+        void OnHomeDataHeadChanged(List<HomeBean.DataBean> resultsBeans);
     }
 
 }

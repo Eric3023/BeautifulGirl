@@ -41,10 +41,11 @@ public class MainActivity extends BaseActivity{
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Transition slide = TransitionInflater.from(this).inflateTransition(R.transition.slide);
+            Transition fade = TransitionInflater.from(this).inflateTransition(R.transition.fade);
             getWindow().setEnterTransition(slide);
-            getWindow().setReturnTransition(slide);
+            getWindow().setReturnTransition(fade);
 
-            getWindow().setExitTransition(slide);
+            getWindow().setExitTransition(fade);
             getWindow().setReenterTransition(slide);
         }
 

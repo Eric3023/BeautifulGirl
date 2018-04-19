@@ -18,10 +18,10 @@ import java.util.List;
 
 public class FindListAdapter extends BaseAdapter {
 
-    private List<FindBean.ResultsBean> list;
+    private List<FindBean.DataBean> list;
     private Context context;
 
-    public FindListAdapter(Context context, List<FindBean.ResultsBean> list) {
+    public FindListAdapter(Context context, List<FindBean.DataBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -55,11 +55,11 @@ public class FindListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        FindBean.ResultsBean bean = list.get(i);
+        FindBean.DataBean bean = list.get(i);
         if (bean != null) {
-            Picasso.get().load(bean.getUrl()).resize((int)context.getResources().getDimension(R.dimen.x300), (int)context.getResources().getDimension(R.dimen.y120)).into(viewHolder.img);
-            viewHolder.title.setText(bean.getCreatedAt());
-            viewHolder.content.setText(bean.getPublishedAt());
+            Picasso.get().load(bean.getImage_url()).resize((int)context.getResources().getDimension(R.dimen.x300), (int)context.getResources().getDimension(R.dimen.y120)).into(viewHolder.img);
+            viewHolder.title.setText(bean.getDesc());
+            viewHolder.content.setText(bean.getColum());
         }
         return view;
     }
