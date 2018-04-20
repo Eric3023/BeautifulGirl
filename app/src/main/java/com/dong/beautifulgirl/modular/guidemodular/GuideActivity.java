@@ -106,12 +106,16 @@ public class GuideActivity extends BaseActivity {
         mButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    startComponent(MainActivity.class,
-                            ActivityOptions.makeSceneTransitionAnimation(GuideActivity.this).toBundle());
-                } else {
-                    startComponent(MainActivity.class);
-                }                finish();
+
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+//                    startComponent(MainActivity.class,
+//                            ActivityOptions.makeSceneTransitionAnimation(GuideActivity.this).toBundle());
+//                } else {
+//                    startComponent(MainActivity.class);
+//                }
+
+                startComponent(MainActivity.class);
+                finish();
             }
         });
     }

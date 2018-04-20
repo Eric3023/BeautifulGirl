@@ -7,10 +7,19 @@
     android:fitsSystemWindows="true"
     tools:context="com.dong.beautifulgirl.modular.mainmodular.MainActivity">
 
-    <com.dong.tabviewpager.widget.BottomTabFragmentViewPager
-        android:id="@+id/main_viewpager"
+    <com.ashokvarma.bottomnavigation.BottomNavigationBar
+        android:id="@+id/main_bottomNavigationBar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </com.dong.tabviewpager.widget.BottomTabFragmentViewPager>
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+    </com.ashokvarma.bottomnavigation.BottomNavigationBar>
+
+    <FrameLayout
+        android:id="@+id/main_frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/main_bottomNavigationBar">
+    </FrameLayout>
+
 
 </RelativeLayout>

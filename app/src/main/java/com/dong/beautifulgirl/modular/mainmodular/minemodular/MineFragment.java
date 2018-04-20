@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.dong.beautifulgirl.R;
-import com.dong.beautifulgirl.modular.logicmodular.LogicActivity;
+import com.dong.beautifulgirl.modular.logicandsignmodular.LogicAndSignActivity;
 import com.dong.circleimageview.widget.CircleImageView;
 
 /**
@@ -89,7 +89,7 @@ public class MineFragment extends Fragment implements MineContract.View{
         circleImageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(MineFragment.this.getContext(), LogicActivity.class);
+                Intent intent = new Intent(MineFragment.this.getContext(), LogicAndSignActivity.class);
                 FragmentActivity activity = MineFragment.this.getActivity();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     Pair<CircleImageView, String> photoImageViewPair = Pair.create(circleImageView, "share photo img");

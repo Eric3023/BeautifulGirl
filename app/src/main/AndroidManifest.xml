@@ -31,7 +31,9 @@
         <activity
             android:name=".modular.guidemodular.GuideActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".modular.logicmodular.LogicActivity"></activity>
+        <activity android:name=".modular.logicandsignmodular.LogicAndSignActivity" />
+        <activity
+            android:name=".modular.logicandsignmodular.logicmodular.LogicActivity" />
     </application>
 
 </manifest>

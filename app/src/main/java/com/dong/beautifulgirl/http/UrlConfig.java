@@ -37,5 +37,4 @@ public class UrlConfig {
 
     public static final String FIND_HEAD_URL = "channel/listjson?pn=0&rn=5&tag1=" + TAG_ROOT + "&tag2="+TAG_FIFTH+"&ie=utf8";
 
-
 }

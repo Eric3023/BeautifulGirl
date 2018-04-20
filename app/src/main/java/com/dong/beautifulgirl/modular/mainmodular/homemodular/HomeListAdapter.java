@@ -57,7 +57,7 @@ public class HomeListAdapter extends BaseAdapter {
 
         HomeBean.DataBean bean = list.get(i);
         if (bean != null) {
-            Picasso.get().load(bean.getImage_url()).resize((int) context.getResources().getDimension(R.dimen.x100), (int) context.getResources().getDimension(R.dimen.y50)).into(viewHolder.img);
+            Picasso.get().load(bean.getImage_url()).into(viewHolder.img);
             viewHolder.title.setText(bean.getAbs());
             viewHolder.content.setText(bean.getTag());
         }

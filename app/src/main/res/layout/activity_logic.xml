@@ -1,205 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context="com.dong.beautifulgirl.modular.logicmodular.LogicActivity"
-    android:orientation="vertical">
+    android:background="@android:color/white"
+    tools:context="com.dong.beautifulgirl.modular.logicandsignmodular.logicmodular.LogicActivity">
 
-    <include
-        android:id="@+id/logic_toptitle"
-        layout="@layout/include_toptitle">
-    </include>
-
-    <LinearLayout
-        android:id="@+id/logic_photo"
+    <ImageView
+        android:id="@+id/logic_backgroud"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y70"
-        android:background="@color/colorblue"
-        android:orientation="vertical">
+        android:layout_height="@dimen/y120"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logic_backgroud"
+        android:transitionName="share logic background"/>
 
-        <com.dong.circleimageview.widget.CircleImageView
-            android:id="@+id/logic_photo_circleImageView"
-            android:layout_width="@dimen/y50"
-            android:layout_height="@dimen/y50"
-            android:layout_gravity="center_horizontal"
-            android:transitionName="share photo img" />
-        <TextView
-            android:id="@+id/logic_name_tv"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:textSize="@dimen/x15"
-            android:layout_marginTop="@dimen/y5"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:transitionName="share photo tv"/>
-    </LinearLayout>
+    <TextView
+        android:id="@+id/logic_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="登陆"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/x18"
+        android:layout_marginLeft="@dimen/x10"
+        android:layout_marginTop="@dimen/y15"
+        android:transitionName="share logic txt"/>
 
-    <LinearLayout
-        android:layout_marginTop="@dimen/y10"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#dddddd">
+    <EditText
+        android:id="@+id/logic_account"
+        android:layout_width="@dimen/x250"
+        android:layout_height="@dimen/y32"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/x16"
+        android:hint="账号"
+        android:layout_below="@id/logic_backgroud"
+        android:layout_marginTop="@dimen/y40"/>
 
-        <LinearLayout
-            android:id="@+id/logic_data"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y30"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/y5"
-            android:paddingBottom="@dimen/y5"
-            android:paddingRight="@dimen/x10"
-            android:paddingLeft="@dimen/x10"
-            android:background="@android:color/white">
-            <ImageView
-                android:layout_width="@dimen/y20"
-                android:layout_height="@dimen/y20"
-                android:src="@drawable/ic_tab_home"
-                android:layout_gravity="center_vertical"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="个人资料"
-                android:textSize="@dimen/x16"
-                android:layout_marginLeft="@dimen/x20"/>
-        </LinearLayout>
+    <EditText
+        android:id="@+id/logic_password"
+        android:layout_width="@dimen/x250"
+        android:layout_height="@dimen/y32"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/x16"
+        android:hint="密码"
+        android:layout_below="@id/logic_account"
+        android:layout_marginTop="@dimen/y20"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px">
-        </View>
+    <Button
+        android:id="@+id/logic_commit"
+        android:layout_width="@dimen/x250"
+        android:layout_height="@dimen/y24"
+        android:layout_centerHorizontal="true"
+        android:padding="0px"
+        android:textSize="@dimen/x16"
+        android:hint="登陆"
+        android:layout_below="@id/logic_password"
+        android:layout_marginTop="@dimen/y30"
+        android:background="@drawable/logic_sign_btn_focus"/>
 
-
-        <LinearLayout
-            android:id="@+id/logic_messeage"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y30"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/y5"
-            android:paddingBottom="@dimen/y5"
-            android:paddingRight="@dimen/x10"
-            android:paddingLeft="@dimen/x10"
-            android:background="@android:color/white">
-            <ImageView
-                android:layout_width="@dimen/y20"
-                android:layout_height="@dimen/y20"
-                android:src="@drawable/ic_tab_home"
-                android:layout_gravity="center_vertical"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="我的留言"
-                android:textSize="@dimen/x16"
-                android:layout_marginLeft="@dimen/x20"/>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px">
-        </View>
-
-        <LinearLayout
-            android:id="@+id/logic_star"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y30"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/y5"
-            android:paddingBottom="@dimen/y5"
-            android:paddingRight="@dimen/x10"
-            android:paddingLeft="@dimen/x10"
-            android:background="@android:color/white">
-            <ImageView
-                android:layout_width="@dimen/y20"
-                android:layout_height="@dimen/y20"
-                android:src="@drawable/ic_tab_home"
-                android:layout_gravity="center_vertical"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="我的收藏"
-                android:textSize="@dimen/x16"
-                android:layout_marginLeft="@dimen/x20"/>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px">
-        </View>
-
-        <LinearLayout
-            android:id="@+id/logic_information"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y30"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/y5"
-            android:paddingBottom="@dimen/y5"
-            android:paddingRight="@dimen/x10"
-            android:paddingLeft="@dimen/x10"
-            android:background="@android:color/white">
-            <ImageView
-                android:layout_width="@dimen/y20"
-                android:layout_height="@dimen/y20"
-                android:src="@drawable/ic_tab_home"
-                android:layout_gravity="center_vertical"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="我的消息"
-                android:textSize="@dimen/x16"
-                android:layout_marginLeft="@dimen/x20"/>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10px">
-        </View>
-
-        <LinearLayout
-            android:id="@+id/logic_change_paassword"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y30"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/y5"
-            android:paddingBottom="@dimen/y5"
-            android:paddingRight="@dimen/x10"
-            android:paddingLeft="@dimen/x10"
-            android:background="@android:color/white">
-            <ImageView
-                android:layout_width="@dimen/y20"
-                android:layout_height="@dimen/y20"
-                android:src="@drawable/ic_tab_home"
-                android:layout_gravity="center_vertical"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="修改密码"
-                android:textSize="@dimen/x16"
-                android:layout_marginLeft="@dimen/x20"/>
-        </LinearLayout>
-
-
-        <Button
-            android:layout_width="@dimen/x280"
-            android:layout_height="@dimen/y30"
-            android:padding="@dimen/x5"
-            android:background="@color/colorblue"
-            android:text="切换账号"
-            android:textSize="@dimen/x18"
-            android:gravity="center"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="@dimen/y30"
-            android:layout_gravity="center_horizontal"/>
-
-    </LinearLayout>
-
-
-</LinearLayout>
+</RelativeLayout>

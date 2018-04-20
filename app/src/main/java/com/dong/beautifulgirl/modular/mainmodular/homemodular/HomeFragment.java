@@ -124,6 +124,7 @@ public class HomeFragment extends Fragment implements HomeContract.View {
                     .setLoop(false)
                     .setBeans(pagerBeans)
                     .setDefaultResouces(new int[]{R.drawable.home_pager_default})
+                    .setImageScale(LoopViewPager.CENTER_CROP)
                     .initialise();
         }
     }

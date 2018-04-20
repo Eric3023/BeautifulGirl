@@ -1,4 +1,4 @@
-package com.dong.beautifulgirl.modular.logicmodular;
+package com.dong.beautifulgirl.modular.logicandsignmodular.logicmodular;
 
 import com.dong.beautifulgirl.base.BasePresenter;
 import com.dong.beautifulgirl.base.BaseView;

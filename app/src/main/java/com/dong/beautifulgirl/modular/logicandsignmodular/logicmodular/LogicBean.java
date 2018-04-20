@@ -1,4 +1,4 @@
-package com.dong.beautifulgirl.modular.logicmodular;
+package com.dong.beautifulgirl.modular.logicandsignmodular.logicmodular;
 
 /**
  * Created by donghuadong on 2018/4/10.

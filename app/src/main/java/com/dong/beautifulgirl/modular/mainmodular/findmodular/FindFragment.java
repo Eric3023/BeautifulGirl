@@ -120,6 +120,7 @@ public class FindFragment extends Fragment implements FindContract.View {
                     .setAutoTime(5)
                     .setLoop(false)
                     .setBeans(beans)
+                    .setImageScale(LoopViewPager.CENTER_CROP)
                     .setDefaultResouces(new int[]{R.drawable.home_pager_default})
                     .setOnLoopPagerClickListener(new OnLoopPagerClickListener() {
                         @Override

@@ -57,7 +57,7 @@ public class FindListAdapter extends BaseAdapter {
 
         FindBean.DataBean bean = list.get(i);
         if (bean != null) {
-            Picasso.get().load(bean.getImage_url()).resize((int)context.getResources().getDimension(R.dimen.x300), (int)context.getResources().getDimension(R.dimen.y120)).into(viewHolder.img);
+            Picasso.get().load(bean.getImage_url()).into(viewHolder.img);
             viewHolder.title.setText(bean.getDesc());
             viewHolder.content.setText(bean.getColum());
         }
