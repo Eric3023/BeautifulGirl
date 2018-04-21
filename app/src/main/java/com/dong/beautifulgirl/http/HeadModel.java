@@ -32,6 +32,14 @@ public class HeadModel {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public static Observable<HomeBean> getHomeCardData(Context context){
+        return RetrofitHelper.getInstance()
+                .getService(context)
+                .getHomeCardData()
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
     public static Observable<RecommendBean> getRecommendData(Context context){
         return RetrofitHelper.getInstance()
                 .getService(context)

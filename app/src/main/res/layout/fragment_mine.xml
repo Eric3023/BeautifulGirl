@@ -14,7 +14,8 @@
     <LinearLayout
         android:id="@+id/mine_photo"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y70"
+        android:layout_height="@dimen/y80"
+        android:background="@drawable/home_pager_backgroud"
         android:orientation="horizontal">
 
         <com.dong.circleimageview.widget.CircleImageView
@@ -37,7 +38,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:layout_marginTop="@dimen/y10"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"

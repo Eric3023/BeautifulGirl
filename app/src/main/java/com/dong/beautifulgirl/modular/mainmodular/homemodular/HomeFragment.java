@@ -3,17 +3,26 @@ package com.dong.beautifulgirl.modular.mainmodular.homemodular;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.CardView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.dong.beautifulgirl.R;
+import com.dong.beautifulgirl.util.ToastUtil;
 import com.dong.pointviewpager.bean.LoopViewPagerBean;
+import com.dong.pointviewpager.listener.OnLoopPagerClickListener;
 import com.dong.pointviewpager.widget.LoopViewPager;
+import com.dong.pointviewpager.widget.PointGalleryViewPager;
 import com.dong.pointviewpager.widget.PointView;
-import com.dong.pointviewpager.widget.PointViewPager;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,7 +34,7 @@ import java.util.List;
  * Use the {@link HomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment implements HomeContract.View {
+public class HomeFragment extends Fragment implements HomeContract.View, View.OnClickListener, HomeListAdapter.OnCardItemClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -35,9 +44,8 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     private String mParam1;
     private String mParam2;
     private Context context;
-    private View inflateView;
     private ListView listView;
-    private PointViewPager pointViewPager;
+    private PointGalleryViewPager pointGalleryViewPager;
 
     private HomeContract.Presenter presenter;
     private LoopViewPager loopViewPager;
@@ -45,6 +53,22 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     private List<HomeBean.DataBean> listResultsBeans;
     private List<LoopViewPagerBean> pagerBeans;
     private HomeListAdapter adapter;
+    private ImageView firstCardImg;
+    private TextView firstCardTextView;
+    private ImageView secondCardImg;
+    private TextView secondCardTextView;
+    private ImageView thirdCardImg;
+    private TextView thirdCardTextView;
+    private ImageView fourthCardImg;
+    private TextView fourthCardTextView;
+    private LinearLayout firstCardLayout;
+    private LinearLayout secondCardLayout;
+    private LinearLayout thirdCardLayout;
+    private LinearLayout fourthCardLayout;
+    private CardView firstCard;
+    private CardView secondCard;
+    private CardView thirdCard;
+    private CardView fourthCard;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -84,36 +108,72 @@ public class HomeFragment extends Fragment implements HomeContract.View {
         context = getContext();
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-        init(view);
+        View inflateView = View.inflate(context, R.layout.inflate_home_pointviewpager, null);
+        initHeadView(inflateView);
+        initView(view, inflateView);
 
         if (presenter != null)
             presenter.start(getContext());
         return view;
     }
 
-    private void init(View view) {
-
+    private void initHeadView(View view) {
+        initCard(view);
         initPointLoopViewpager(view);
+    }
 
-        initListView(view);
+    private void initView(View view, View headView) {
+
+        initMenu(view);
+
+        initListView(view, headView);
 
     }
 
-    @Override
-    public void onResume() {
-        Log.i("Dong","onResume");
-        super.onResume();
+    private void initMenu(View view) {
+        Button menu = view.findViewById(R.id.home_menu);
+        Button qCode = view.findViewById(R.id.home_qcode);
+
+        menu.setOnClickListener(this);
+        qCode.setOnClickListener(this);
+    }
+
+
+    private void initCard(View view) {
+        firstCardLayout = view.findViewById(R.id.home_card_first);
+        secondCardLayout = view.findViewById(R.id.home_card_second);
+        thirdCardLayout = view.findViewById(R.id.home_card_third);
+        fourthCardLayout = view.findViewById(R.id.home_card_fourth);
+
+        firstCardImg = firstCardLayout.findViewById(R.id.home_card_iamgeview);
+        firstCardTextView = firstCardLayout.findViewById(R.id.home_card_textview);
+        firstCard = firstCardLayout.findViewById(R.id.home_card_cardview);
+        secondCardImg = secondCardLayout.findViewById(R.id.home_card_iamgeview);
+        secondCardTextView = secondCardLayout.findViewById(R.id.home_card_textview);
+        secondCard = secondCardLayout.findViewById(R.id.home_card_cardview);
+        thirdCardImg = thirdCardLayout.findViewById(R.id.home_card_iamgeview);
+        thirdCardTextView = thirdCardLayout.findViewById(R.id.home_card_textview);
+        thirdCard = thirdCardLayout.findViewById(R.id.home_card_cardview);
+        fourthCardImg = fourthCardLayout.findViewById(R.id.home_card_iamgeview);
+        fourthCardTextView = fourthCardLayout.findViewById(R.id.home_card_textview);
+        fourthCard = fourthCardLayout.findViewById(R.id.home_card_cardview);
+
+        firstCard.setOnClickListener(this);
+        secondCard.setOnClickListener(this);
+        thirdCard.setOnClickListener(this);
+        fourthCard.setOnClickListener(this);
+
     }
 
     private void initPointLoopViewpager(View view) {
-        inflateView = View.inflate(context, R.layout.inflate_home_pointviewpager, null);
-        pointViewPager = inflateView.findViewById(R.id.home_pointviewpager);
-        if (pointViewPager != null) {
-            loopViewPager = pointViewPager.getLoopViewPager();
-            pointView = pointViewPager.getPointView();
+        pointGalleryViewPager = view.findViewById(R.id.home_pointgalleryviewpager);
+        if (pointGalleryViewPager != null) {
+            loopViewPager = pointGalleryViewPager.getLoopViewPager();
+            pointView = pointGalleryViewPager.getPointView();
 
             initLoopViewPager(loopViewPager);
             initPointView(pointView);
+            initGalleryViewPager(pointGalleryViewPager);
         }
     }
 
@@ -125,6 +185,18 @@ public class HomeFragment extends Fragment implements HomeContract.View {
                     .setBeans(pagerBeans)
                     .setDefaultResouces(new int[]{R.drawable.home_pager_default})
                     .setImageScale(LoopViewPager.CENTER_CROP)
+                    .setOnLoopPagerClickListener(new OnLoopPagerClickListener() {
+                        @Override
+                        public void onLoopPagerClick(int i, LoopViewPagerBean loopViewPagerBean) {
+                            HomeBean.DataBean dataBean = (HomeBean.DataBean) loopViewPagerBean.getObject();
+                            if(dataBean!=null){
+                               ToastUtil.toastLong(HomeFragment.this.getActivity(), dataBean.getDesc());
+                            }
+                        }
+                    })
+                    .setCard(true)
+                    .setCardElevation(getResources().getDimension(R.dimen.x3))
+                    .setCardPadding(0)
                     .initialise();
         }
     }
@@ -132,19 +204,27 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     private void initPointView(PointView pointView) {
         if (pointView != null) {
             pointView.setRudis(getResources().getDimension(R.dimen.x3))
-                    .setDisbottom(getResources().getDimension(R.dimen.x5))
-                    .setDistance(getResources().getDimension(R.dimen.x5))
+                    .setDisbottom(getResources().getDimension(R.dimen.y8))
+                    .setDistance(getResources().getDimension(R.dimen.x8))
                     .initialise();
         }
     }
 
+    private void initGalleryViewPager(PointGalleryViewPager pointGalleryViewPager) {
+        pointGalleryViewPager.setPageWidth((int) getResources().getDimension(R.dimen.x290))//设置ViewPager的宽度，适当小于GalleryViewPager的宽度
+                .setPageHeight(RelativeLayout.LayoutParams.MATCH_PARENT)//设置ViewPager的高度
+                .setPageScale((float) 0.95)//设置两侧隐藏页面的缩放比例
+                .setPageAlpha((float) 0.8)//设置两侧隐藏页面的透明度
+                .initialise();
+    }
 
-    private void initListView(View view) {
+    private void initListView(View view, View headView) {
         listView = view.findViewById(R.id.home_listview);
-        listView.addHeaderView(inflateView);
+        listView.addHeaderView(headView);
 
         listResultsBeans = new ArrayList<HomeBean.DataBean>();
         adapter = new HomeListAdapter(context, listResultsBeans);
+        adapter.setOnCardItemClickListener(this);
         listView.setAdapter(adapter);
     }
 
@@ -157,6 +237,44 @@ public class HomeFragment extends Fragment implements HomeContract.View {
     public void homeDataChanged(List<HomeBean.DataBean> resultsBeans) {
         this.listResultsBeans.addAll(resultsBeans);
         adapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public void homeDataCardChanged(List<HomeBean.DataBean> list) {
+        if(list!=null){
+            if(list.size()>0){
+                HomeBean.DataBean dataBean = list.get(0);
+                if(dataBean!=null){
+                    firstCard.setTag(dataBean);
+                    Picasso.get().load(dataBean.getImage_url()).into(firstCardImg);
+                    firstCardTextView.setText(dataBean.getDesc());
+                }
+            }
+            if(list.size()>1){
+                HomeBean.DataBean dataBean = list.get(1);
+                if(dataBean!=null){
+                    secondCard.setTag(dataBean);
+                    Picasso.get().load(dataBean.getImage_url()).into(secondCardImg);
+                    secondCardTextView.setText(dataBean.getDesc());
+                }
+            }
+            if(list.size()>2){
+                HomeBean.DataBean dataBean = list.get(2);
+                if(dataBean!=null){
+                    thirdCard.setTag(dataBean);
+                    Picasso.get().load(dataBean.getImage_url()).into(thirdCardImg);
+                    thirdCardTextView.setText(dataBean.getDesc());
+                }
+            }
+            if(list.size()>3){
+                HomeBean.DataBean dataBean = list.get(3);
+                if(dataBean!=null){
+                    fourthCard.setTag(dataBean);
+                    Picasso.get().load(dataBean.getImage_url()).into(fourthCardImg);
+                    fourthCardTextView.setText(dataBean.getDesc());
+                }
+            }
+        }
     }
 
     @Override
@@ -184,12 +302,38 @@ public class HomeFragment extends Fragment implements HomeContract.View {
                 loopViewPager.setAuto(true)
                         .setLoop(true)
                         .setAutoTime(5)
-                       .setBeans(pagerBeans)
+                        .setBeans(pagerBeans)
                         .setDefaultResouces(new int[]{R.drawable.home_pager_default})
                         .initialise();
             }
+        }
+    }
 
-            pointView.setCount(10);
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        ToastUtil.toastLong(context, "id:"+id);
+        switch (id){
+            case R.id.home_menu:
+                ToastUtil.toastLong(getActivity(), "打开侧滑菜单");
+                break;
+            case R.id.home_qcode:
+                ToastUtil.toastLong(getActivity(), "打开扫描二维码");
+                break;
+            case R.id.home_card_cardview:
+                HomeBean.DataBean firstDataBean = (HomeBean.DataBean) v.getTag();
+                if(firstDataBean!=null){
+                    ToastUtil.toastLong(context, firstDataBean.getDesc());
+                }
+                break;
+        }
+    }
+
+    @Override
+    public void onCardItemClick(int i) {
+        HomeBean.DataBean dataBean = listResultsBeans.get(i);
+        if(dataBean!=null){
+            ToastUtil.toastLong(getActivity(), dataBean.getDesc());
         }
     }
 }

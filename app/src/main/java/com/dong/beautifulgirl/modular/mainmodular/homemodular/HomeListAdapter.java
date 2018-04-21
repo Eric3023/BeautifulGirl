@@ -1,6 +1,7 @@
 package com.dong.beautifulgirl.modular.mainmodular.homemodular;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -20,10 +21,15 @@ public class HomeListAdapter extends BaseAdapter {
 
     private List<HomeBean.DataBean> list;
     private Context context;
+    private OnCardItemClickListener onCardItemClickListener;
 
     public HomeListAdapter(Context context, List<HomeBean.DataBean> list) {
         this.context = context;
         this.list = list;
+    }
+
+    public void setOnCardItemClickListener(OnCardItemClickListener onCardItemClickListener) {
+        this.onCardItemClickListener = onCardItemClickListener;
     }
 
     @Override
@@ -42,7 +48,7 @@ public class HomeListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder = null;
         if (view == null) {
             viewHolder = new ViewHolder();
@@ -59,9 +65,24 @@ public class HomeListAdapter extends BaseAdapter {
         if (bean != null) {
             Picasso.get().load(bean.getImage_url()).into(viewHolder.img);
             viewHolder.title.setText(bean.getAbs());
-            viewHolder.content.setText(bean.getTag());
+            viewHolder.content.setText(bean.getDesc());
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onCardItemClickListener!=null){
+                        onCardItemClickListener.onCardItemClick(i);
+                    }
+                }
+            });
         }
         return view;
+    }
+
+
+    public interface OnCardItemClickListener{
+
+        void onCardItemClick(int i);
     }
 }
 

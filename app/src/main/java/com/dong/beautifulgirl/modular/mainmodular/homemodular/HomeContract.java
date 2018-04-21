@@ -17,6 +17,8 @@ public class HomeContract {
         void loadHomeData(Context context);
 
         void loadHomeHeadData(Context context);
+
+        void loadHomeCardData(Context context);
     }
 
     interface View extends BaseView<Presenter>{
@@ -24,5 +26,7 @@ public class HomeContract {
         void homeDataChanged(List<HomeBean.DataBean> list);
 
         void homeDataHeadChanged(List<HomeBean.DataBean> list);
+
+        void homeDataCardChanged(List<HomeBean.DataBean> list);
     }
 }

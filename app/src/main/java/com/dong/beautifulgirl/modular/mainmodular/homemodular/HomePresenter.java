@@ -25,6 +25,7 @@ public class HomePresenter implements HomeContract.Presenter, HomeServerHelper.O
     public void start(Context context) {
         loadHomeData(context);
         loadHomeHeadData(context);
+        loadHomeCardData(context);
     }
 
 
@@ -39,6 +40,11 @@ public class HomePresenter implements HomeContract.Presenter, HomeServerHelper.O
     }
 
     @Override
+    public void loadHomeCardData(Context context) {
+        homeServerHelper.loadHomeCardData(context);
+    }
+
+    @Override
     public void OnHomeDataChanged(List<HomeBean.DataBean> resultsBeans) {
         view.homeDataChanged(resultsBeans);
     }
@@ -46,5 +52,10 @@ public class HomePresenter implements HomeContract.Presenter, HomeServerHelper.O
     @Override
     public void OnHomeDataHeadChanged(List<HomeBean.DataBean> resultsBeans) {
         view.homeDataHeadChanged(resultsBeans);
+    }
+
+    @Override
+    public void OnHomeDataCardChanged(List<HomeBean.DataBean> resultsBeans) {
+        view.homeDataCardChanged(resultsBeans);
     }
 }

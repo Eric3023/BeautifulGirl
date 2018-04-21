@@ -79,7 +79,7 @@ public class MainActivity extends BaseActivity{
 
             Fragment fragment = fragments.get(i);
 
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 Transition slide = TransitionInflater.from(this).inflateTransition(R.transition.slide);
                 Transition explode = TransitionInflater.from(this).inflateTransition(R.transition.explode);
                 Transition fade = TransitionInflater.from(this).inflateTransition(R.transition.fade);

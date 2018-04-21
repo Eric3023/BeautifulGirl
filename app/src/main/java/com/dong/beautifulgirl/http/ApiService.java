@@ -26,6 +26,10 @@ public interface ApiService {
     Observable<HomeBean> getHomeHeadData();
 
     @Headers("cache:600")
+    @GET(UrlConfig.HOME_CARD_URL)
+    Observable<HomeBean> getHomeCardData();
+
+    @Headers("cache:600")
     @GET(UrlConfig.RECOMMEND_URL)
     Observable<RecommendBean> getRecommendData();
 

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!--title-->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="美图推荐"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/x5"
+        android:layout_marginRight="@dimen/x5"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_marginTop="@dimen/x8"
+        android:textSize="@dimen/x15"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/home_card_first"
+            layout="@layout/include_card_imagview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        </include>
+
+        <include
+            android:id="@+id/home_card_second"
+            layout="@layout/include_card_imagview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        </include>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <include
+            android:id="@+id/home_card_third"
+            layout="@layout/include_card_imagview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        </include>
+
+        <include
+            android:id="@+id/home_card_fourth"
+            layout="@layout/include_card_imagview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1">
+        </include>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="一饱眼福"
+        android:textStyle="bold"
+        android:layout_marginBottom="@dimen/x5"
+        android:layout_marginRight="@dimen/x5"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_marginTop="@dimen/x8"
+        android:textSize="@dimen/x15"/>
+
+</LinearLayout>

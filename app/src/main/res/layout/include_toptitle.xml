@@ -1,20 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/y25"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorblue">
 
+    <Button
+        android:id="@+id/home_menu"
+        android:layout_width="@dimen/x22"
+        android:layout_height="@dimen/x22"
+        android:background="@drawable/home_menu_icon"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x10" />
+
     <TextView
+        android:id="@+id/home_title"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_centerInParent="true"
         android:layout_marginLeft="@dimen/x10"
+        android:textStyle="bold"
         android:gravity="center"
-        android:text="所谓伊人"
-        android:textSize="@dimen/x15"
+        android:text="Home"
+        android:textSize="@dimen/x16"
         android:textColor="@android:color/white"/>
 
-</android.support.constraint.ConstraintLayout>
+    <Button
+        android:id="@+id/home_qcode"
+        android:layout_width="@dimen/x36"
+        android:layout_height="@dimen/x36"
+        android:background="@drawable/home_qcode_icon"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/x10"
+        android:layout_alignParentRight="true" />
+
+</RelativeLayout>

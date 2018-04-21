@@ -59,16 +59,6 @@ public class HomeServerHelper {
 
                     }
                 });
-
-//        for (int i = 0; i < 50; i++) {
-//            HomeBean.ResultsBean bean = new HomeBean.ResultsBean();
-//            bean.setCreatedAt(TITLE);
-//            bean.setDesc(CONTENT);
-//
-//            resultsBeans.add(bean);
-//        }
-//        if (onHomeDataChangedListener != null)
-//            onHomeDataChangedListener.OnHomeDataChanged(resultsBeans);
     }
 
     public void loadHomeHeadData(Context context) {
@@ -104,17 +94,41 @@ public class HomeServerHelper {
                     }
                 });
 
-//        for (int i = 0; i < 50; i++) {
-//            HomeBean.ResultsBean bean = new HomeBean.ResultsBean();
-//            bean.setCreatedAt(TITLE);
-//            bean.setDesc(CONTENT);
-//
-//            resultsBeans.add(bean);
-//        }
-//        if (onHomeDataChangedListener != null)
-//            onHomeDataChangedListener.OnHomeDataChanged(resultsBeans);
     }
 
+    public void loadHomeCardData(Context context) {
+
+        HeadModel.getHomeCardData(context)
+                .subscribe(new Observer<HomeBean>() {
+                    @Override
+                    public void onSubscribe(Disposable d) {
+
+                    }
+
+                    @Override
+                    public void onNext(HomeBean homeBean) {
+                        if (homeBean != null) {
+                            Log.i("Dong", "加载Home 数据：" + homeBean.getData().size());
+                            List<HomeBean.DataBean> results = homeBean.getData();
+
+                            if(results!=null&&results.size()>0)
+                                results.remove(results.size()-1);
+                            if (onHomeDataChangedListener != null)
+                                onHomeDataChangedListener.OnHomeDataCardChanged(results);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Log.i("Dong", "Home Head数据加载失败：" + e.getMessage());
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+    }
 
     public void setOnHomeDataChangedListener(OnHomeDataChangedListener onHomeDataChangedListener) {
         this.onHomeDataChangedListener = onHomeDataChangedListener;
@@ -125,6 +139,8 @@ public class HomeServerHelper {
         void OnHomeDataChanged(List<HomeBean.DataBean> resultsBeans);
 
         void OnHomeDataHeadChanged(List<HomeBean.DataBean> resultsBeans);
+
+        void OnHomeDataCardChanged(List<HomeBean.DataBean> resultsBeans);
     }
 
 }

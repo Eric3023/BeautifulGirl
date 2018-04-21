@@ -1,13 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
-    <com.dong.pointviewpager.widget.PointViewPager
-        android:id="@+id/home_pointviewpager"
+    <com.dong.pointviewpager.widget.PointGalleryViewPager
+        android:id="@+id/home_pointgalleryviewpager"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y120">
-    </com.dong.pointviewpager.widget.PointViewPager>
+        android:layout_height="@dimen/y120"
+        android:background="@drawable/home_pager_backgroud">
+    </com.dong.pointviewpager.widget.PointGalleryViewPager>
 
-</android.support.constraint.ConstraintLayout>
+    <include
+        layout="@layout/include_home_cards"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/x5">
+    </include>
+
+</LinearLayout>
