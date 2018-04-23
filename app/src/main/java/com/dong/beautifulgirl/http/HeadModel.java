@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.dong.beautifulgirl.modular.mainmodular.findmodular.FindBean;
 import com.dong.beautifulgirl.modular.mainmodular.homemodular.HomeBean;
+import com.dong.beautifulgirl.modular.mainmodular.minemodular.MineLikeBean;
 import com.dong.beautifulgirl.modular.mainmodular.recommendmodular.RecommendBean;
 
 import io.reactivex.Observable;
@@ -16,51 +17,60 @@ import io.reactivex.schedulers.Schedulers;
 
 public class HeadModel {
 
-    public static Observable<HomeBean> getHomeData(Context context){
+    public static Observable<HomeBean> getHomeData(Context context, int pn, int rn , String tag1, String tag2, String ie){
         return RetrofitHelper.getInstance()
                 .getService(context)
-                .getHomeData()
+                .getHomeData(pn, rn, tag1, tag2, ie)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static Observable<HomeBean> getHomeHeadData(Context context){
+    public static Observable<HomeBean> getHomeHeadData(Context context, int pn, int rn , String tag1, String tag2, String ie){
         return RetrofitHelper.getInstance()
                 .getService(context)
-                .getHomeHeadData()
+                .getHomeHeadData(pn, rn, tag1, tag2, ie)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static Observable<HomeBean> getHomeCardData(Context context){
+    public static Observable<HomeBean> getHomeCardData(Context context, int pn, int rn , String tag1, String tag2, String ie){
         return RetrofitHelper.getInstance()
                 .getService(context)
-                .getHomeCardData()
+                .getHomeCardData(pn, rn, tag1, tag2, ie)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static Observable<RecommendBean> getRecommendData(Context context){
+    public static Observable<RecommendBean> getRecommendData(Context context, int pn, int rn , String tag1, String tag2, String ie){
         return RetrofitHelper.getInstance()
                 .getService(context)
-                .getRecommendData()
+                .getRecommendData(pn, rn, tag1, tag2, ie)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static Observable<FindBean> getFindData(Context context){
+    public static Observable<FindBean> getFindData(Context context, int pn, int rn , String tag1, String tag2, String ie){
         return RetrofitHelper.getInstance()
                 .getService(context)
-                .getFindData()
+                .getFindData(pn, rn, tag1, tag2, ie)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public static Observable<FindBean> getFindHeadData(Context context){
+    public static Observable<FindBean> getFindHeadData(Context context, int pn, int rn , String tag1, String tag2, String ie){
         return RetrofitHelper.getInstance()
                 .getService(context)
-                .getFindHeadData()
+                .getFindHeadData(pn, rn, tag1, tag2, ie)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
+
+    public static Observable<MineLikeBean> getMineLikeData(Context context, int pn, int rn , String tag1, String tag2, String ie){
+        return RetrofitHelper.getInstance()
+                .getService(context)
+                .getMineLikeData(pn, rn, tag1, tag2, ie)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
 }

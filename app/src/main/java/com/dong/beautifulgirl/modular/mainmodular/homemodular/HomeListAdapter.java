@@ -79,7 +79,6 @@ public class HomeListAdapter extends BaseAdapter {
         return view;
     }
 
-
     public interface OnCardItemClickListener{
 
         void onCardItemClick(int i);

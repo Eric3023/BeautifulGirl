@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,7 +6,7 @@
 
     <include
         android:id="@+id/find_toptitle"
-        layout="@layout/include_toptitle">
+        layout="@layout/include_find_title">
     </include>
 
     <ListView
@@ -16,4 +16,4 @@
         android:layout_below="@id/find_toptitle">
     </ListView>
 
-</FrameLayout>
+</RelativeLayout>

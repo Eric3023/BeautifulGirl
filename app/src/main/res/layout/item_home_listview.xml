@@ -19,11 +19,11 @@
         android:foreground="?android:attr/selectableItemBackground"
         app:cardElevation="0px"
         app:cardCornerRadius="@dimen/x5"
-        app:cardPreventCornerOverlap="true"
+        app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true"
         app:contentPadding="0px">
 
-        <ImageView
+        <com.dong.beautifulgirl.widget.RoundImageView
             android:id="@+id/home_listview_img"
             android:layout_width="@dimen/x120"
             android:layout_height="@dimen/y60"

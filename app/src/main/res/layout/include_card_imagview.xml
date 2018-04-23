@@ -14,11 +14,11 @@
         android:foreground="?android:attr/selectableItemBackground"
         app:cardElevation="@dimen/x3"
         app:cardCornerRadius="@dimen/x5"
-        app:cardPreventCornerOverlap="true"
+        app:cardPreventCornerOverlap="false"
         app:cardUseCompatPadding="true"
         app:contentPadding="0px">
 
-        <ImageView
+        <com.dong.beautifulgirl.widget.RoundImageView
             android:id="@+id/home_card_iamgeview"
             android:layout_width="match_parent"
             android:layout_height="@dimen/y60"

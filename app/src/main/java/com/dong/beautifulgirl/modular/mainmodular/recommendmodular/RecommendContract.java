@@ -15,11 +15,16 @@ public interface RecommendContract {
 
     interface Presenter extends BasePresenter{
 
-        void loadRecommend(Context context);
+        void loadRecommendTab(Context context);
+
+        void loadRecommend(Context context, String tag);
 
     }
 
     interface View extends BaseView<Presenter>{
+
+        void RecommendTabChanged(List<RecommendTabBean> tabBeans);
+
         void RecommendDataChanged(List<RecommendBean.DataBean> resultsBeans);
     }
 

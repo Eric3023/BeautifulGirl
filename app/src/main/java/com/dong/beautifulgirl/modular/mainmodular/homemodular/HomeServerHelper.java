@@ -18,19 +18,20 @@ import io.reactivex.disposables.Disposable;
 
 public class HomeServerHelper {
 
-    private int pageNum = 0;
-    private int resourceNum = 20;
-    private final String TAG = "小清新";
+    private int pn_head;//页码
+    private final int rn_head = 5;//一页显示的数量
 
-//    public static final int[] IMG_IDS = {R.drawable.guide_img1, R.drawable.guide_img2, R.drawable.guide_img3, R.drawable.guide_img4};
-//    public static final String TITLE = "这是标题内容";
-//    public static final String CONTENT = "这是详细说明---这是详细说明---";
+    private int pn_card;//页码
+    private final int rn_card = 4;//一页显示的数量
+
+    private int pn_con;//页码
+    private final int rn_con = 30;//一页显示的数量
 
     public OnHomeDataChangedListener onHomeDataChangedListener;
 
     public void loadHomeData(Context context) {
 
-        HeadModel.getHomeData(context)
+        HeadModel.getHomeData(context, pn_con, rn_con, UrlConfig.TAG_ROOT, UrlConfig.TAG_THIRD, UrlConfig.IE)
                 .subscribe(new Observer<HomeBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -63,7 +64,7 @@ public class HomeServerHelper {
 
     public void loadHomeHeadData(Context context) {
 
-        HeadModel.getHomeHeadData(context)
+        HeadModel.getHomeHeadData(context, pn_head, rn_head, UrlConfig.TAG_ROOT, UrlConfig.TAG_SEVEVTH, UrlConfig.IE)
                 .subscribe(new Observer<HomeBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -98,7 +99,7 @@ public class HomeServerHelper {
 
     public void loadHomeCardData(Context context) {
 
-        HeadModel.getHomeCardData(context)
+        HeadModel.getHomeCardData(context, pn_card, rn_card, UrlConfig.TAG_ROOT, UrlConfig.TAG_SECOND, UrlConfig.IE)
                 .subscribe(new Observer<HomeBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -108,7 +109,7 @@ public class HomeServerHelper {
                     @Override
                     public void onNext(HomeBean homeBean) {
                         if (homeBean != null) {
-                            Log.i("Dong", "加载Home 数据：" + homeBean.getData().size());
+                            Log.i("Dong", "加载Home Card数据：" + homeBean.getData().size());
                             List<HomeBean.DataBean> results = homeBean.getData();
 
                             if(results!=null&&results.size()>0)

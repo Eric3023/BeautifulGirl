@@ -24,19 +24,23 @@ public class UrlConfig {
     public static final String TAG_THIRTEENTH ="网络美女";
     public static final String TAG_FOURTEENTH ="宅男女神";
 
+    public static final String IE ="utf8";
+
+
     public static final String BASE_URL = "http://image.baidu.com/";
 
-    public static final String HOME_URL = "channel/listjson?pn=0&rn=20&tag1=" + TAG_ROOT + "&tag2="+TAG_SECOND+"&ie=utf8";//小清新
+    public static final String HOME_URL = "channel/listjson";
 
-    public static final String HOME_HEAD_URL = "channel/listjson?pn=0&rn=5&tag1=" + TAG_ROOT + "&tag2="+TAG_THIRD+"&ie=utf8";//唯美
+    public static final String HOME_HEAD_URL = "channel/listjson";
 
-    public static final String HOME_CARD_URL = "channel/listjson?pn=0&rn=4&tag1=" + TAG_ROOT + "&tag2="+TAG_SEVEVTH+"&ie=utf8";//气质
+    public static final String HOME_CARD_URL = "channel/listjson";
 
+    public static final String RECOMMEND_URL = "channel/listjson";
 
-    public static final String RECOMMEND_URL = "channel/listjson?pn=0&rn=30&tag1=" + TAG_ROOT + "&tag2="+TAG_TWELTH+"&ie=utf8";//写真
+    public static final String FIND_URL = "channel/listjson";
 
-    public static final String FIND_URL = "channel/listjson?pn=0&rn=20&tag1=" + TAG_ROOT + "&tag2="+TAG_NINETH+"&ie=utf8";//长发
+    public static final String FIND_HEAD_URL = "channel/listjson";
 
-    public static final String FIND_HEAD_URL = "channel/listjson?pn=0&rn=5&tag1=" + TAG_ROOT + "&tag2="+TAG_FIFTH+"&ie=utf8";//诱惑
+    public static final String MINE_LIKE = "channel/listjson";
 
 }

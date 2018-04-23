@@ -1,19 +1,19 @@
-package com.dong.beautifulgirl.modular.mainmodular.minemodular;
+package com.dong.beautifulgirl.modular.mainmodular.mainmodular;
 
 /**
  * Created by donghuadong on 2018/4/10.
  */
 
-public class MineBean {
+public class MainSlideBean {
 
     private String headImgUrl;
     private String name;
     private String uid;
 
-    public MineBean() {
+    public MainSlideBean() {
     }
 
-    public MineBean(String headImgUrl, String name, String uid) {
+    public MainSlideBean(String headImgUrl, String name, String uid) {
         this.headImgUrl = headImgUrl;
         this.name = name;
         this.uid = uid;

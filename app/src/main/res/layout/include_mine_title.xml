@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y25"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorblue">
+
+    <Button
+        android:id="@+id/mine_menu"
+        android:layout_width="@dimen/x22"
+        android:layout_height="@dimen/x22"
+        android:background="@drawable/home_menu_icon"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="@dimen/x10"
+        android:visibility="gone"/>
+
+    <TextView
+        android:id="@+id/mine_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/x10"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="我的"
+        android:textSize="@dimen/x16"
+        android:textColor="@android:color/white"/>
+
+    <Button
+        android:id="@+id/mine_qcode"
+        android:layout_width="@dimen/x36"
+        android:layout_height="@dimen/x36"
+        android:background="@drawable/home_qcode_icon"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="@dimen/x10"
+        android:layout_alignParentRight="true"
+        android:visibility="gone"/>
+
+</RelativeLayout>

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.dong.beautifulgirl.http.HeadModel;
+import com.dong.beautifulgirl.http.UrlConfig;
 
 import java.util.List;
 
@@ -16,15 +17,17 @@ import io.reactivex.disposables.Disposable;
 
 public class FindServerHelper {
 
-//    public static final int[] IMG_IDS = {R.drawable.img_default0,R.drawable.img_default1,R.drawable.img_default2};
-//    public static final String TITLE = "这是标题内容";
-//    public static final String CONTENT = "这是详细说明---这是详细说明---";
+    private int pn_head;//页码
+    private final int rn_head = 10;//一页显示的数量
+
+    private int pn_con;//页码
+    private final int rn_con = 30;//一页显示的数量
 
     public OnFindDataChangedListener onFindDataChangedListener;
 
     public void loadFindData(Context context){
 
-        HeadModel.getFindData(context)
+        HeadModel.getFindData(context, pn_con, rn_con, UrlConfig.TAG_ROOT, UrlConfig.TAG_NINETH, UrlConfig.IE)
                 .subscribe(new Observer<FindBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
@@ -55,25 +58,11 @@ public class FindServerHelper {
 
                     }
                 });
-
-//        List<FindBean> homeBeans = new ArrayList<FindBean>();
-//        for (int i = 0; i < 50; i++) {
-//            FindBean bean = new FindBean();
-//            bean.setImgId(IMG_IDS[i%IMG_IDS.length]);
-//            bean.setTitle(TITLE);
-//            bean.setContent(CONTENT);
-//
-//            homeBeans.add(bean);
-//        }
-//
-//        Log.i("Dong", "加载Home数据："+homeBeans.size());
-//        if(onFindDataChangedListener!=null)
-//            onFindDataChangedListener.OnHomeDataChanged(homeBeans);
     }
 
     public void loadFindHeadData(Context context){
 
-        HeadModel.getFindHeadData(context)
+        HeadModel.getFindHeadData(context, pn_head, rn_head, UrlConfig.TAG_ROOT, UrlConfig.TAG_FIFTH, UrlConfig.IE)
                 .subscribe(new Observer<FindBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {

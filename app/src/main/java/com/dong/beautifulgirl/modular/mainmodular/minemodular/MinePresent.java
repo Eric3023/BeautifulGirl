@@ -3,6 +3,8 @@ package com.dong.beautifulgirl.modular.mainmodular.minemodular;
 import android.content.Context;
 import android.util.Log;
 
+import java.util.List;
+
 /**
  * Created by donghuadong on 2018/4/10.
  */
@@ -24,6 +26,7 @@ public class MinePresent implements MineContract.Presenter, MineServerHelper.OnM
     @Override
     public void start(Context context) {
         loadMineData();
+        loadMineLikeData(context);
     }
 
     @Override
@@ -32,9 +35,20 @@ public class MinePresent implements MineContract.Presenter, MineServerHelper.OnM
     }
 
     @Override
+    public void loadMineLikeData(Context context) {
+        serverHelper.loadMineLikeData(context);
+    }
+
+    @Override
     public void onMineDataChanged(MineBean mineBean) {
         Log.i("Dong", "获取Mine数据："+mineBean.getName());
         view.mineDataChanged(mineBean);
+    }
+
+    @Override
+    public void onMineLikeDataChanged(List<MineLikeBean.DataBean> dataBeans) {
+        Log.i("Dong", "获取Mine数据："+dataBeans.size());
+        view.mineLikeDataChanged(dataBeans);
     }
 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
@@ -7,7 +7,20 @@
     <com.dong.pointviewpager.widget.GalleryViewPager
         android:id="@+id/find_loopviewpager"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y90">
+        android:layout_height="@dimen/y120"
+        android:background="@drawable/home_pager_backgroud">
     </com.dong.pointviewpager.widget.GalleryViewPager>
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="美图精选"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/x5"
+        android:layout_marginRight="@dimen/x5"
+        android:layout_marginLeft="@dimen/x5"
+        android:layout_marginTop="@dimen/x8"
+        android:textSize="@dimen/x15"
+        android:layout_below="@id/find_loopviewpager"/>
+</RelativeLayout>

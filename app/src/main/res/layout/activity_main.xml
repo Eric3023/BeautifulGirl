@@ -1,25 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     android:fitsSystemWindows="true"
-    tools:context="com.dong.beautifulgirl.modular.mainmodular.MainActivity">
+    tools:context="com.dong.beautifulgirl.modular.mainmodular.mainmodular.MainActivity">
 
-    <com.ashokvarma.bottomnavigation.BottomNavigationBar
-        android:id="@+id/main_bottomNavigationBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true">
-    </com.ashokvarma.bottomnavigation.BottomNavigationBar>
+   <android.support.v4.widget.DrawerLayout
+       android:id="@+id/main_drawerlayout"
+       android:layout_width="match_parent"
+       android:layout_height="match_parent">
 
-    <FrameLayout
-        android:id="@+id/main_frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/main_bottomNavigationBar">
-    </FrameLayout>
+       <RelativeLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+           <com.ashokvarma.bottomnavigation.BottomNavigationBar
+               android:id="@+id/main_bottomNavigationBar"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:layout_alignParentBottom="true">
+           </com.ashokvarma.bottomnavigation.BottomNavigationBar>
 
+           <FrameLayout
+               android:id="@+id/main_frameLayout"
+               android:layout_width="match_parent"
+               android:layout_height="match_parent"
+               android:background="@android:color/white"
+               android:layout_above="@id/main_bottomNavigationBar">
+           </FrameLayout>
+       </RelativeLayout>
 
-</RelativeLayout>
+       <LinearLayout
+           android:id="@+id/main_right_slide_layout"
+           android:layout_width="@dimen/x240"
+           android:layout_height="match_parent"
+           android:background="@android:color/white"
+           android:layout_gravity="start"
+           android:orientation="vertical"
+           android:clickable="true">
+           <include layout="@layout/include_slide"></include>
+       </LinearLayout>
+
+   </android.support.v4.widget.DrawerLayout>
+
+</LinearLayout>

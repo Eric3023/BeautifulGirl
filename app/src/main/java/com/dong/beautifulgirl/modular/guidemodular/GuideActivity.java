@@ -1,6 +1,5 @@
 package com.dong.beautifulgirl.modular.guidemodular;
 
-import android.app.ActivityOptions;
 import android.os.Build;
 import android.os.Bundle;
 import android.transition.Transition;
@@ -9,9 +8,8 @@ import android.view.View;
 import android.widget.Button;
 
 import com.dong.beautifulgirl.R;
-import com.dong.beautifulgirl.modular.mainmodular.MainActivity;
+import com.dong.beautifulgirl.modular.mainmodular.mainmodular.MainActivity;
 import com.dong.beautifulgirl.base.BaseActivity;
-import com.dong.beautifulgirl.modular.splashmodular.SplashActivity;
 import com.dong.pointviewpager.bean.LoopViewPagerBean;
 import com.dong.pointviewpager.listener.OnLoopPageChangeListener;
 import com.dong.pointviewpager.widget.LoopViewPager;

@@ -20,10 +20,15 @@ public class FindListAdapter extends BaseAdapter {
 
     private List<FindBean.DataBean> list;
     private Context context;
+    private OnCardItemClickListener onCardItemClickListener;
 
     public FindListAdapter(Context context, List<FindBean.DataBean> list) {
         this.context = context;
         this.list = list;
+    }
+
+    public void setOnCardItemClickListener(OnCardItemClickListener onCardItemClickListener) {
+        this.onCardItemClickListener = onCardItemClickListener;
     }
 
     @Override
@@ -42,7 +47,7 @@ public class FindListAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int i, View view, ViewGroup viewGroup) {
+    public View getView(final int i, View view, ViewGroup viewGroup) {
         ViewHolder viewHolder = null;
         if (view == null) {
             viewHolder = new ViewHolder();
@@ -60,8 +65,22 @@ public class FindListAdapter extends BaseAdapter {
             Picasso.get().load(bean.getImage_url()).into(viewHolder.img);
             viewHolder.title.setText(bean.getDesc());
             viewHolder.content.setText(bean.getColum());
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if(onCardItemClickListener!=null){
+                        onCardItemClickListener.onCardItemClick(i);
+                    }
+                }
+            });
         }
         return view;
+    }
+
+    public interface OnCardItemClickListener{
+
+        void onCardItemClick(int i);
     }
 }
 

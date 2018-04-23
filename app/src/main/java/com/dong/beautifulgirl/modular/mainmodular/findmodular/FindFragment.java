@@ -6,10 +6,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.dong.beautifulgirl.R;
+import com.dong.beautifulgirl.modular.mainmodular.mainmodular.MainActivity;
 import com.dong.beautifulgirl.util.ToastUtil;
 import com.dong.pointviewpager.adapter.LoopPagerAdapter;
 import com.dong.pointviewpager.bean.LoopViewPagerBean;
@@ -27,7 +29,7 @@ import java.util.List;
  * Use the {@link FindFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FindFragment extends Fragment implements FindContract.View {
+public class FindFragment extends Fragment implements FindContract.View, FindListAdapter.OnCardItemClickListener, View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -85,7 +87,7 @@ public class FindFragment extends Fragment implements FindContract.View {
         // Inflate the layout for this fragment
         context = getContext();
 
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        View view = inflater.inflate(R.layout.fragment_find, container, false);
         init(view);
 
         if (presenter != null)
@@ -96,12 +98,19 @@ public class FindFragment extends Fragment implements FindContract.View {
 
     private void init(View view) {
 
+        initMenu(view);
+
         initPointLoopViewpager(view);
 
         initListView(view);
 
     }
 
+    private void initMenu(View view) {
+        Button menu = view.findViewById(R.id.find_menu);
+
+        menu.setOnClickListener(this);
+    }
 
     private void initPointLoopViewpager(View view) {
         inflateView = View.inflate(context, R.layout.inflate_find_viewpager, null);
@@ -125,28 +134,35 @@ public class FindFragment extends Fragment implements FindContract.View {
                     .setOnLoopPagerClickListener(new OnLoopPagerClickListener() {
                         @Override
                         public void onLoopPagerClick(int i, LoopViewPagerBean loopViewPagerBean) {
-                            ToastUtil.toastShort(context, "点击位置：" + i);
+                            FindBean.DataBean dataBean = (FindBean.DataBean) loopViewPagerBean.getObject();
+                            if(dataBean!=null)
+                                ToastUtil.toastShort(context, dataBean.getImage_url());
                         }
                     })
+                    .setCard(true)
+                    .setCardElevation(getResources().getDimension(R.dimen.x3))
+                    .setCardPadding(0)
                     .initialise();
         }
     }
 
     private void initGalleryViewPager(GalleryViewPager galleryViewPager) {
-        galleryViewPager.setPageWidth((int) getResources().getDimension(R.dimen.x240))//设置ViewPager的宽度，适当小于GalleryViewPager的宽度
+        galleryViewPager.setPageWidth((int) getResources().getDimension(R.dimen.x290))//设置ViewPager的宽度，适当小于GalleryViewPager的宽度
                 .setPageHeight(RelativeLayout.LayoutParams.MATCH_PARENT)//设置ViewPager的高度
-                .setPageScale((float) 0.9)//设置两侧隐藏页面的缩放比例
-                .setPageAlpha((float) 0.5)//设置两侧隐藏页面的透明度
+                .setPageScale((float) 0.95)//设置两侧隐藏页面的缩放比例
+                .setPageAlpha((float) 0.8)//设置两侧隐藏页面的透明度
                 .initialise();
     }
 
     private void initListView(View view) {
-        listView = view.findViewById(R.id.home_listview);
+        listView = view.findViewById(R.id.find_listview);
         listView.addHeaderView(inflateView);
 
         resultsBeans = new ArrayList<FindBean.DataBean>();
         adapter = new FindListAdapter(context, resultsBeans);
         listView.setAdapter(adapter);
+
+        adapter.setOnCardItemClickListener(this);
     }
 
     @Override
@@ -177,6 +193,28 @@ public class FindFragment extends Fragment implements FindContract.View {
         if(loopViewPager!=null){
             LoopPagerAdapter loopPagerAdapter = loopViewPager.getLoopPagerAdapter();
             loopPagerAdapter.notifyDataSetChanged();
+        }
+    }
+
+    @Override
+    public void onCardItemClick(int i) {
+        FindBean.DataBean dataBean = resultsBeans.get(i);
+        if(dataBean!=null){
+            ToastUtil.toastLong(context, dataBean.getDesc());
+        }
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.find_menu:
+                MainActivity mainActivity = (MainActivity) getActivity();
+                if(mainActivity.isOpen())
+                    mainActivity.closeSlide();
+                else
+                    mainActivity.openSlide();
+                break;
         }
     }
 }

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dong.beautifulgirl.R;
+import com.dong.beautifulgirl.modular.mainmodular.mainmodular.MainActivity;
 import com.dong.beautifulgirl.util.ToastUtil;
 import com.dong.pointviewpager.bean.LoopViewPagerBean;
 import com.dong.pointviewpager.listener.OnLoopPagerClickListener;
@@ -312,10 +312,13 @@ public class HomeFragment extends Fragment implements HomeContract.View, View.On
     @Override
     public void onClick(View v) {
         int id = v.getId();
-        ToastUtil.toastLong(context, "id:"+id);
         switch (id){
             case R.id.home_menu:
-                ToastUtil.toastLong(getActivity(), "打开侧滑菜单");
+                MainActivity mainActivity = (MainActivity) getActivity();
+                if(mainActivity.isOpen())
+                    mainActivity.closeSlide();
+                else
+                    mainActivity.openSlide();
                 break;
             case R.id.home_qcode:
                 ToastUtil.toastLong(getActivity(), "打开扫描二维码");

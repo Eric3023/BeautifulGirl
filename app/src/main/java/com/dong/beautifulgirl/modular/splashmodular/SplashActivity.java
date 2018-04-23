@@ -5,13 +5,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.dong.beautifulgirl.R;
-import com.dong.beautifulgirl.modular.mainmodular.MainActivity;
+import com.dong.beautifulgirl.modular.mainmodular.mainmodular.MainActivity;
 import com.dong.beautifulgirl.base.BaseActivity;
 import com.dong.beautifulgirl.modular.guidemodular.GuideActivity;
 import com.dong.beautifulgirl.util.PackageUtil;

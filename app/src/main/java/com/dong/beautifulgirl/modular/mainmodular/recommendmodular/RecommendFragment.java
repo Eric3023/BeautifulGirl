@@ -3,15 +3,19 @@ package com.dong.beautifulgirl.modular.mainmodular.recommendmodular;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.dong.beautifulgirl.R;
+import com.dong.beautifulgirl.modular.mainmodular.mainmodular.MainActivity;
 import com.dong.beautifulgirl.util.ToastUtil;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +23,7 @@ import java.util.List;
  * Use the {@link RecommendFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RecommendFragment extends Fragment implements RecommendContract.View, RecommendAdapter.OnClickListener {
+public class RecommendFragment extends Fragment implements RecommendContract.View, View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -35,6 +39,11 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
     private final int CLUM_NUM = 2;
     private RecommendAdapter recommendAdapter;
     private StaggeredGridLayoutManager layoutManager;
+    private RecyclerView tabRecyclerView;
+    private LinearLayoutManager tabLayoutManager;
+    private RecommendTabAdapter recommendTabAdapter;
+    private List<RecommendBean.DataBean> resultsBeans;
+    private List<RecommendTabBean> tabBeans;
 
     public RecommendFragment() {
         // Required empty public constructor
@@ -82,16 +91,58 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
     }
 
     private void initView(View view) {
-        recyclerView = view.findViewById(R.id.recommend_recyclerview);
-        layoutManager = new StaggeredGridLayoutManager(CLUM_NUM, StaggeredGridLayoutManager.VERTICAL);
-        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
-        recyclerView.setLayoutManager(layoutManager);
+        initMenu(view);
+        initTabRecycleView(view);
+        initRecycleView(view);
     }
 
-    @Override
-    public void RecommendDataChanged(List<RecommendBean.DataBean> resultsBeans) {
+    private void initMenu(View view) {
+        Button menu = view.findViewById(R.id.recommend_menu);
+        Button qCode = view.findViewById(R.id.recommend_search);
+
+        menu.setOnClickListener(this);
+        qCode.setOnClickListener(this);
+    }
+
+    private void initTabRecycleView(View view) {
+        tabRecyclerView = view.findViewById(R.id.recommend_tab_recycleview);
+        tabLayoutManager = new LinearLayoutManager(getActivity());
+        tabLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+        tabRecyclerView.setLayoutManager(tabLayoutManager);
+
+        tabBeans = new ArrayList<RecommendTabBean>();
+        recommendTabAdapter = new RecommendTabAdapter(getContext(), tabBeans);
+        recommendTabAdapter.setOnClickListener(new RecommendTabAdapter.OnClickListener() {
+            @Override
+            public void onClick(List<RecommendTabBean> tabBeans, int position) {
+                if (tabBeans != null && tabBeans.get(position) != null) {
+                    int size = resultsBeans.size();
+                    resultsBeans.clear();
+                    recommendAdapter.notifyItemRangeRemoved(0, size);
+                    presenter.loadRecommend(RecommendFragment.this.getActivity(), tabBeans.get(position).getTab());
+                }
+            }
+        });
+        tabRecyclerView.setAdapter(recommendTabAdapter);
+    }
+
+    private void initRecycleView(View view) {
+        recyclerView = view.findViewById(R.id.recommend_recyclerview);
+        layoutManager = new StaggeredGridLayoutManager(CLUM_NUM, StaggeredGridLayoutManager.VERTICAL) {
+        };
+        layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
+        recyclerView.setLayoutManager(layoutManager);
+
+        resultsBeans = new ArrayList<RecommendBean.DataBean>();
         recommendAdapter = new RecommendAdapter(getContext(), resultsBeans);
-        recommendAdapter.setOnClickListener(this);
+        recommendAdapter.setOnClickListener(new RecommendAdapter.OnClickListener() {
+            @Override
+            public void onClick(List<RecommendBean.DataBean> resultsBeans, int position) {
+                if (resultsBeans != null && resultsBeans.get(position) != null)
+                    ToastUtil.toastLong(getContext(), "数据内容为：" + resultsBeans.get(position).getDesc());
+
+            }
+        });
         recyclerView.setAdapter(recommendAdapter);
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -109,12 +160,44 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
     }
 
     @Override
+    public void RecommendTabChanged(List<RecommendTabBean> tabBeans) {
+        if (this.tabBeans != null && tabBeans != null) {
+            this.tabBeans.clear();
+            this.tabBeans.addAll(tabBeans);
+            recommendTabAdapter.notifyDataSetChanged();
+        }
+
+    }
+
+    @Override
+    public void RecommendDataChanged(List<RecommendBean.DataBean> resultsBeans) {
+        if (resultsBeans != null) {
+            int size = this.resultsBeans.size();
+            this.resultsBeans.addAll(resultsBeans);
+            recommendAdapter.notifyItemRangeInserted(size, this.resultsBeans.size());
+        }
+    }
+
+    @Override
     public void setPresenter(RecommendContract.Presenter presenter) {
         this.presenter = presenter;
     }
 
+
     @Override
-    public void onClick(List<RecommendBean.DataBean> resultsBeans, int position) {
-        ToastUtil.toastLong(getContext(), "数据内容为：" + resultsBeans.get(position).getDesc());
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id) {
+            case R.id.recommend_menu:
+                MainActivity mainActivity = (MainActivity) getActivity();
+                if(mainActivity.isOpen())
+                    mainActivity.closeSlide();
+                else
+                    mainActivity.openSlide();
+                break;
+            case R.id.recommend_search:
+                ToastUtil.toastLong(getActivity(), "点击了搜索按钮");
+                break;
+        }
     }
 }

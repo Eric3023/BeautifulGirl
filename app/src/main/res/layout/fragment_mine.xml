@@ -5,198 +5,238 @@
     android:orientation="vertical"
     tools:context=".modular.mainmodular.minemodular.MineFragment">
 
-
     <include
         android:id="@+id/mine_toptitle"
-        layout="@layout/include_toptitle">
-    </include>
+        layout="@layout/include_mine_title"></include>
 
-    <LinearLayout
-        android:id="@+id/mine_photo"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y80"
-        android:background="@drawable/home_pager_backgroud"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <com.dong.circleimageview.widget.CircleImageView
-            android:id="@+id/mine_photo_circleImageView"
-            android:layout_width="@dimen/y50"
-            android:layout_height="@dimen/y50"
-            android:layout_marginLeft="@dimen/x10"
-            android:layout_gravity="center_vertical"
-            android:transitionName="share photo img"/>
-        <TextView
-            android:id="@+id/mine_name_tv"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="@dimen/x15"
-            android:layout_marginLeft="@dimen/x5"
-            android:layout_marginTop="@dimen/y45"
-            android:textColor="@android:color/white"
-            android:textStyle="bold"
-            android:transitionName="share photo tv"/>
-    </LinearLayout>
+            android:orientation="vertical">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="#dddddd">
-
-        <LinearLayout
-            android:id="@+id/mine_data"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y30"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/y5"
-            android:paddingBottom="@dimen/y5"
-            android:paddingRight="@dimen/x10"
-            android:paddingLeft="@dimen/x10"
-            android:background="@android:color/white">
-            <ImageView
-                android:layout_width="@dimen/y20"
-                android:layout_height="@dimen/y20"
-                android:src="@drawable/ic_tab_home"
-                android:layout_gravity="center_vertical"/>
-            <TextView
+            <RelativeLayout
+                android:id="@+id/mine_photo"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="个人资料"
-                android:textSize="@dimen/x16"
-                android:layout_marginLeft="@dimen/x20"/>
+                android:layout_height="@dimen/y80"
+                android:background="@drawable/home_pager_backgroud">
+
+                <com.dong.circleimageview.widget.CircleImageView
+                    android:id="@+id/mine_photo_circleImageView"
+                    android:layout_width="@dimen/y50"
+                    android:layout_height="@dimen/y50"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="@dimen/x15"
+                    android:transitionName="share photo img" />
+
+                <TextView
+                    android:id="@+id/mine_name_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_marginTop="@dimen/y30"
+                    android:layout_toRightOf="@id/mine_photo_circleImageView"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/x15"
+                    android:textStyle="bold"
+                    android:transitionName="share photo tv" />
+
+                <TextView
+                    android:id="@+id/mine_uid_tv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/mine_name_tv"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_marginTop="@dimen/y3"
+                    android:layout_toRightOf="@id/mine_photo_circleImageView"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/x12"
+                    android:textStyle="bold" />
+            </RelativeLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/colorGray"></View>
+
+            <LinearLayout
+                android:id="@+id/mine_like"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y30"
+                android:background="@android:color/white"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/y5"
+                android:paddingLeft="@dimen/x20"
+                android:paddingRight="@dimen/x15"
+                android:paddingTop="@dimen/y5">
+
+                <ImageView
+                    android:layout_width="@dimen/y16"
+                    android:layout_height="@dimen/y16"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_tab_home" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="我的收藏"
+                    android:textSize="@dimen/x14" />
+
+                <ImageView
+                    android:layout_width="@dimen/y8"
+                    android:layout_height="@dimen/y8"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/look_more_ico" />
+            </LinearLayout>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/mine_like_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y80"
+                android:layout_marginLeft="@dimen/x20"
+                android:layout_marginRight="@dimen/x20"></android.support.v7.widget.RecyclerView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/colorGray"></View>
+
+            <LinearLayout
+                android:id="@+id/mine_change_paassword"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y30"
+                android:background="@android:color/white"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/y5"
+                android:paddingLeft="@dimen/x20"
+                android:paddingRight="@dimen/x15"
+                android:paddingTop="@dimen/y5">
+
+                <ImageView
+                    android:layout_width="@dimen/y16"
+                    android:layout_height="@dimen/y16"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_tab_home" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="修改密码"
+                    android:textSize="@dimen/x14" />
+
+                <ImageView
+                    android:layout_width="@dimen/y8"
+                    android:layout_height="@dimen/y8"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/look_more_ico" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/colorGray"></View>
+
+            <LinearLayout
+                android:id="@+id/mine_user_return"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y30"
+                android:background="@android:color/white"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/y5"
+                android:paddingLeft="@dimen/x20"
+                android:paddingRight="@dimen/x15"
+                android:paddingTop="@dimen/y5">
+
+                <ImageView
+                    android:layout_width="@dimen/y16"
+                    android:layout_height="@dimen/y16"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_tab_home" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="用户反馈"
+                    android:textSize="@dimen/x14" />
+
+                <ImageView
+                    android:layout_width="@dimen/y8"
+                    android:layout_height="@dimen/y8"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/look_more_ico" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/colorGray"></View>
+
+            <LinearLayout
+                android:id="@+id/mine_check_version"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/y30"
+                android:background="@android:color/white"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/y5"
+                android:paddingLeft="@dimen/x20"
+                android:paddingRight="@dimen/x15"
+                android:paddingTop="@dimen/y5">
+
+                <ImageView
+                    android:layout_width="@dimen/y16"
+                    android:layout_height="@dimen/y16"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_tab_home" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/x10"
+                    android:layout_weight="1"
+                    android:gravity="center_vertical"
+                    android:text="检查更新"
+                    android:textSize="@dimen/x14" />
+
+                <ImageView
+                    android:layout_width="@dimen/y8"
+                    android:layout_height="@dimen/y8"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/look_more_ico" />
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="@color/colorGray"></View>
+
+            <Button
+                android:id="@+id/mine_change_accout"
+                android:layout_width="@dimen/x280"
+                android:layout_height="@dimen/y30"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/y30"
+                android:layout_marginBottom="@dimen/y50"
+                android:background="@color/colorblue"
+                android:gravity="center"
+                android:padding="@dimen/x5"
+                android:text="切换账号"
+                android:textColor="@android:color/white"
+                android:textSize="@dimen/x18" />
+
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px">
-        </View>
-
-
-        <LinearLayout
-            android:id="@+id/mine_messeage"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y30"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/y5"
-            android:paddingBottom="@dimen/y5"
-            android:paddingRight="@dimen/x10"
-            android:paddingLeft="@dimen/x10"
-            android:background="@android:color/white">
-            <ImageView
-                android:layout_width="@dimen/y20"
-                android:layout_height="@dimen/y20"
-                android:src="@drawable/ic_tab_home"
-                android:layout_gravity="center_vertical"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="我的留言"
-                android:textSize="@dimen/x16"
-                android:layout_marginLeft="@dimen/x20"/>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px">
-        </View>
-
-        <LinearLayout
-            android:id="@+id/mine_star"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y30"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/y5"
-            android:paddingBottom="@dimen/y5"
-            android:paddingRight="@dimen/x10"
-            android:paddingLeft="@dimen/x10"
-            android:background="@android:color/white">
-            <ImageView
-                android:layout_width="@dimen/y20"
-                android:layout_height="@dimen/y20"
-                android:src="@drawable/ic_tab_home"
-                android:layout_gravity="center_vertical"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="我的收藏"
-                android:textSize="@dimen/x16"
-                android:layout_marginLeft="@dimen/x20"/>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1px">
-        </View>
-
-        <LinearLayout
-            android:id="@+id/mine_information"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y30"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/y5"
-            android:paddingBottom="@dimen/y5"
-            android:paddingRight="@dimen/x10"
-            android:paddingLeft="@dimen/x10"
-            android:background="@android:color/white">
-            <ImageView
-                android:layout_width="@dimen/y20"
-                android:layout_height="@dimen/y20"
-                android:src="@drawable/ic_tab_home"
-                android:layout_gravity="center_vertical"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="我的消息"
-                android:textSize="@dimen/x16"
-                android:layout_marginLeft="@dimen/x20"/>
-        </LinearLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="10px">
-        </View>
-
-        <LinearLayout
-            android:id="@+id/mine_change_paassword"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/y30"
-            android:orientation="horizontal"
-            android:paddingTop="@dimen/y5"
-            android:paddingBottom="@dimen/y5"
-            android:paddingRight="@dimen/x10"
-            android:paddingLeft="@dimen/x10"
-            android:background="@android:color/white">
-            <ImageView
-                android:layout_width="@dimen/y20"
-                android:layout_height="@dimen/y20"
-                android:src="@drawable/ic_tab_home"
-                android:layout_gravity="center_vertical"/>
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center_vertical"
-                android:text="修改密码"
-                android:textSize="@dimen/x16"
-                android:layout_marginLeft="@dimen/x20"/>
-        </LinearLayout>
-
-
-        <Button
-            android:layout_width="@dimen/x280"
-            android:layout_height="@dimen/y30"
-            android:padding="@dimen/x5"
-            android:background="@color/colorblue"
-            android:text="切换账号"
-            android:textSize="@dimen/x18"
-            android:gravity="center"
-            android:textColor="@android:color/white"
-            android:layout_marginTop="@dimen/y30"
-            android:layout_gravity="center_horizontal"/>
-
-    </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>
