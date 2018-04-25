@@ -1,7 +1,6 @@
 package com.dong.beautifulgirl.modular.mainmodular.homemodular;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -61,17 +60,20 @@ public class HomeListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
 
+        final ImageView shareImg = viewHolder.img;
+
         HomeBean.DataBean bean = list.get(i);
         if (bean != null) {
             Picasso.get().load(bean.getImage_url()).into(viewHolder.img);
             viewHolder.title.setText(bean.getAbs());
             viewHolder.content.setText(bean.getDesc());
 
+            final ViewHolder finalViewHolder = viewHolder;
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(onCardItemClickListener!=null){
-                        onCardItemClickListener.onCardItemClick(i);
+                        onCardItemClickListener.onCardItemClick(shareImg, i);
                     }
                 }
             });
@@ -81,7 +83,7 @@ public class HomeListAdapter extends BaseAdapter {
 
     public interface OnCardItemClickListener{
 
-        void onCardItemClick(int i);
+        void onCardItemClick(ImageView shareImg, int i);
     }
 }
 

@@ -2,6 +2,7 @@ package com.dong.beautifulgirl.http;
 
 import android.content.Context;
 
+import com.dong.beautifulgirl.modular.detailmodular.DetailBean;
 import com.dong.beautifulgirl.modular.mainmodular.findmodular.FindBean;
 import com.dong.beautifulgirl.modular.mainmodular.homemodular.HomeBean;
 import com.dong.beautifulgirl.modular.mainmodular.minemodular.MineLikeBean;
@@ -71,6 +72,14 @@ public class HeadModel {
                 .getMineLikeData(pn, rn, tag1, tag2, ie)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
+
     }
 
+    public static Observable<DetailBean> getDetailData(Context context, int pn, int rn , String tag1, String tag2, String ie){
+        return RetrofitHelper.getInstance()
+                .getService(context)
+                .getDetailData(pn, rn, tag1, tag2, ie)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 }

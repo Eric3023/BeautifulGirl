@@ -27,7 +27,8 @@
             layout="@layout/include_card_imagview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:transitionName="share card img first">
         </include>
 
         <include
@@ -35,7 +36,8 @@
             layout="@layout/include_card_imagview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:transitionName="share card img second">
         </include>
 
     </LinearLayout>
@@ -50,7 +52,8 @@
             layout="@layout/include_card_imagview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:transitionName="share card img third">
         </include>
 
         <include
@@ -58,7 +61,8 @@
             layout="@layout/include_card_imagview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:transitionName="share card fourth">
         </include>
 
     </LinearLayout>

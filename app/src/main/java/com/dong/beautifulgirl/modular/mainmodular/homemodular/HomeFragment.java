@@ -1,9 +1,13 @@
 package com.dong.beautifulgirl.modular.mainmodular.homemodular;
 
+import android.app.ActivityOptions;
 import android.content.Context;
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.CardView;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,6 +19,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.dong.beautifulgirl.R;
+import com.dong.beautifulgirl.http.UrlConfig;
+import com.dong.beautifulgirl.modular.detailimgactivity.DetailImgActivity;
+import com.dong.beautifulgirl.modular.detailmodular.DetailActivity;
 import com.dong.beautifulgirl.modular.mainmodular.mainmodular.MainActivity;
 import com.dong.beautifulgirl.util.ToastUtil;
 import com.dong.pointviewpager.bean.LoopViewPagerBean;
@@ -190,7 +197,11 @@ public class HomeFragment extends Fragment implements HomeContract.View, View.On
                         public void onLoopPagerClick(int i, LoopViewPagerBean loopViewPagerBean) {
                             HomeBean.DataBean dataBean = (HomeBean.DataBean) loopViewPagerBean.getObject();
                             if(dataBean!=null){
-                               ToastUtil.toastLong(HomeFragment.this.getActivity(), dataBean.getDesc());
+                                Intent intent = new Intent(getContext(), DetailActivity.class);
+                                intent.putExtra("POSITION", i);
+                                intent.putExtra("TAG", UrlConfig.TAG_SEVEVTH);
+                                intent.putExtra("RN", 5);
+                                getActivity().startActivity(intent);
                             }
                         }
                     })
@@ -326,17 +337,36 @@ public class HomeFragment extends Fragment implements HomeContract.View, View.On
             case R.id.home_card_cardview:
                 HomeBean.DataBean firstDataBean = (HomeBean.DataBean) v.getTag();
                 if(firstDataBean!=null){
-                    ToastUtil.toastLong(context, firstDataBean.getDesc());
+
+                    ImageView img = v.findViewById(R.id.home_card_iamgeview);
+
+                    Intent intent = new Intent(getContext(), DetailImgActivity.class);
+                    intent.putExtra("URL", firstDataBean.getImage_url());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        Pair<ImageView, String> imgPair = Pair.create(img, "share detail img");
+                        ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), new Pair[]{imgPair});
+                        startActivity(intent, activityOptions.toBundle());
+                    } else {
+                        startActivity(intent);
+                    }
                 }
                 break;
         }
     }
 
     @Override
-    public void onCardItemClick(int i) {
+    public void onCardItemClick(ImageView shareImg, int i) {
         HomeBean.DataBean dataBean = listResultsBeans.get(i);
         if(dataBean!=null){
-            ToastUtil.toastLong(getActivity(), dataBean.getDesc());
+            Intent intent = new Intent(getContext(), DetailImgActivity.class);
+            intent.putExtra("URL", dataBean.getImage_url());
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Pair<ImageView, String> imgPair = Pair.create(shareImg, "share detail img");
+                ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(getActivity(), new Pair[]{imgPair});
+                startActivity(intent, activityOptions.toBundle());
+            } else {
+                startActivity(intent);
+            }
         }
     }
 }

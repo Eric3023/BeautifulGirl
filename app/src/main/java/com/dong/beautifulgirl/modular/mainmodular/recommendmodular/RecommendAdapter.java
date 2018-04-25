@@ -58,7 +58,7 @@ public class RecommendAdapter extends RecyclerView.Adapter <RecommendAdapter.Vie
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         if(resultsBeans!=null){
             final RecommendBean.DataBean resultsBean = resultsBeans.get(position);
             if(resultsBean!=null){

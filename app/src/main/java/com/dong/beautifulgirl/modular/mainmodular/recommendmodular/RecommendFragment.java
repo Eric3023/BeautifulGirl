@@ -1,6 +1,7 @@
 package com.dong.beautifulgirl.modular.mainmodular.recommendmodular;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -12,6 +13,8 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.dong.beautifulgirl.R;
+import com.dong.beautifulgirl.http.UrlConfig;
+import com.dong.beautifulgirl.modular.detailmodular.DetailActivity;
 import com.dong.beautifulgirl.modular.mainmodular.mainmodular.MainActivity;
 import com.dong.beautifulgirl.util.ToastUtil;
 
@@ -44,6 +47,7 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
     private RecommendTabAdapter recommendTabAdapter;
     private List<RecommendBean.DataBean> resultsBeans;
     private List<RecommendTabBean> tabBeans;
+    private String tag = UrlConfig.TAG_FIRST;
 
     public RecommendFragment() {
         // Required empty public constructor
@@ -119,6 +123,7 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
                     int size = resultsBeans.size();
                     resultsBeans.clear();
                     recommendAdapter.notifyItemRangeRemoved(0, size);
+                    tag = tabBeans.get(position).getTab();
                     presenter.loadRecommend(RecommendFragment.this.getActivity(), tabBeans.get(position).getTab());
                 }
             }
@@ -127,6 +132,7 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
     }
 
     private void initRecycleView(View view) {
+
         recyclerView = view.findViewById(R.id.recommend_recyclerview);
         layoutManager = new StaggeredGridLayoutManager(CLUM_NUM, StaggeredGridLayoutManager.VERTICAL) {
         };
@@ -138,9 +144,13 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
         recommendAdapter.setOnClickListener(new RecommendAdapter.OnClickListener() {
             @Override
             public void onClick(List<RecommendBean.DataBean> resultsBeans, int position) {
-                if (resultsBeans != null && resultsBeans.get(position) != null)
-                    ToastUtil.toastLong(getContext(), "数据内容为：" + resultsBeans.get(position).getDesc());
-
+                if (resultsBeans != null && resultsBeans.get(position) != null){
+                    Intent intent = new Intent(getContext(), DetailActivity.class);
+                    intent.putExtra("POSITION", position);
+                    intent.putExtra("TAG", tag);
+                    intent.putExtra("RN", 30);
+                    getActivity().startActivity(intent);
+                }
             }
         });
         recyclerView.setAdapter(recommendAdapter);
@@ -182,7 +192,6 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
     public void setPresenter(RecommendContract.Presenter presenter) {
         this.presenter = presenter;
     }
-
 
     @Override
     public void onClick(View v) {

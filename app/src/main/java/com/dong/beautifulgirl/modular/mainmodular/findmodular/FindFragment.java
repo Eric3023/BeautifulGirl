@@ -1,6 +1,7 @@
 package com.dong.beautifulgirl.modular.mainmodular.findmodular;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -11,6 +12,8 @@ import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 import com.dong.beautifulgirl.R;
+import com.dong.beautifulgirl.http.UrlConfig;
+import com.dong.beautifulgirl.modular.detailmodular.DetailActivity;
 import com.dong.beautifulgirl.modular.mainmodular.mainmodular.MainActivity;
 import com.dong.beautifulgirl.util.ToastUtil;
 import com.dong.pointviewpager.adapter.LoopPagerAdapter;
@@ -135,8 +138,12 @@ public class FindFragment extends Fragment implements FindContract.View, FindLis
                         @Override
                         public void onLoopPagerClick(int i, LoopViewPagerBean loopViewPagerBean) {
                             FindBean.DataBean dataBean = (FindBean.DataBean) loopViewPagerBean.getObject();
-                            if(dataBean!=null)
-                                ToastUtil.toastShort(context, dataBean.getImage_url());
+                            if(dataBean!=null){
+                                Intent intent = new Intent(getContext(), DetailActivity.class);
+                                intent.putExtra("POSITION", i);
+                                intent.putExtra("TAG", UrlConfig.TAG_FIFTH);
+                                intent.putExtra("RN", 10);
+                                getActivity().startActivity(intent);                            }
                         }
                     })
                     .setCard(true)
@@ -200,7 +207,11 @@ public class FindFragment extends Fragment implements FindContract.View, FindLis
     public void onCardItemClick(int i) {
         FindBean.DataBean dataBean = resultsBeans.get(i);
         if(dataBean!=null){
-            ToastUtil.toastLong(context, dataBean.getDesc());
+            Intent intent = new Intent(getContext(), DetailActivity.class);
+            intent.putExtra("POSITION", i);
+            intent.putExtra("TAG", UrlConfig.TAG_NINETH);
+            intent.putExtra("RN", 30);
+            getActivity().startActivity(intent);
         }
     }
 

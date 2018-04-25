@@ -43,4 +43,6 @@ public class UrlConfig {
 
     public static final String MINE_LIKE = "channel/listjson";
 
+    public static final String DETAIL_URL = "channel/listjson";
+
 }

@@ -27,7 +27,8 @@
             android:id="@+id/home_listview_img"
             android:layout_width="@dimen/x120"
             android:layout_height="@dimen/y60"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            android:transitionName="share detail img"/>
 
     </android.support.v7.widget.CardView>
 

@@ -19,4 +19,8 @@
         <item name="android:windowBackground">@color/colorblue</item>
     </style>
 
+    <style name="AppTheme.NoActionBar.Transparent" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
+
 </resources>

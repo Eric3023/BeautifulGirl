@@ -58,19 +58,9 @@ public class SplashActivity extends BaseActivity {
                     @Override
                     public void onNext(String s) {
                         if (getIsFirstStart()) {
-                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                                startComponent(GuideActivity.class,
-                                        ActivityOptions.makeSceneTransitionAnimation(SplashActivity.this).toBundle());
-                            } else {
-                                startComponent(GuideActivity.class);
-                            }
+                            startComponent(GuideActivity.class);
                         } else
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                            startComponent(MainActivity.class,
-                                    ActivityOptions.makeSceneTransitionAnimation(SplashActivity.this).toBundle());
-                        } else {
                             startComponent(MainActivity.class);
-                        }
                         finish();
                     }
 
