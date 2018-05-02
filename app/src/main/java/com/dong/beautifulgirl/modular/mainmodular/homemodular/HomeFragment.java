@@ -20,10 +20,11 @@ import android.widget.TextView;
 
 import com.dong.beautifulgirl.R;
 import com.dong.beautifulgirl.http.UrlConfig;
-import com.dong.beautifulgirl.modular.detailimgactivity.DetailImgActivity;
+import com.dong.beautifulgirl.modular.detailimgmodular.DetailImgActivity;
 import com.dong.beautifulgirl.modular.detailmodular.DetailActivity;
 import com.dong.beautifulgirl.modular.mainmodular.mainmodular.MainActivity;
-import com.dong.beautifulgirl.util.ToastUtil;
+import com.dong.beautifulgirl.modular.scanmodular.ScanActivity;
+import com.dong.beautifulgirl.test.TestBean;
 import com.dong.pointviewpager.bean.LoopViewPagerBean;
 import com.dong.pointviewpager.listener.OnLoopPagerClickListener;
 import com.dong.pointviewpager.widget.LoopViewPager;
@@ -57,7 +58,7 @@ public class HomeFragment extends Fragment implements HomeContract.View, View.On
     private HomeContract.Presenter presenter;
     private LoopViewPager loopViewPager;
     private PointView pointView;
-    private List<HomeBean.DataBean> listResultsBeans;
+    private List<TestBean.DataBean> listResultsBeans;
     private List<LoopViewPagerBean> pagerBeans;
     private HomeListAdapter adapter;
     private ImageView firstCardImg;
@@ -195,7 +196,7 @@ public class HomeFragment extends Fragment implements HomeContract.View, View.On
                     .setOnLoopPagerClickListener(new OnLoopPagerClickListener() {
                         @Override
                         public void onLoopPagerClick(int i, LoopViewPagerBean loopViewPagerBean) {
-                            HomeBean.DataBean dataBean = (HomeBean.DataBean) loopViewPagerBean.getObject();
+                            TestBean.DataBean dataBean = (TestBean.DataBean) loopViewPagerBean.getObject();
                             if(dataBean!=null){
                                 Intent intent = new Intent(getContext(), DetailActivity.class);
                                 intent.putExtra("POSITION", i);
@@ -233,7 +234,7 @@ public class HomeFragment extends Fragment implements HomeContract.View, View.On
         listView = view.findViewById(R.id.home_listview);
         listView.addHeaderView(headView);
 
-        listResultsBeans = new ArrayList<HomeBean.DataBean>();
+        listResultsBeans = new ArrayList<TestBean.DataBean>();
         adapter = new HomeListAdapter(context, listResultsBeans);
         adapter.setOnCardItemClickListener(this);
         listView.setAdapter(adapter);
@@ -245,16 +246,16 @@ public class HomeFragment extends Fragment implements HomeContract.View, View.On
     }
 
     @Override
-    public void homeDataChanged(List<HomeBean.DataBean> resultsBeans) {
+    public void homeDataChanged(List<TestBean.DataBean> resultsBeans) {
         this.listResultsBeans.addAll(resultsBeans);
         adapter.notifyDataSetChanged();
     }
 
     @Override
-    public void homeDataCardChanged(List<HomeBean.DataBean> list) {
+    public void homeDataCardChanged(List<TestBean.DataBean> list) {
         if(list!=null){
             if(list.size()>0){
-                HomeBean.DataBean dataBean = list.get(0);
+                TestBean.DataBean dataBean = list.get(0);
                 if(dataBean!=null){
                     firstCard.setTag(dataBean);
                     Picasso.get().load(dataBean.getImage_url()).into(firstCardImg);
@@ -262,7 +263,7 @@ public class HomeFragment extends Fragment implements HomeContract.View, View.On
                 }
             }
             if(list.size()>1){
-                HomeBean.DataBean dataBean = list.get(1);
+                TestBean.DataBean dataBean = list.get(1);
                 if(dataBean!=null){
                     secondCard.setTag(dataBean);
                     Picasso.get().load(dataBean.getImage_url()).into(secondCardImg);
@@ -270,7 +271,7 @@ public class HomeFragment extends Fragment implements HomeContract.View, View.On
                 }
             }
             if(list.size()>2){
-                HomeBean.DataBean dataBean = list.get(2);
+                TestBean.DataBean dataBean = list.get(2);
                 if(dataBean!=null){
                     thirdCard.setTag(dataBean);
                     Picasso.get().load(dataBean.getImage_url()).into(thirdCardImg);
@@ -278,7 +279,7 @@ public class HomeFragment extends Fragment implements HomeContract.View, View.On
                 }
             }
             if(list.size()>3){
-                HomeBean.DataBean dataBean = list.get(3);
+                TestBean.DataBean dataBean = list.get(3);
                 if(dataBean!=null){
                     fourthCard.setTag(dataBean);
                     Picasso.get().load(dataBean.getImage_url()).into(fourthCardImg);
@@ -289,10 +290,10 @@ public class HomeFragment extends Fragment implements HomeContract.View, View.On
     }
 
     @Override
-    public void homeDataHeadChanged(List<HomeBean.DataBean> list) {
+    public void homeDataHeadChanged(List<TestBean.DataBean> list) {
         if (list != null) {
             for (int i = 0; i < list.size(); i++) {
-                HomeBean.DataBean resultsBean = list.get(i);
+                TestBean.DataBean resultsBean = list.get(i);
 
                 if (resultsBean != null) {
                     LoopViewPagerBean bean = new LoopViewPagerBean();
@@ -322,20 +323,21 @@ public class HomeFragment extends Fragment implements HomeContract.View, View.On
 
     @Override
     public void onClick(View v) {
+        MainActivity mainActivity = (MainActivity) getActivity();
         int id = v.getId();
         switch (id){
             case R.id.home_menu:
-                MainActivity mainActivity = (MainActivity) getActivity();
                 if(mainActivity.isOpen())
                     mainActivity.closeSlide();
                 else
                     mainActivity.openSlide();
                 break;
             case R.id.home_qcode:
-                ToastUtil.toastLong(getActivity(), "打开扫描二维码");
+                Intent scannerIntent = new Intent(mainActivity, ScanActivity.class);
+                mainActivity.startActivityForResult(scannerIntent, MainActivity.REQUEST_CODE_SCANNER);
                 break;
             case R.id.home_card_cardview:
-                HomeBean.DataBean firstDataBean = (HomeBean.DataBean) v.getTag();
+                TestBean.DataBean firstDataBean = (TestBean.DataBean) v.getTag();
                 if(firstDataBean!=null){
 
                     ImageView img = v.findViewById(R.id.home_card_iamgeview);
@@ -356,7 +358,7 @@ public class HomeFragment extends Fragment implements HomeContract.View, View.On
 
     @Override
     public void onCardItemClick(ImageView shareImg, int i) {
-        HomeBean.DataBean dataBean = listResultsBeans.get(i);
+        TestBean.DataBean dataBean = listResultsBeans.get(i);
         if(dataBean!=null){
             Intent intent = new Intent(getContext(), DetailImgActivity.class);
             intent.putExtra("URL", dataBean.getImage_url());

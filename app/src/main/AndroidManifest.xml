@@ -31,15 +31,32 @@
         </activity>
         <activity
             android:name=".modular.mainmodular.mainmodular.MainActivity"
+            android:launchMode="singleTask"
             android:screenOrientation="portrait" />
         <activity
             android:name=".modular.guidemodular.GuideActivity"
             android:screenOrientation="portrait" />
-        <activity android:name=".modular.logicandsignmodular.LogicAndSignActivity" />
-        <activity android:name=".modular.logicandsignmodular.logicmodular.LogicActivity" />
+        <activity
+            android:name=".modular.logicandsignmodular.LogicAndSignActivity"
+            android:theme="@style/AppTheme.NoActionBar.White" />
+        <activity
+            android:name=".modular.logicandsignmodular.logicmodular.LogicActivity"
+            android:theme="@style/AppTheme.NoActionBar.White"
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".modular.detailmodular.DetailActivity" />
-        <activity android:name=".modular.detailimgactivity.DetailImgActivity"
-            android:theme="@style/AppTheme.NoActionBar.Transparent"></activity>
+        <activity
+            android:name=".modular.detailimgmodular.DetailImgActivity"
+            android:theme="@style/AppTheme.NoActionBar.Transparent" />
+        <activity
+            android:name=".modular.logicandsignmodular.signmodular.SignActivity"
+            android:theme="@style/AppTheme.NoActionBar.White"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".modular.passwordmodular.PasswordActivity"
+            android:theme="@style/AppTheme.NoActionBar.White"
+            android:windowSoftInputMode="stateHidden" />
+        <activity android:name=".modular.likemodular.LikeActivity" />
+        <activity android:name=".modular.scanmodular.ScanActivity"></activity>
     </application>
 
 </manifest>

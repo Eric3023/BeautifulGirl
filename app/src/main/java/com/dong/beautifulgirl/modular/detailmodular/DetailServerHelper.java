@@ -5,6 +5,9 @@ import android.content.Context;
 import com.dong.beautifulgirl.http.HeadModel;
 import com.dong.beautifulgirl.http.UrlConfig;
 import com.dong.beautifulgirl.modular.mainmodular.recommendmodular.RecommendBean;
+import com.dong.beautifulgirl.test.TestBean;
+
+import junit.framework.Test;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,23 +24,23 @@ public class DetailServerHelper {
     private int pn;//页码
 
     private OnDetailDataChangedListener listener;
-    private ArrayList<DetailBean.DataBean> dataBeans;
+    private ArrayList<TestBean.DataBean> dataBeans;
 
     public void loadLDetailData(Context context, String tag, int rn){
 
-        dataBeans = new ArrayList<DetailBean.DataBean>();
+        dataBeans = new ArrayList<TestBean.DataBean>();
 
-        HeadModel.getDetailData(context, pn ,rn, UrlConfig.TAG_ROOT, tag, UrlConfig.IE)
-                .subscribe(new Observer<DetailBean>() {
+        HeadModel.getTestData(context, pn ,rn, UrlConfig.TAG_ROOT, tag, UrlConfig.IE)
+                .subscribe(new Observer<TestBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(DetailBean detailBean) {
+                    public void onNext(TestBean detailBean) {
                         if(detailBean!=null){
-                            List<DetailBean.DataBean> results = detailBean.getData();
+                            List<TestBean.DataBean> results = detailBean.getData();
                             if(results!=null){
                                 if(results!=null&& results.size()>1)
                                     results.remove(results.size()-1);
@@ -66,7 +69,7 @@ public class DetailServerHelper {
     }
 
     public interface OnDetailDataChangedListener{
-        void onDetailDataChanged(List<DetailBean.DataBean> dataBeans);
+        void onDetailDataChanged(List<TestBean.DataBean> dataBeans);
     }
 
 }

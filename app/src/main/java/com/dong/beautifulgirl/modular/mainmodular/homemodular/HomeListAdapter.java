@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dong.beautifulgirl.R;
+import com.dong.beautifulgirl.test.TestBean;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -18,11 +19,11 @@ import java.util.List;
 
 public class HomeListAdapter extends BaseAdapter {
 
-    private List<HomeBean.DataBean> list;
+    private List<TestBean.DataBean> list;
     private Context context;
     private OnCardItemClickListener onCardItemClickListener;
 
-    public HomeListAdapter(Context context, List<HomeBean.DataBean> list) {
+    public HomeListAdapter(Context context, List<TestBean.DataBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -62,7 +63,7 @@ public class HomeListAdapter extends BaseAdapter {
 
         final ImageView shareImg = viewHolder.img;
 
-        HomeBean.DataBean bean = list.get(i);
+        TestBean.DataBean bean = list.get(i);
         if (bean != null) {
             Picasso.get().load(bean.getImage_url()).into(viewHolder.img);
             viewHolder.title.setText(bean.getAbs());

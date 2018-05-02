@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.dong.beautifulgirl.http.HeadModel;
 import com.dong.beautifulgirl.http.UrlConfig;
+import com.dong.beautifulgirl.test.TestBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,18 +32,18 @@ public class HomeServerHelper {
 
     public void loadHomeData(Context context) {
 
-        HeadModel.getHomeData(context, pn_con, rn_con, UrlConfig.TAG_ROOT, UrlConfig.TAG_THIRD, UrlConfig.IE)
-                .subscribe(new Observer<HomeBean>() {
+        HeadModel.getTestData(context, pn_con, rn_con, UrlConfig.TAG_ROOT, UrlConfig.TAG_THIRD, UrlConfig.IE)
+                .subscribe(new Observer<TestBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(HomeBean homeBean) {
+                    public void onNext(TestBean homeBean) {
                         if (homeBean != null) {
                             Log.i("Dong", "加载Home数据：" + homeBean.getData().size());
-                            List<HomeBean.DataBean> results = homeBean.getData();
+                            List<TestBean.DataBean> results = homeBean.getData();
                             if(results!=null&&results.size()>0)
                                 results.remove(results.size()-1);
                             if (onHomeDataChangedListener != null)
@@ -64,18 +65,18 @@ public class HomeServerHelper {
 
     public void loadHomeHeadData(Context context) {
 
-        HeadModel.getHomeHeadData(context, pn_head, rn_head, UrlConfig.TAG_ROOT, UrlConfig.TAG_SEVEVTH, UrlConfig.IE)
-                .subscribe(new Observer<HomeBean>() {
+        HeadModel.getTestData(context, pn_head, rn_head, UrlConfig.TAG_ROOT, UrlConfig.TAG_SEVEVTH, UrlConfig.IE)
+                .subscribe(new Observer<TestBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(HomeBean homeBean) {
+                    public void onNext(TestBean homeBean) {
                         if (homeBean != null) {
                             Log.i("Dong", "加载Home Head数据：" + homeBean.getData().size());
-                            List<HomeBean.DataBean> results = homeBean.getData();
+                            List<TestBean.DataBean> results = homeBean.getData();
 
                             if(results!=null&&results.size()>0)
                                 results.remove(results.size()-1);
@@ -99,18 +100,18 @@ public class HomeServerHelper {
 
     public void loadHomeCardData(Context context) {
 
-        HeadModel.getHomeCardData(context, pn_card, rn_card, UrlConfig.TAG_ROOT, UrlConfig.TAG_SECOND, UrlConfig.IE)
-                .subscribe(new Observer<HomeBean>() {
+        HeadModel.getTestData(context, pn_card, rn_card, UrlConfig.TAG_ROOT, UrlConfig.TAG_SECOND, UrlConfig.IE)
+                .subscribe(new Observer<TestBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(HomeBean homeBean) {
+                    public void onNext(TestBean homeBean) {
                         if (homeBean != null) {
                             Log.i("Dong", "加载Home Card数据：" + homeBean.getData().size());
-                            List<HomeBean.DataBean> results = homeBean.getData();
+                            List<TestBean.DataBean> results = homeBean.getData();
 
                             if(results!=null&&results.size()>0)
                                 results.remove(results.size()-1);
@@ -137,11 +138,11 @@ public class HomeServerHelper {
 
     public interface OnHomeDataChangedListener {
 
-        void OnHomeDataChanged(List<HomeBean.DataBean> resultsBeans);
+        void OnHomeDataChanged(List<TestBean.DataBean> resultsBeans);
 
-        void OnHomeDataHeadChanged(List<HomeBean.DataBean> resultsBeans);
+        void OnHomeDataHeadChanged(List<TestBean.DataBean> resultsBeans);
 
-        void OnHomeDataCardChanged(List<HomeBean.DataBean> resultsBeans);
+        void OnHomeDataCardChanged(List<TestBean.DataBean> resultsBeans);
     }
 
 }

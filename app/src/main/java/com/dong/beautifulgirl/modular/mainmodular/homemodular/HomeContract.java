@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.dong.beautifulgirl.base.BasePresenter;
 import com.dong.beautifulgirl.base.BaseView;
+import com.dong.beautifulgirl.test.TestBean;
 
 import java.util.List;
 
@@ -23,10 +24,10 @@ public class HomeContract {
 
     interface View extends BaseView<Presenter>{
 
-        void homeDataChanged(List<HomeBean.DataBean> list);
+        void homeDataChanged(List<TestBean.DataBean> list);
 
-        void homeDataHeadChanged(List<HomeBean.DataBean> list);
+        void homeDataHeadChanged(List<TestBean.DataBean> list);
 
-        void homeDataCardChanged(List<HomeBean.DataBean> list);
+        void homeDataCardChanged(List<TestBean.DataBean> list);
     }
 }

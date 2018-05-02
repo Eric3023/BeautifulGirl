@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.dong.beautifulgirl.base.BasePresenter;
 import com.dong.beautifulgirl.base.BaseView;
+import com.dong.beautifulgirl.test.TestBean;
 
 import java.util.List;
 
@@ -15,7 +16,7 @@ public interface MineContract {
 
     interface Presenter extends BasePresenter{
 
-        void loadMineData();
+        void loadMineData(Context context);
 
         void loadMineLikeData(Context context);
 
@@ -24,7 +25,7 @@ public interface MineContract {
     interface View extends BaseView<Presenter>{
         void mineDataChanged(MineBean mineBean);
 
-        void mineLikeDataChanged(List<MineLikeBean.DataBean> dataBeans);
+        void mineLikeDataChanged(List<TestBean.DataBean> dataBeans);
 
     }
 

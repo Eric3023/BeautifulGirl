@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dong.beautifulgirl.R;
+import com.dong.beautifulgirl.test.TestBean;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.List;
 public class RecommendAdapter extends RecyclerView.Adapter <RecommendAdapter.ViewHolder>{
 
     private Context context;
-    private List<RecommendBean.DataBean> resultsBeans;
+    private List<TestBean.DataBean> resultsBeans;
     private OnClickListener onClickListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -38,10 +39,10 @@ public class RecommendAdapter extends RecyclerView.Adapter <RecommendAdapter.Vie
     }
 
     public  interface   OnClickListener{
-        void onClick(List<RecommendBean.DataBean> resultsBeans, int position);
+        void onClick(List<TestBean.DataBean> resultsBeans, int position);
     }
 
-    public RecommendAdapter(Context context, List<RecommendBean.DataBean> resultsBeans) {
+    public RecommendAdapter(Context context, List<TestBean.DataBean> resultsBeans) {
         this.context = context;
         this.resultsBeans = resultsBeans;
     }
@@ -60,7 +61,7 @@ public class RecommendAdapter extends RecyclerView.Adapter <RecommendAdapter.Vie
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         if(resultsBeans!=null){
-            final RecommendBean.DataBean resultsBean = resultsBeans.get(position);
+            final TestBean.DataBean resultsBean = resultsBeans.get(position);
             if(resultsBean!=null){
                 Picasso.get().load(resultsBean.getImage_url()).into(holder.imageView);
 

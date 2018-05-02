@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.dong.beautifulgirl.base.BasePresenter;
 import com.dong.beautifulgirl.base.BaseView;
+import com.dong.beautifulgirl.test.TestBean;
 
 import java.util.List;
 
@@ -20,7 +21,7 @@ public interface DetailContract {
     }
 
     interface View extends BaseView<Presenter>{
-        void detailDataChanged(List<DetailBean.DataBean> dataBeans);
+        void detailDataChanged(List<TestBean.DataBean> dataBeans);
     }
 
 }

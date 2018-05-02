@@ -9,14 +9,24 @@ public class MineBean {
     private String headImgUrl;
     private String name;
     private String uid;
+    private String password;
 
     public MineBean() {
     }
 
-    public MineBean(String headImgUrl, String name, String uid) {
+    public MineBean(String headImgUrl, String name, String uid, String password) {
         this.headImgUrl = headImgUrl;
         this.name = name;
         this.uid = uid;
+        this.password = password;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getHeadImgUrl() {

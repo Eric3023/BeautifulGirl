@@ -18,4 +18,8 @@
     <style name="AppTheme.NoActionBar.Transparent" parent="AppTheme.NoActionBar">
         <item name="android:windowBackground">@android:color/transparent</item>
     </style>
+
+    <style name="AppTheme.NoActionBar.White" parent="AppTheme.NoActionBar">
+        <item name="android:windowBackground">@android:color/white</item>
+    </style>
 </resources>

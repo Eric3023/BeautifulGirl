@@ -10,6 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -20,7 +21,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.dong.beautifulgirl.R;
+import com.dong.beautifulgirl.modular.likemodular.LikeActivity;
 import com.dong.beautifulgirl.modular.logicandsignmodular.LogicAndSignActivity;
+import com.dong.beautifulgirl.modular.logicandsignmodular.logicmodular.LogicActivity;
+import com.dong.beautifulgirl.modular.mainmodular.mainmodular.MainActivity;
+import com.dong.beautifulgirl.modular.passwordmodular.PasswordActivity;
+import com.dong.beautifulgirl.test.TestBean;
 import com.dong.beautifulgirl.util.ToastUtil;
 import com.dong.circleimageview.widget.CircleImageView;
 
@@ -48,13 +54,14 @@ public class MineFragment extends Fragment implements MineContract.View, View.On
     private TextView uidTextView;
     private RecyclerView likeRecycleView;
     private LinearLayoutManager likeLayoutManager;
-    private ArrayList<MineLikeBean.DataBean> dataBeans;
+    private ArrayList<TestBean.DataBean> dataBeans;
     private MineLikeAdapter likeAdapter;
     private LinearLayout likeLayout;
     private LinearLayout changePassWordLayout;
     private LinearLayout userReturnLayout;
     private LinearLayout checkVersionLayout;
     private Button changeAccountLayout;
+    private Button no_login_ben;
 
     public MineFragment() {
         // Required empty public constructor
@@ -101,6 +108,13 @@ public class MineFragment extends Fragment implements MineContract.View, View.On
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (presenter != null)
+            presenter.loadMineData(getContext());
+    }
+
     private void initView(View view) {
 
         initMesseageView(view);
@@ -110,22 +124,22 @@ public class MineFragment extends Fragment implements MineContract.View, View.On
 
     /**
      * 初始化个人信息View（头像/昵称）
+     *
      * @param view
      */
     private void initMesseageView(View view) {
         circleImageView = view.findViewById(R.id.mine_photo_circleImageView);
         nameTextView = view.findViewById(R.id.mine_name_tv);
         uidTextView = view.findViewById(R.id.mine_uid_tv);
+        no_login_ben = view.findViewById(R.id.mine_no_login_btn);
 
-        circleImageView.setOnClickListener(new View.OnClickListener() {
+        no_login_ben.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MineFragment.this.getContext(), LogicAndSignActivity.class);
                 FragmentActivity activity = MineFragment.this.getActivity();
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                    Pair<CircleImageView, String> photoImageViewPair = Pair.create(circleImageView, "share photo img");
-                    Pair<TextView, String> nameTextViewPair = Pair.create(nameTextView, "share photo tv");
-                    ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(activity, new Pair[]{photoImageViewPair, nameTextViewPair});
+                    ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(activity, new Pair[]{});
                     activity.startActivity(intent, activityOptions.toBundle());
                 } else {
                     activity.startActivity(intent);
@@ -137,6 +151,7 @@ public class MineFragment extends Fragment implements MineContract.View, View.On
 
     /**
      * 初始化各个书签
+     *
      * @param view
      */
     private void initTabView(View view) {
@@ -155,6 +170,7 @@ public class MineFragment extends Fragment implements MineContract.View, View.On
 
     /**
      * 初始化收藏RecycleView
+     *
      * @param view
      */
     private void initRecycleView(View view) {
@@ -163,18 +179,29 @@ public class MineFragment extends Fragment implements MineContract.View, View.On
         likeLayoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
         likeRecycleView.setLayoutManager(likeLayoutManager);
 
-        dataBeans = new ArrayList<MineLikeBean.DataBean>();
+        dataBeans = new ArrayList<TestBean.DataBean>();
         likeAdapter = new MineLikeAdapter(getContext(), dataBeans);
         likeAdapter.setOnClickListener(new MineLikeAdapter.OnClickListener() {
             @Override
-            public void onClick(List<MineLikeBean.DataBean> dataBeans, int position) {
+            public void onClick(List<TestBean.DataBean> dataBeans, int position) {
                 if (position != likeAdapter.getItemCount() - 1) {
-                    if (dataBeans != null && dataBeans.get(position) != null) {
-                        MineLikeBean.DataBean dataBean = dataBeans.get(position);
-                        ToastUtil.toastLong(MineFragment.this.getContext(), dataBean.getDesc());
+                    MainActivity activity = (MainActivity) getActivity();
+                    Intent intent = new Intent(activity, LikeActivity.class);
+                    intent.putExtra("POSITION", position);
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                        ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(activity);
+                        activity.startActivity(intent, activityOptions.toBundle());
+                    }else{
+                        activity.startActivity(intent);
                     }
                 } else {
-                    ToastUtil.toastLong(MineFragment.this.getContext(), "查看更多");
+                    MainActivity activity = (MainActivity) getActivity();
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                        ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(activity);
+                        activity.startComponent(LikeActivity.class, activityOptions.toBundle());
+                    }else{
+                        activity.startComponent(LikeActivity.class);
+                    }
                 }
             }
         });
@@ -183,19 +210,32 @@ public class MineFragment extends Fragment implements MineContract.View, View.On
 
     @Override
     public void mineDataChanged(MineBean mineBean) {
-        Log.i("Dong", "URL:" + mineBean.getHeadImgUrl());
-        circleImageView
-                .setResourceID(R.drawable.home_pager_default)
-                .setPath(mineBean.getHeadImgUrl())//圆形图片源为网络图片
-                .setEdge(true)//设置是否显示边缘圆环
-                .setEdgeColor(Color.WHITE)//设置边缘颜色
-                .setEdgeWidth((int) getResources().getDimension(R.dimen.x3));//设置边缘宽度
-        nameTextView.setText(mineBean.getName());
-        uidTextView.setText("UID:" + mineBean.getUid());
+        String name = mineBean.getName();
+        String password = mineBean.getUid();
+        if (!TextUtils.isEmpty(name) && !TextUtils.isEmpty(password)) {
+            Log.i("Dong", "URL:" + mineBean.getHeadImgUrl());
+            no_login_ben.setVisibility(View.GONE);
+            circleImageView.setVisibility(View.VISIBLE);
+            circleImageView
+                    .setResourceID(R.drawable.home_pager_default)
+                    .setPath(mineBean.getHeadImgUrl())//圆形图片源为网络图片
+                    .setEdge(true)//设置是否显示边缘圆环
+                    .setEdgeColor(Color.WHITE)//设置边缘颜色
+                    .setEdgeWidth((int) getResources().getDimension(R.dimen.x3));//设置边缘宽度
+            nameTextView.setVisibility(View.VISIBLE);
+            nameTextView.setText(mineBean.getName());
+            uidTextView.setVisibility(View.VISIBLE);
+            uidTextView.setText("UID:" + mineBean.getUid());
+        }else{
+            no_login_ben.setVisibility(View.VISIBLE);
+            circleImageView.setVisibility(View.GONE);
+            nameTextView.setVisibility(View.GONE);
+            uidTextView.setVisibility(View.GONE);
+        }
     }
 
     @Override
-    public void mineLikeDataChanged(List<MineLikeBean.DataBean> dataBeans) {
+    public void mineLikeDataChanged(List<TestBean.DataBean> dataBeans) {
         if (dataBeans != null) {
             int size = this.dataBeans.size();
             this.dataBeans.clear();
@@ -203,10 +243,10 @@ public class MineFragment extends Fragment implements MineContract.View, View.On
 
             int num = dataBeans.size() > 5 ? 5 : dataBeans.size();
             for (int i = 0; i < num; i++) {
-                MineLikeBean.DataBean dataBean = dataBeans.get(i);
+                TestBean.DataBean dataBean = dataBeans.get(i);
                 this.dataBeans.add(dataBean);
             }
-            MineLikeBean.DataBean dataBean = new MineLikeBean.DataBean();
+            TestBean.DataBean dataBean = new TestBean.DataBean();
             this.dataBeans.add(dataBean);
 
 //            this.dataBeans.addAll(dataBeans);
@@ -222,13 +262,19 @@ public class MineFragment extends Fragment implements MineContract.View, View.On
 
     @Override
     public void onClick(View v) {
+        MainActivity activity = (MainActivity) getActivity();
         int id = v.getId();
-        switch (id){
+        switch (id) {
             case R.id.mine_like:
-                ToastUtil.toastLong(getContext(), "我的收藏");
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(activity);
+                    activity.startComponent(LikeActivity.class, activityOptions.toBundle());
+                }else{
+                    activity.startComponent(LikeActivity.class);
+                }
                 break;
             case R.id.mine_change_paassword:
-                ToastUtil.toastLong(getContext(), "修改密码");
+                activity.startComponent(PasswordActivity.class);
                 break;
             case R.id.mine_user_return:
                 ToastUtil.toastLong(getContext(), "用户反馈");
@@ -237,7 +283,7 @@ public class MineFragment extends Fragment implements MineContract.View, View.On
                 ToastUtil.toastLong(getContext(), "检查更新");
                 break;
             case R.id.mine_change_accout:
-                ToastUtil.toastLong(getContext(), "切换账号");
+                activity.startComponent(LogicActivity.class);
                 break;
         }
     }

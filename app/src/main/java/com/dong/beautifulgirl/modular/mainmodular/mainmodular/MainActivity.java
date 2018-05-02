@@ -1,5 +1,7 @@
 package com.dong.beautifulgirl.modular.mainmodular.mainmodular;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +23,7 @@ import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.dong.beautifulgirl.R;
 import com.dong.beautifulgirl.base.BaseActivity;
+import com.dong.beautifulgirl.modular.likemodular.LikeActivity;
 import com.dong.beautifulgirl.modular.mainmodular.findmodular.FindFragment;
 import com.dong.beautifulgirl.modular.mainmodular.findmodular.FindPresenter;
 import com.dong.beautifulgirl.modular.mainmodular.homemodular.HomeFragment;
@@ -29,8 +32,11 @@ import com.dong.beautifulgirl.modular.mainmodular.minemodular.MineFragment;
 import com.dong.beautifulgirl.modular.mainmodular.minemodular.MinePresent;
 import com.dong.beautifulgirl.modular.mainmodular.recommendmodular.RecommendFragment;
 import com.dong.beautifulgirl.modular.mainmodular.recommendmodular.RecommendPresent;
+import com.dong.beautifulgirl.modular.passwordmodular.PasswordActivity;
 import com.dong.beautifulgirl.util.ToastUtil;
 import com.dong.circleimageview.widget.CircleImageView;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +53,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private MainContract.Presenter presenter;
     private CircleImageView headImageView;
     private TextView nameTextView;
+
+    public final static int REQUEST_CODE_SCANNER = 1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -237,10 +245,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         int id = v.getId();
         switch (id){
             case R.id.main_slide_like:
-                ToastUtil.toastLong(this, "我的收藏");
-                break;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(this);
+                    startComponent(LikeActivity.class, activityOptions.toBundle());
+                }else{
+                    startComponent(LikeActivity.class);
+                }                break;
             case R.id.main_slide_change_paassword:
-                ToastUtil.toastLong(this, "修改密码");
+                startComponent(PasswordActivity.class);
                 break;
             case R.id.main_slide_user_return:
                 ToastUtil.toastLong(this, "用户反馈");
@@ -271,5 +283,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                 .setEdgeColor(Color.WHITE)//设置边缘颜色
                 .setEdgeWidth((int) getResources().getDimension(R.dimen.x3));//设置边缘宽度
         nameTextView.setText(mainSlideBean.getName());
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == REQUEST_CODE_SCANNER){
+            Bundle bundle = data.getExtras();
+            String result = bundle.getString("RESULT");
+            ToastUtil.toastLong(this, "扫描结果："+result);
+        }
     }
 }

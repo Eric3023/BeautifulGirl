@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.dong.beautifulgirl.R;
 import com.dong.beautifulgirl.base.BaseActivity;
 import com.dong.beautifulgirl.modular.logicandsignmodular.logicmodular.LogicActivity;
+import com.dong.beautifulgirl.modular.logicandsignmodular.signmodular.SignActivity;
 
 public class LogicAndSignActivity extends BaseActivity implements View.OnClickListener {
 
@@ -68,8 +69,7 @@ public class LogicAndSignActivity extends BaseActivity implements View.OnClickLi
                 Intent logicIntent = new Intent(mContext, LogicActivity.class);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     Pair<ImageView, String> backPair = Pair.create(backgroundImg, "share logic background");
-                    Pair<TextView, String> logicPair = Pair.create(logicTextView, "share logic txt");
-                    ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(this, new Pair[]{backPair, logicPair});
+                    ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(this, new Pair[]{backPair});
                     startActivity(logicIntent, activityOptions.toBundle());
                 } else {
                     startActivity(logicIntent);
@@ -77,11 +77,10 @@ public class LogicAndSignActivity extends BaseActivity implements View.OnClickLi
                 break;
             case R.id.logicandsign_sign_btn:
             case R.id.logicandsign_sign_tv:
-                Intent signIntent = new Intent(mContext, LogicActivity.class);
+                Intent signIntent = new Intent(mContext, SignActivity.class);
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                     Pair<ImageView, String> backPair = Pair.create(backgroundImg, "share logic background");
-                    Pair<TextView, String> logicPair = Pair.create(logicTextView, "share logic txt");
-                    ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(this, new Pair[]{backPair, logicPair});
+                    ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(this, new Pair[]{backPair});
                     startActivity(signIntent, activityOptions.toBundle());
                 } else {
                     startActivity(signIntent);

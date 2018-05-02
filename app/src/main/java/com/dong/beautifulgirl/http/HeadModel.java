@@ -7,6 +7,7 @@ import com.dong.beautifulgirl.modular.mainmodular.findmodular.FindBean;
 import com.dong.beautifulgirl.modular.mainmodular.homemodular.HomeBean;
 import com.dong.beautifulgirl.modular.mainmodular.minemodular.MineLikeBean;
 import com.dong.beautifulgirl.modular.mainmodular.recommendmodular.RecommendBean;
+import com.dong.beautifulgirl.test.TestBean;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -17,6 +18,14 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class HeadModel {
+
+    public static Observable<TestBean> getTestData(Context context, int pn, int rn , String tag1, String tag2, String ie){
+        return RetrofitHelper.getInstance()
+                .getService(context)
+                .getTestData(pn, rn, tag1, tag2, ie)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
 
     public static Observable<HomeBean> getHomeData(Context context, int pn, int rn , String tag1, String tag2, String ie){
         return RetrofitHelper.getInstance()

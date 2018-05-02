@@ -15,6 +15,7 @@ import com.dong.beautifulgirl.R;
 import com.dong.beautifulgirl.http.UrlConfig;
 import com.dong.beautifulgirl.modular.detailmodular.DetailActivity;
 import com.dong.beautifulgirl.modular.mainmodular.mainmodular.MainActivity;
+import com.dong.beautifulgirl.test.TestBean;
 import com.dong.beautifulgirl.util.ToastUtil;
 import com.dong.pointviewpager.adapter.LoopPagerAdapter;
 import com.dong.pointviewpager.bean.LoopViewPagerBean;
@@ -49,7 +50,7 @@ public class FindFragment extends Fragment implements FindContract.View, FindLis
     private FindContract.Presenter presenter;
     private LoopViewPager loopViewPager;
 
-    private List<FindBean.DataBean> resultsBeans;
+    private List<TestBean.DataBean> resultsBeans;
     private FindListAdapter adapter;
     private List<LoopViewPagerBean> beans;
 
@@ -137,7 +138,7 @@ public class FindFragment extends Fragment implements FindContract.View, FindLis
                     .setOnLoopPagerClickListener(new OnLoopPagerClickListener() {
                         @Override
                         public void onLoopPagerClick(int i, LoopViewPagerBean loopViewPagerBean) {
-                            FindBean.DataBean dataBean = (FindBean.DataBean) loopViewPagerBean.getObject();
+                            TestBean.DataBean dataBean = (TestBean.DataBean) loopViewPagerBean.getObject();
                             if(dataBean!=null){
                                 Intent intent = new Intent(getContext(), DetailActivity.class);
                                 intent.putExtra("POSITION", i);
@@ -165,7 +166,7 @@ public class FindFragment extends Fragment implements FindContract.View, FindLis
         listView = view.findViewById(R.id.find_listview);
         listView.addHeaderView(inflateView);
 
-        resultsBeans = new ArrayList<FindBean.DataBean>();
+        resultsBeans = new ArrayList<TestBean.DataBean>();
         adapter = new FindListAdapter(context, resultsBeans);
         listView.setAdapter(adapter);
 
@@ -178,16 +179,16 @@ public class FindFragment extends Fragment implements FindContract.View, FindLis
     }
 
     @Override
-    public void findDataChanged(List<FindBean.DataBean> resultsBeans) {
+    public void findDataChanged(List<TestBean.DataBean> resultsBeans) {
         this.resultsBeans.addAll(resultsBeans);
         adapter.notifyDataSetChanged();
     }
 
     @Override
-    public void findDataHeadChanged(List<FindBean.DataBean> list) {
+    public void findDataHeadChanged(List<TestBean.DataBean> list) {
         if (list != null) {
             for (int i = 0; i < list.size(); i++) {
-                FindBean.DataBean resultsBean = list.get(i);
+                TestBean.DataBean resultsBean = list.get(i);
 
                 if (resultsBean != null) {
                     LoopViewPagerBean bean = new LoopViewPagerBean();
@@ -205,7 +206,7 @@ public class FindFragment extends Fragment implements FindContract.View, FindLis
 
     @Override
     public void onCardItemClick(int i) {
-        FindBean.DataBean dataBean = resultsBeans.get(i);
+        TestBean.DataBean dataBean = resultsBeans.get(i);
         if(dataBean!=null){
             Intent intent = new Intent(getContext(), DetailActivity.class);
             intent.putExtra("POSITION", i);

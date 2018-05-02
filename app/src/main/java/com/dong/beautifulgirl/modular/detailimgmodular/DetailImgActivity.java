@@ -1,4 +1,4 @@
-package com.dong.beautifulgirl.modular.detailimgactivity;
+package com.dong.beautifulgirl.modular.detailimgmodular;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;

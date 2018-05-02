@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import com.dong.beautifulgirl.R;
 import com.dong.beautifulgirl.http.UrlConfig;
+import com.dong.beautifulgirl.test.TestBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +23,7 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
 
     private DetailContract.Presenter presenter;
     private VerticalViewPager verticalViewPager;
-    private List<DetailBean.DataBean> dataBeans;
+    private List<TestBean.DataBean> dataBeans;
     private DetailAdapter detailAdapter;
     private String tag;
     private int position;
@@ -78,7 +79,7 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
     }
 
     private void initData() {
-        dataBeans = new ArrayList<DetailBean.DataBean>();
+        dataBeans = new ArrayList<TestBean.DataBean>();
 
         detailAdapter = new DetailAdapter(this, dataBeans);
 
@@ -92,7 +93,7 @@ public class DetailActivity extends AppCompatActivity implements DetailContract.
     }
 
     @Override
-    public void detailDataChanged(List<DetailBean.DataBean> dataBeans) {
+    public void detailDataChanged(List<TestBean.DataBean> dataBeans) {
 
         if(dataBeans!=null){
             this.dataBeans.addAll(dataBeans);

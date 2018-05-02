@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dong.beautifulgirl.R;
+import com.dong.beautifulgirl.test.TestBean;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -21,10 +22,10 @@ import java.util.List;
 public class DetailAdapter extends PagerAdapter {
 
 
-    private List<DetailBean.DataBean> dataBeans;
+    private List<TestBean.DataBean> dataBeans;
     private Context context;
 
-    public DetailAdapter(Context context, List<DetailBean.DataBean> dataBeans) {
+    public DetailAdapter(Context context, List<TestBean.DataBean> dataBeans) {
         this.dataBeans = dataBeans;
         this.context = context;
     }
@@ -46,7 +47,7 @@ public class DetailAdapter extends PagerAdapter {
         TextView textView = view.findViewById(R.id.item_detail_text);
 
         if (dataBeans != null && dataBeans.get(position) != null) {
-            DetailBean.DataBean dataBean = dataBeans.get(position);
+            TestBean.DataBean dataBean = dataBeans.get(position);
             Picasso.get().load(dataBean.getImage_url()).fit().centerInside().into(img);
 
             if (TextUtils.isEmpty(dataBean.getDesc())) {

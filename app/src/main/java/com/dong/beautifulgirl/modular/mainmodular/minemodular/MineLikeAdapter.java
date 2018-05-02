@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dong.beautifulgirl.R;
+import com.dong.beautifulgirl.test.TestBean;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -20,7 +21,7 @@ import java.util.List;
 public class MineLikeAdapter extends RecyclerView.Adapter <MineLikeAdapter.ViewHolder>{
 
     private Context context;
-    private List<MineLikeBean.DataBean> resultsBeans;
+    private List<TestBean.DataBean> resultsBeans;
     private OnClickListener onClickListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
@@ -36,11 +37,11 @@ public class MineLikeAdapter extends RecyclerView.Adapter <MineLikeAdapter.ViewH
     }
 
     public  interface   OnClickListener{
-        void onClick(List<MineLikeBean.DataBean> resultsBeans, int position);
+        void onClick(List<TestBean.DataBean> resultsBeans, int position);
 
     }
 
-    public MineLikeAdapter(Context context, List<MineLikeBean.DataBean> resultsBeans) {
+    public MineLikeAdapter(Context context, List<TestBean.DataBean> resultsBeans) {
         this.context = context;
         this.resultsBeans = resultsBeans;
     }
@@ -59,7 +60,7 @@ public class MineLikeAdapter extends RecyclerView.Adapter <MineLikeAdapter.ViewH
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
         if(resultsBeans!=null){
-            final MineLikeBean.DataBean resultsBean = resultsBeans.get(position);
+            final TestBean.DataBean resultsBean = resultsBeans.get(position);
             if(resultsBean!=null){
                 if(position != getItemCount()-1){
                     holder.imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);

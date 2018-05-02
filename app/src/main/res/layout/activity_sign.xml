@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sign_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.dong.beautifulgirl.modular.logicandsignmodular.signmodular.LogicActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent">
+
+        <ImageView
+            android:id="@+id/sign_backgroud"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/y210"
+            android:scaleType="centerCrop"
+            android:src="@drawable/logic_backgroud"
+            android:transitionName="share sign background" />
+
+        <TextView
+            android:id="@+id/sign_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginTop="@dimen/y15"
+            android:text="注册"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/x18"  />
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
+        android:orientation="vertical">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@android:color/transparent">
+        </ScrollView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@android:color/white">
+
+            <EditText
+                android:id="@+id/sign_account"
+                android:layout_width="@dimen/x250"
+                android:layout_height="@dimen/y24"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/y30"
+                android:hint="账号"
+                android:paddingBottom="0px"
+                android:paddingTop="0px"
+                android:textSize="@dimen/x16" />
+
+            <EditText
+                android:id="@+id/sign_password"
+                android:layout_width="@dimen/x250"
+                android:layout_height="@dimen/y24"
+                android:layout_below="@id/sign_account"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/y20"
+                android:hint="密码"
+                android:paddingBottom="0px"
+                android:paddingTop="0px"
+                android:textSize="@dimen/x16" />
+
+            <Button
+                android:id="@+id/sign_commit"
+                android:layout_width="@dimen/x250"
+                android:layout_height="@dimen/y24"
+                android:layout_below="@id/sign_password"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/y20"
+                android:layout_marginTop="@dimen/y30"
+                android:background="@drawable/logic_sign_btn_focus"
+                android:fitsSystemWindows="true"
+                android:hint="注册"
+                android:padding="0px"
+                android:textSize="@dimen/x16" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

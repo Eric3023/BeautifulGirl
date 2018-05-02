@@ -3,6 +3,8 @@ package com.dong.beautifulgirl.modular.detailmodular;
 import android.content.Context;
 import android.util.Log;
 
+import com.dong.beautifulgirl.test.TestBean;
+
 import java.util.List;
 
 /**
@@ -34,7 +36,7 @@ public class DetailPresent implements DetailContract.Presenter, DetailServerHelp
     }
 
     @Override
-    public void onDetailDataChanged(List<DetailBean.DataBean> dataBeans) {
+    public void onDetailDataChanged(List<TestBean.DataBean> dataBeans) {
         view.detailDataChanged(dataBeans);
     }
 }

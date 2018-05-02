@@ -30,7 +30,7 @@
                     android:layout_height="@dimen/y50"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="@dimen/x15"
-                    android:transitionName="share photo img" />
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/mine_name_tv"
@@ -42,7 +42,7 @@
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/x15"
                     android:textStyle="bold"
-                    android:transitionName="share photo tv" />
+                    android:visibility="gone"/>
 
                 <TextView
                     android:id="@+id/mine_uid_tv"
@@ -54,7 +54,19 @@
                     android:layout_toRightOf="@id/mine_photo_circleImageView"
                     android:textColor="@android:color/white"
                     android:textSize="@dimen/x12"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:visibility="gone"/>
+
+                <Button
+                    android:id="@+id/mine_no_login_btn"
+                    android:layout_width="@dimen/x72"
+                    android:layout_height="@dimen/y20"
+                    android:layout_centerInParent="true"
+                    android:text="立即登陆"
+                    android:textColor="@android:color/white"
+                    android:textSize="@dimen/x15"
+                    android:background="@drawable/mine_no_logic_btn"
+                    android:padding="0px" />
             </RelativeLayout>
 
             <View

@@ -2,9 +2,11 @@ package com.dong.beautifulgirl.modular.logicandsignmodular.logicmodular;
 
 import android.animation.ObjectAnimator;
 import android.animation.ValueAnimator;
+import android.graphics.Rect;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.util.Log;
@@ -12,26 +14,31 @@ import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.dong.beautifulgirl.R;
 import com.dong.beautifulgirl.base.BaseActivity;
+import com.dong.beautifulgirl.modular.mainmodular.mainmodular.MainActivity;
+import com.dong.beautifulgirl.util.ToastUtil;
 
-public class LogicActivity extends BaseActivity implements ValueAnimator.AnimatorUpdateListener {
+public class LogicActivity extends BaseActivity implements View.OnClickListener, LogicContract.View {
 
-    private ImageView logicBackgroud;
-    private ValueAnimator shrinkAnimator;
-    private ValueAnimator expandAnimator;
+    private EditText accountEditView;
+    private EditText passwordEditView;
+    private Button commit;
+
+    private LogicContract.Presenter presenter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logic);
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-
 
         if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             Transition slide = TransitionInflater.from(this).inflateTransition(R.transition.slide);
@@ -44,43 +51,52 @@ public class LogicActivity extends BaseActivity implements ValueAnimator.Animato
         }
 
         initView();
-
-        initAnimator();
+        initPresenter();
     }
 
-    private void initAnimator() {
-        shrinkAnimator = ValueAnimator.ofFloat(100, 20);
-        shrinkAnimator.setDuration(500);
-        shrinkAnimator.setInterpolator(new LinearInterpolator());
-        shrinkAnimator.addUpdateListener(this);
-
-        expandAnimator = ValueAnimator.ofFloat(20, 100);
-        expandAnimator.setDuration(500);
-        expandAnimator.setInterpolator(new LinearInterpolator());
-        expandAnimator.addUpdateListener(this);
+    private void initPresenter() {
+        presenter = new LogicPresent(this);
     }
 
     private void initView() {
-        logicBackgroud = findViewById(R.id.logic_backgroud);
+
+        accountEditView = findViewById(R.id.logic_account);
+        passwordEditView = findViewById(R.id.logic_password);
+
+        commit = findViewById(R.id.logic_commit);
+        commit.setOnClickListener(this);
+
     }
 
     @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        return super.onKeyDown(keyCode, event);
+    public void onClick(View v) {
+        int id = v.getId();
+        switch (id){
+            case R.id.logic_commit:
+                String accout = accountEditView.getText().toString();
+                String password = passwordEditView.getText().toString();
+
+                if(presenter!=null &&!TextUtils.isEmpty(accout)&&!TextUtils.isEmpty(password)){
+                    presenter.loadLogicData(this, accout, password);
+                }else{
+                    ToastUtil.toastLong(this, "账号密码不能为空");
+                }
+                break;
+        }
     }
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        return super.onTouchEvent(event);
+    public void setPresenter(LogicContract.Presenter presenter) {
+        this.presenter = presenter;
     }
 
     @Override
-    public void onAnimationUpdate(ValueAnimator animation) {
-        Float value = (Float) animation.getAnimatedValue();
-
-        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) logicBackgroud.getLayoutParams();
-        layoutParams.height = (int) ((float)getResources().getDimension(R.dimen.y120)*value/100);
-
-        logicBackgroud.setLayoutParams(layoutParams);
+    public void logicDataChanged(LogicBean logicBean) {
+        boolean messeage = logicBean.getMesseage();
+        if(messeage){
+            startComponent(MainActivity.class);
+        }else{
+            ToastUtil.toastLong(this, "登陆失败");
+        }
     }
 }

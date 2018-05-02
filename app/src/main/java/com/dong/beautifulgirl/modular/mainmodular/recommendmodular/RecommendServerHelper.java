@@ -5,6 +5,7 @@ import android.util.Log;
 
 import com.dong.beautifulgirl.http.HeadModel;
 import com.dong.beautifulgirl.http.UrlConfig;
+import com.dong.beautifulgirl.test.TestBean;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,23 +23,23 @@ public class RecommendServerHelper {
     private final int rn = 30;//一页显示的数量
 
     private OnRecommendDataChangedListener listener;
-    private List<RecommendBean.DataBean> resultsBeans;
+    private List<TestBean.DataBean> resultsBeans;
 
     public void loadRecommend(Context context, String tag){
 
-        resultsBeans = new ArrayList<RecommendBean.DataBean>();
+        resultsBeans = new ArrayList<TestBean.DataBean>();
 
-        HeadModel.getRecommendData(context, pn ,rn, UrlConfig.TAG_ROOT, tag, UrlConfig.IE)
-                .subscribe(new Observer<RecommendBean>() {
+        HeadModel.getTestData(context, pn ,rn, UrlConfig.TAG_ROOT, tag, UrlConfig.IE)
+                .subscribe(new Observer<TestBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(RecommendBean recommendBean) {
+                    public void onNext(TestBean recommendBean) {
                         if(recommendBean!=null){
-                            List<RecommendBean.DataBean> results = recommendBean.getData();
+                            List<TestBean.DataBean> results = recommendBean.getData();
                             if(results!=null){
                                 if(results!=null&& results.size()>1)
                                     results.remove(results.size()-1);
@@ -93,7 +94,7 @@ public class RecommendServerHelper {
 
         void onRecommendTabDataChanged(List<RecommendTabBean> tabBeans);
 
-        void onRecommendDataChanged(List<RecommendBean.DataBean> resultsBeans);
+        void onRecommendDataChanged(List<TestBean.DataBean> resultsBeans);
     }
 
 }

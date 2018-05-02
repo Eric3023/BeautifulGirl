@@ -16,7 +16,7 @@ public interface MainContract {
 
     interface Presenter extends BasePresenter{
 
-        void loadMainSlideData();
+        void loadMainSlideData(Context context);
     }
 
     interface View extends BaseView<Presenter>{

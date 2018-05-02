@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.dong.beautifulgirl.http.UrlConfig;
+import com.dong.beautifulgirl.test.TestBean;
 
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class RecommendPresent implements RecommendContract.Presenter, RecommendS
     }
 
     @Override
-    public void onRecommendDataChanged(List<RecommendBean.DataBean> resultsBeans) {
+    public void onRecommendDataChanged(List<TestBean.DataBean> resultsBeans) {
         if(resultsBeans!=null){
         Log.i("Dong", "获取Recommend数据："+resultsBeans.size());
         view.RecommendDataChanged(resultsBeans);}

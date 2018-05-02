@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.dong.beautifulgirl.base.BasePresenter;
 import com.dong.beautifulgirl.base.BaseView;
+import com.dong.beautifulgirl.test.TestBean;
 
 import java.util.List;
 
@@ -25,7 +26,7 @@ public interface RecommendContract {
 
         void RecommendTabChanged(List<RecommendTabBean> tabBeans);
 
-        void RecommendDataChanged(List<RecommendBean.DataBean> resultsBeans);
+        void RecommendDataChanged(List<TestBean.DataBean> resultsBeans);
     }
 
 }

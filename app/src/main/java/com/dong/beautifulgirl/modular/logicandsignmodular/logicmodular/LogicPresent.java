@@ -23,17 +23,15 @@ public class LogicPresent implements LogicContract.Presenter, LogicServerHelper.
 
     @Override
     public void start(Context context) {
-        loadLogicData();
     }
 
     @Override
-    public void loadLogicData() {
-        serverHelper.loadLogicData();
+    public void loadLogicData(Context context, String account, String password) {
+        serverHelper.loadLogicData(context, account, password);
     }
 
     @Override
     public void onLogicDataChanged(LogicBean logicBean) {
-        Log.i("Dong", "获取Logic数据："+logicBean.getName());
         view.logicDataChanged(logicBean);
     }
 

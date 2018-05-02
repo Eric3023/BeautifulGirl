@@ -1,6 +1,8 @@
 package com.dong.beautifulgirl.modular.mainmodular.mainmodular;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.text.TextUtils;
 
 import com.dong.beautifulgirl.http.HeadModel;
 import com.dong.beautifulgirl.http.UrlConfig;
@@ -18,17 +20,25 @@ import io.reactivex.disposables.Disposable;
 public class MainServerHelper {
 
     private final String IMG_URL = "http://a.hiphotos.baidu.com/image/pic/item/902397dda144ad34e98003fedca20cf431ad8588.jpg";
-    private final String NAME = "Eric";
-    private final String UID = "827142667";
 
     private OnMainSlideDataChangedListener listener;
 
-    public void loadMainSlideData(){
+    public void loadMainSlideData(Context context){
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences("account", Context.MODE_PRIVATE); //私有数据
+
+        String acountKey =  "account";
+        String passwordKey =  "password";
 
         MainSlideBean mineBean = new MainSlideBean();
-        mineBean.setName(NAME);
-        mineBean.setHeadImgUrl(IMG_URL);
-        mineBean.setUid(UID);
+        String acount = sharedPreferences.getString(acountKey, "");
+        String password = sharedPreferences.getString(passwordKey, "");
+
+        if(!TextUtils.isEmpty(acount)&&!TextUtils.isEmpty(password)){
+            mineBean.setName(acount);
+            mineBean.setHeadImgUrl(IMG_URL);
+            mineBean.setUid(password);
+        }
 
         if(listener!=null)
             listener.onMainSlideDataChanged(mineBean);

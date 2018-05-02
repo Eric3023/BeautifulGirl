@@ -27,7 +27,7 @@ public class MainPresent implements MainContract.Presenter, MainServerHelper.OnM
 
     @Override
     public void start(Context context) {
-        loadMainSlideData();
+        loadMainSlideData(context);
     }
 
     @Override
@@ -38,7 +38,7 @@ public class MainPresent implements MainContract.Presenter, MainServerHelper.OnM
 
 
     @Override
-    public void loadMainSlideData() {
-        serverHelper.loadMainSlideData();
+    public void loadMainSlideData(Context context) {
+        serverHelper.loadMainSlideData(context);
     }
 }

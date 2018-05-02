@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.dong.beautifulgirl.base.BasePresenter;
 import com.dong.beautifulgirl.base.BaseView;
+import com.dong.beautifulgirl.test.TestBean;
 
 import java.util.List;
 
@@ -21,8 +22,8 @@ public class FindContract {
 
     interface View extends BaseView<Presenter>{
 
-        void findDataChanged(List<FindBean.DataBean> list);
+        void findDataChanged(List<TestBean.DataBean> list);
 
-        void findDataHeadChanged(List<FindBean.DataBean> list);
+        void findDataHeadChanged(List<TestBean.DataBean> list);
     }
 }

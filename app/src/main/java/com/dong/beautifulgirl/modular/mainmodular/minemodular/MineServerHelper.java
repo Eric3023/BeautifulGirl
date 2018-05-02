@@ -1,10 +1,15 @@
 package com.dong.beautifulgirl.modular.mainmodular.minemodular;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.text.TextUtils;
+import android.util.Log;
 
 import com.dong.beautifulgirl.http.HeadModel;
 import com.dong.beautifulgirl.http.UrlConfig;
 import com.dong.beautifulgirl.modular.mainmodular.recommendmodular.RecommendBean;
+import com.dong.beautifulgirl.test.TestBean;
+import com.dong.beautifulgirl.util.PackageUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,15 +32,28 @@ public class MineServerHelper {
 
     private OnMineDataChangedListener listener;
 
-    public void loadMineData(){
+    public void loadMineData(Context context){
 
         MineBean mineBean = new MineBean();
-        mineBean.setName(NAME);
-        mineBean.setHeadImgUrl(IMG_URL);
-        mineBean.setUid(UID);
+
+        SharedPreferences sharedPreferences = context.getSharedPreferences("account", Context.MODE_PRIVATE); //私有数据
+
+        String acountKey =  "account";
+        String passwordKey =  "password";
+
+        String acount = sharedPreferences.getString(acountKey, "");
+        String password = sharedPreferences.getString(passwordKey, "");
+
+        if(!TextUtils.isEmpty(acount)&&!TextUtils.isEmpty(password)){
+            mineBean.setName(acount);
+            mineBean.setHeadImgUrl(IMG_URL);
+            mineBean.setUid(password);
+        }
+
 
         if(listener!=null)
             listener.onMineDataChanged(mineBean);
+
     }
 
     public void setOnRecommendDataChangedListener(OnMineDataChangedListener listener) {
@@ -44,17 +62,17 @@ public class MineServerHelper {
 
     public void loadMineLikeData(Context context) {
 
-        HeadModel.getMineLikeData(context, pn_like ,rn_like, UrlConfig.TAG_ROOT, UrlConfig.TAG_THIRD, UrlConfig.IE)
-                .subscribe(new Observer<MineLikeBean>() {
+        HeadModel.getTestData(context, pn_like ,rn_like, UrlConfig.TAG_ROOT, UrlConfig.TAG_THIRD, UrlConfig.IE)
+                .subscribe(new Observer<TestBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
 
                     }
 
                     @Override
-                    public void onNext(MineLikeBean mineLikeBean) {
+                    public void onNext(TestBean mineLikeBean) {
                         if(mineLikeBean!=null){
-                            List<MineLikeBean.DataBean> results = mineLikeBean.getData();
+                            List<TestBean.DataBean> results = mineLikeBean.getData();
                             if(results!=null){
                                 if(results!=null&& results.size()>1)
                                     results.remove(results.size()-1);
@@ -80,7 +98,7 @@ public class MineServerHelper {
     public interface OnMineDataChangedListener{
         void onMineDataChanged(MineBean mineBean);
 
-        void onMineLikeDataChanged(List<MineLikeBean.DataBean> dataBeans);
+        void onMineLikeDataChanged(List<TestBean.DataBean> dataBeans);
     }
 
 }

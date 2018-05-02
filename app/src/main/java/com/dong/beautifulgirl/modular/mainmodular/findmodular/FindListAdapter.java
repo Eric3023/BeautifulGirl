@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dong.beautifulgirl.R;
+import com.dong.beautifulgirl.test.TestBean;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
@@ -18,11 +19,11 @@ import java.util.List;
 
 public class FindListAdapter extends BaseAdapter {
 
-    private List<FindBean.DataBean> list;
+    private List<TestBean.DataBean> list;
     private Context context;
     private OnCardItemClickListener onCardItemClickListener;
 
-    public FindListAdapter(Context context, List<FindBean.DataBean> list) {
+    public FindListAdapter(Context context, List<TestBean.DataBean> list) {
         this.context = context;
         this.list = list;
     }
@@ -60,7 +61,7 @@ public class FindListAdapter extends BaseAdapter {
             viewHolder = (ViewHolder) view.getTag();
         }
 
-        FindBean.DataBean bean = list.get(i);
+        TestBean.DataBean bean = list.get(i);
         if (bean != null) {
             Picasso.get().load(bean.getImage_url()).into(viewHolder.img);
             viewHolder.title.setText(bean.getDesc());

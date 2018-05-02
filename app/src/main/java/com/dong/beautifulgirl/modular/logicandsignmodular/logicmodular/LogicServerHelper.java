@@ -1,24 +1,40 @@
 package com.dong.beautifulgirl.modular.logicandsignmodular.logicmodular;
 
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.text.TextUtils;
+
 /**
  * Created by donghuadong on 2018/4/10.
  */
 
 public class LogicServerHelper {
 
-    private final String IMG_URL = "http://a.hiphotos.baidu.com/image/pic/item/902397dda144ad34e98003fedca20cf431ad8588.jpg";
-    private final String NAME = "Eric";
-
     private OnLogicDataChangedListener listener;
 
-    public void loadLogicData(){
+    public void loadLogicData(Context context, String account, String password){
 
-        LogicBean logicBean = new LogicBean();
-        logicBean.setName(NAME);
-        logicBean.setHeadImgUrl(IMG_URL);
 
-        if(listener!=null)
+        SharedPreferences sharedPreferences = context.getSharedPreferences("accounts", Context.MODE_PRIVATE); //私有数据
+
+        String passwordOnLine = sharedPreferences.getString(account, "");
+
+        if(TextUtils.equals(password, passwordOnLine)&&listener!=null){
+
+            SharedPreferences sp = context.getSharedPreferences("account", Context.MODE_PRIVATE); //私有数据
+            SharedPreferences.Editor edit = sp.edit();
+            edit.putString("account", account);
+            edit.putString("password", password);
+            edit.commit();
+
+            LogicBean logicBean = new LogicBean();
+            logicBean.setMesseage(true);
             listener.onLogicDataChanged(logicBean);
+        }else{
+            LogicBean logicBean = new LogicBean();
+            logicBean.setMesseage(false);
+            listener.onLogicDataChanged(logicBean);
+        }
     }
 
     public void setOnRecommendDataChangedListener(OnLogicDataChangedListener listener) {

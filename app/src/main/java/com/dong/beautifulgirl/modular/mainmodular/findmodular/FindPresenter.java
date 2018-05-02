@@ -2,6 +2,8 @@ package com.dong.beautifulgirl.modular.mainmodular.findmodular;
 
 import android.content.Context;
 
+import com.dong.beautifulgirl.test.TestBean;
+
 import java.util.List;
 
 /**
@@ -29,12 +31,12 @@ public class FindPresenter implements FindContract.Presenter, FindServerHelper.O
 
 
     @Override
-    public void OnFindDataChanged(List<FindBean.DataBean> resultsBeans) {
+    public void OnFindDataChanged(List<TestBean.DataBean> resultsBeans) {
         view.findDataChanged(resultsBeans);
     }
 
     @Override
-    public void OnFindDataHeadChanged(List<FindBean.DataBean> resultsBeans) {
+    public void OnFindDataHeadChanged(List<TestBean.DataBean> resultsBeans) {
         view.findDataHeadChanged(resultsBeans);
     }
 

@@ -16,6 +16,7 @@ import com.dong.beautifulgirl.R;
 import com.dong.beautifulgirl.http.UrlConfig;
 import com.dong.beautifulgirl.modular.detailmodular.DetailActivity;
 import com.dong.beautifulgirl.modular.mainmodular.mainmodular.MainActivity;
+import com.dong.beautifulgirl.test.TestBean;
 import com.dong.beautifulgirl.util.ToastUtil;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
     private RecyclerView tabRecyclerView;
     private LinearLayoutManager tabLayoutManager;
     private RecommendTabAdapter recommendTabAdapter;
-    private List<RecommendBean.DataBean> resultsBeans;
+    private List<TestBean.DataBean> resultsBeans;
     private List<RecommendTabBean> tabBeans;
     private String tag = UrlConfig.TAG_FIRST;
 
@@ -139,11 +140,11 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
         layoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
         recyclerView.setLayoutManager(layoutManager);
 
-        resultsBeans = new ArrayList<RecommendBean.DataBean>();
+        resultsBeans = new ArrayList<TestBean.DataBean>();
         recommendAdapter = new RecommendAdapter(getContext(), resultsBeans);
         recommendAdapter.setOnClickListener(new RecommendAdapter.OnClickListener() {
             @Override
-            public void onClick(List<RecommendBean.DataBean> resultsBeans, int position) {
+            public void onClick(List<TestBean.DataBean> resultsBeans, int position) {
                 if (resultsBeans != null && resultsBeans.get(position) != null){
                     Intent intent = new Intent(getContext(), DetailActivity.class);
                     intent.putExtra("POSITION", position);
@@ -180,7 +181,7 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
     }
 
     @Override
-    public void RecommendDataChanged(List<RecommendBean.DataBean> resultsBeans) {
+    public void RecommendDataChanged(List<TestBean.DataBean> resultsBeans) {
         if (resultsBeans != null) {
             int size = this.resultsBeans.size();
             this.resultsBeans.addAll(resultsBeans);
