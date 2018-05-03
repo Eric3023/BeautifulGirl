@@ -45,4 +45,6 @@ public class UrlConfig {
 
     public static final String DETAIL_URL = "channel/listjson";
 
+    public static final String SEARCH_DETAIL_URL = "http://image.baidu.com/search/acjson";
+
 }

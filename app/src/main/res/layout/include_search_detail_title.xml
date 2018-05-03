@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y25"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorblue">
+
+    <TextView
+        android:id="@+id/home_title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="@dimen/x10"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:text="搜索结果"
+        android:textSize="@dimen/x15"
+        android:textColor="@android:color/white"/>
+
+</RelativeLayout>

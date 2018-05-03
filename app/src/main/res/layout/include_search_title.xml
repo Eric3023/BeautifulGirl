@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/y25"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/colorblue">
+
+    <TextView
+        android:id="@+id/search_cancle"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="取消"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:layout_alignParentRight="true"
+        android:layout_marginLeft="@dimen/x10"
+        android:layout_marginRight="@dimen/x10"
+        android:textSize="@dimen/x15"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@id/search_cancle"
+        android:orientation="horizontal"
+        android:background="@drawable/search_edit_backgroud"
+        android:layout_marginLeft="@dimen/x10"
+        android:layout_marginTop="@dimen/y3"
+        android:layout_marginBottom="@dimen/y3">
+
+        <ImageView
+            android:id="@+id/search_icon"
+            android:layout_width="@dimen/x30"
+            android:layout_height="@dimen/x30"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/search_button_icon_f"/>
+
+        <EditText
+            android:id="@+id/search_edit"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:singleLine="true"
+            android:hint="请输入关键词"
+            android:textSize="@dimen/x15"
+            android:padding="0px"
+            android:background="@null"
+            android:imeOptions="actionSearch"/>
+    </LinearLayout>
+
+</RelativeLayout>

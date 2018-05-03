@@ -56,7 +56,9 @@
             android:theme="@style/AppTheme.NoActionBar.White"
             android:windowSoftInputMode="stateHidden" />
         <activity android:name=".modular.likemodular.LikeActivity" />
-        <activity android:name=".modular.scanmodular.ScanActivity"></activity>
+        <activity android:name=".modular.scanmodular.ScanActivity" />
+        <activity android:name=".modular.searchmodular.SearchActivity" />
+        <activity android:name=".modular.searchdetailmodular.SearchDetailActivity"></activity>
     </application>
 
 </manifest>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
+    tools:context="com.dong.beautifulgirl.modular.searchmodular.SearchActivity">
+
+    <include
+        android:id="@+id/search_title"
+        layout="@layout/include_search_title">
+    </include>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/white"
+        android:orientation="vertical"
+        android:layout_below="@id/search_title">
+
+        <LinearLayout
+            android:id="@+id/search_histoty_title"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/x15"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/x10"
+            android:visibility="gone">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:text="搜索历史"
+                android:textSize="@dimen/x12"
+                android:textColor="@android:color/darker_gray"/>
+
+            <ImageView
+                android:id="@+id/search_history_delete"
+                android:layout_width="@dimen/x12"
+                android:layout_height="@dimen/x12"
+                android:layout_gravity="center_vertical"
+                android:scaleType="fitXY"
+                android:src="@drawable/search_history_delete"/>
+        </LinearLayout>
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/search_history_flowlayout"
+            app:max_select="0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x10">
+        </com.zhy.view.flowlayout.TagFlowLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_margin="@dimen/x10">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_gravity="center_vertical"
+                android:text="猜你想找"
+                android:textSize="@dimen/x12"
+                android:textColor="@android:color/darker_gray"/>
+        </LinearLayout>
+
+
+        <com.zhy.view.flowlayout.TagFlowLayout
+            android:id="@+id/search_hot_flowlayout"
+            app:max_select="0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/x10"
+            android:layout_marginRight="@dimen/x10">
+        </com.zhy.view.flowlayout.TagFlowLayout>
+    </LinearLayout>
+
+</RelativeLayout>

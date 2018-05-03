@@ -1,6 +1,7 @@
 package com.dong.beautifulgirl.modular.mainmodular.recommendmodular;
 
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -14,10 +15,10 @@ import android.widget.Button;
 
 import com.dong.beautifulgirl.R;
 import com.dong.beautifulgirl.http.UrlConfig;
+import com.dong.beautifulgirl.modular.searchmodular.SearchActivity;
 import com.dong.beautifulgirl.modular.detailmodular.DetailActivity;
 import com.dong.beautifulgirl.modular.mainmodular.mainmodular.MainActivity;
 import com.dong.beautifulgirl.test.TestBean;
-import com.dong.beautifulgirl.util.ToastUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -196,17 +197,22 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
 
     @Override
     public void onClick(View v) {
+        MainActivity mainActivity = (MainActivity) getActivity();
         int id = v.getId();
         switch (id) {
             case R.id.recommend_menu:
-                MainActivity mainActivity = (MainActivity) getActivity();
                 if(mainActivity.isOpen())
                     mainActivity.closeSlide();
                 else
                     mainActivity.openSlide();
                 break;
             case R.id.recommend_search:
-                ToastUtil.toastLong(getActivity(), "点击了搜索按钮");
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                    ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(mainActivity);
+                    mainActivity.startComponent(SearchActivity.class, activityOptions.toBundle());
+                }else{
+                    mainActivity.startComponent(SearchActivity.class);
+                }
                 break;
         }
     }

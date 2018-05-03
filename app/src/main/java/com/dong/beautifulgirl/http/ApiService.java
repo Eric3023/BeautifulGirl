@@ -5,6 +5,7 @@ import com.dong.beautifulgirl.modular.mainmodular.findmodular.FindBean;
 import com.dong.beautifulgirl.modular.mainmodular.homemodular.HomeBean;
 import com.dong.beautifulgirl.modular.mainmodular.minemodular.MineLikeBean;
 import com.dong.beautifulgirl.modular.mainmodular.recommendmodular.RecommendBean;
+import com.dong.beautifulgirl.modular.searchdetailmodular.SearchDetailBean;
 import com.dong.beautifulgirl.test.TestBean;
 
 import io.reactivex.Observable;
@@ -92,6 +93,15 @@ public interface ApiService {
                                          @Query("tag1") String tag1,
                                          @Query("tag2") String tag2,
                                          @Query("ie") String ie);
+
+    @Headers("cache:600")
+    @GET(UrlConfig.SEARCH_DETAIL_URL)
+    Observable<SearchDetailBean> getSearchDetailData(@Query("tn") String tn,
+                                                     @Query("ipn") String ipn,
+                                                     @Query("word") String word,
+                                                     @Query("pn") int pn,
+                                                     @Query("rn") int rn,
+                                                     @Query("ie") String ie);
 
 
 }

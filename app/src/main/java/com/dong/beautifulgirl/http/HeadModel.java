@@ -7,6 +7,7 @@ import com.dong.beautifulgirl.modular.mainmodular.findmodular.FindBean;
 import com.dong.beautifulgirl.modular.mainmodular.homemodular.HomeBean;
 import com.dong.beautifulgirl.modular.mainmodular.minemodular.MineLikeBean;
 import com.dong.beautifulgirl.modular.mainmodular.recommendmodular.RecommendBean;
+import com.dong.beautifulgirl.modular.searchdetailmodular.SearchDetailBean;
 import com.dong.beautifulgirl.test.TestBean;
 
 import io.reactivex.Observable;
@@ -88,6 +89,14 @@ public class HeadModel {
         return RetrofitHelper.getInstance()
                 .getService(context)
                 .getDetailData(pn, rn, tag1, tag2, ie)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    public static Observable<SearchDetailBean> getSearchDetailData(Context context, String tn, String ipn , String word, int pn, int rn, String ie){
+        return RetrofitHelper.getInstance()
+                .getService(context)
+                .getSearchDetailData(tn, ipn, word, pn, rn,ie)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread());
     }
