@@ -287,7 +287,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(requestCode == REQUEST_CODE_SCANNER){
+        if(requestCode == REQUEST_CODE_SCANNER&& data!=null&&data.getExtras()!=null){
             Bundle bundle = data.getExtras();
             String result = bundle.getString("RESULT");
             ToastUtil.toastLong(this, "扫描结果："+result);

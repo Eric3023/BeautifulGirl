@@ -21,14 +21,13 @@ public class FindServerHelper {
     private int pn_head;//页码
     private final int rn_head = 10;//一页显示的数量
 
-    private int pn_con;//页码
     private final int rn_con = 30;//一页显示的数量
 
     public OnFindDataChangedListener onFindDataChangedListener;
 
-    public void loadFindData(Context context){
+    public void loadFindData(Context context, int page){
 
-        HeadModel.getTestData(context, pn_con, rn_con, UrlConfig.TAG_ROOT, UrlConfig.TAG_NINETH, UrlConfig.IE)
+        HeadModel.getTestData(context, page, rn_con, UrlConfig.TAG_ROOT, UrlConfig.TAG_NINETH, UrlConfig.IE)
                 .subscribe(new Observer<TestBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {

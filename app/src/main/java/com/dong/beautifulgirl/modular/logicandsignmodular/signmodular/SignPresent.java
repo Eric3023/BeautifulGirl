@@ -12,11 +12,7 @@ public class SignPresent implements SignContract.Presenter, SignServerHelper.OnS
     private SignContract.View view;
     private SignServerHelper serverHelper;
 
-    public SignPresent(SignContract.View view) {
-        this.view = view;
-        if(view!=null)
-            view.setPresenter(this);
-
+    public SignPresent() {
         serverHelper = new SignServerHelper();
         serverHelper.setOnRecommendDataChangedListener(this);
     }
@@ -24,6 +20,18 @@ public class SignPresent implements SignContract.Presenter, SignServerHelper.OnS
     @Override
     public void start(Context context) {
 
+    }
+
+    @Override
+    public void viewCreated(SignContract.View view) {
+        this.view = view;
+        if(view!=null)
+            view.setPresenter(this);
+    }
+
+    @Override
+    public void viewDestroyed() {
+        this.view =null;
     }
 
     @Override

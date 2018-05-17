@@ -7,6 +7,7 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
@@ -33,7 +34,7 @@ import java.util.List;
  * Use the {@link FindFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FindFragment extends Fragment implements FindContract.View, FindListAdapter.OnCardItemClickListener, View.OnClickListener {
+public class FindFragment extends Fragment implements FindContract.View, FindListAdapter.OnCardItemClickListener, View.OnClickListener, FindListAdapter.OnScrollToBottomListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -53,6 +54,9 @@ public class FindFragment extends Fragment implements FindContract.View, FindLis
     private List<TestBean.DataBean> resultsBeans;
     private FindListAdapter adapter;
     private List<LoopViewPagerBean> beans;
+
+    private int page;
+    private boolean needLoad;
 
     public FindFragment() {
         // Required empty public constructor
@@ -90,6 +94,8 @@ public class FindFragment extends Fragment implements FindContract.View, FindLis
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         context = getContext();
+        page = 0;
+        needLoad = true;
 
         View view = inflater.inflate(R.layout.fragment_find, container, false);
         init(view);
@@ -139,12 +145,13 @@ public class FindFragment extends Fragment implements FindContract.View, FindLis
                         @Override
                         public void onLoopPagerClick(int i, LoopViewPagerBean loopViewPagerBean) {
                             TestBean.DataBean dataBean = (TestBean.DataBean) loopViewPagerBean.getObject();
-                            if(dataBean!=null){
+                            if (dataBean != null) {
                                 Intent intent = new Intent(getContext(), DetailActivity.class);
                                 intent.putExtra("POSITION", i);
                                 intent.putExtra("TAG", UrlConfig.TAG_FIFTH);
                                 intent.putExtra("RN", 10);
-                                getActivity().startActivity(intent);                            }
+                                getActivity().startActivity(intent);
+                            }
                         }
                     })
                     .setCard(true)
@@ -171,6 +178,7 @@ public class FindFragment extends Fragment implements FindContract.View, FindLis
         listView.setAdapter(adapter);
 
         adapter.setOnCardItemClickListener(this);
+        adapter.setOnScrollToBottomListener(this);
     }
 
     @Override
@@ -180,6 +188,11 @@ public class FindFragment extends Fragment implements FindContract.View, FindLis
 
     @Override
     public void findDataChanged(List<TestBean.DataBean> resultsBeans) {
+        if (resultsBeans != null && resultsBeans.size() != 0) {
+            needLoad = true;
+        } else {
+            needLoad = false;
+        }
         this.resultsBeans.addAll(resultsBeans);
         adapter.notifyDataSetChanged();
     }
@@ -198,7 +211,7 @@ public class FindFragment extends Fragment implements FindContract.View, FindLis
                 }
             }
         }
-        if(loopViewPager!=null){
+        if (loopViewPager != null) {
             LoopPagerAdapter loopPagerAdapter = loopViewPager.getLoopPagerAdapter();
             loopPagerAdapter.notifyDataSetChanged();
         }
@@ -207,7 +220,7 @@ public class FindFragment extends Fragment implements FindContract.View, FindLis
     @Override
     public void onCardItemClick(int i) {
         TestBean.DataBean dataBean = resultsBeans.get(i);
-        if(dataBean!=null){
+        if (dataBean != null) {
             Intent intent = new Intent(getContext(), DetailActivity.class);
             intent.putExtra("POSITION", i);
             intent.putExtra("TAG", UrlConfig.TAG_NINETH);
@@ -222,11 +235,19 @@ public class FindFragment extends Fragment implements FindContract.View, FindLis
         switch (id) {
             case R.id.find_menu:
                 MainActivity mainActivity = (MainActivity) getActivity();
-                if(mainActivity.isOpen())
+                if (mainActivity.isOpen())
                     mainActivity.closeSlide();
                 else
                     mainActivity.openSlide();
                 break;
+        }
+    }
+
+    @Override
+    public void onScrollToBottom() {
+        if (needLoad) {
+            page += 30;
+            presenter.loadFindData(getActivity(), page);
         }
     }
 }

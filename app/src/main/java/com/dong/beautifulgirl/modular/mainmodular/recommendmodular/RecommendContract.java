@@ -18,7 +18,7 @@ public interface RecommendContract {
 
         void loadRecommendTab(Context context);
 
-        void loadRecommend(Context context, String tag);
+        void loadRecommend(Context context, String tag, int page);
 
     }
 

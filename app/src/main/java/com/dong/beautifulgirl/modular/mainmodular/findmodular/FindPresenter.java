@@ -25,7 +25,7 @@ public class FindPresenter implements FindContract.Presenter, FindServerHelper.O
 
     @Override
     public void start(Context context) {
-        loadFindData(context);
+        loadFindData(context, 0);
         loadFindHeadData(context);
     }
 
@@ -41,8 +41,8 @@ public class FindPresenter implements FindContract.Presenter, FindServerHelper.O
     }
 
     @Override
-    public void loadFindData(Context context) {
-        findServerHelper.loadFindData(context);
+    public void loadFindData(Context context, int page) {
+        findServerHelper.loadFindData(context, page);
     }
 
     @Override

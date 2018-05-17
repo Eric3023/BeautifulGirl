@@ -23,6 +23,7 @@ public class RecommendAdapter extends RecyclerView.Adapter <RecommendAdapter.Vie
     private Context context;
     private List<TestBean.DataBean> resultsBeans;
     private OnClickListener onClickListener;
+    private OnScrollToBottomListener onScrollToBottomListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -38,8 +39,12 @@ public class RecommendAdapter extends RecyclerView.Adapter <RecommendAdapter.Vie
         }
     }
 
-    public  interface   OnClickListener{
+    public interface OnClickListener{
         void onClick(List<TestBean.DataBean> resultsBeans, int position);
+    }
+
+    public interface OnScrollToBottomListener{
+        void onScrollToBottom();
     }
 
     public RecommendAdapter(Context context, List<TestBean.DataBean> resultsBeans) {
@@ -51,6 +56,10 @@ public class RecommendAdapter extends RecyclerView.Adapter <RecommendAdapter.Vie
         this.onClickListener = onClickListener;
     }
 
+    public void setOnScrollToBottomListener(OnScrollToBottomListener onScrollToBottomListener) {
+        this.onScrollToBottomListener = onScrollToBottomListener;
+    }
+
     @Override
     public RecommendAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_recommend,parent,false);
@@ -60,6 +69,11 @@ public class RecommendAdapter extends RecyclerView.Adapter <RecommendAdapter.Vie
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+
+        if(position == getItemCount() -1&&onScrollToBottomListener!=null){
+            onScrollToBottomListener.onScrollToBottom();
+        }
+
         if(resultsBeans!=null){
             final TestBean.DataBean resultsBean = resultsBeans.get(position);
             if(resultsBean!=null){

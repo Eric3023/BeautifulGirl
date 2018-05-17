@@ -21,7 +21,7 @@ import com.squareup.picasso.Picasso;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LikeActivity extends AppCompatActivity implements LikeContract.View, LikeAdapter.OnClickListener, CarouselLayoutManager.OnCenterItemSelectionListener {
+public class LikeActivity extends AppCompatActivity implements LikeContract.View, LikeAdapter.OnClickListener, CarouselLayoutManager.OnCenterItemSelectionListener, LikeAdapter.OnScrollToBottomListener {
 
     private RecyclerView recyclerView;
     private List<TestBean.DataBean> dataBeans;
@@ -31,6 +31,9 @@ public class LikeActivity extends AppCompatActivity implements LikeContract.View
     private CarouselLayoutManager layoutManager;
     private ImageView background;
     private int position;
+
+    private int page;
+    private boolean needLoad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,11 +51,20 @@ public class LikeActivity extends AppCompatActivity implements LikeContract.View
         initPresenter();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.viewDestroyed();
+    }
+
     private void initIntent() {
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         if(bundle!=null)
             position = bundle.getInt("POSITION", 0);
+
+        page = 0;
+        needLoad =true;
     }
 
     private void initTransition() {
@@ -86,13 +98,15 @@ public class LikeActivity extends AppCompatActivity implements LikeContract.View
         layoutManager.setPostLayoutListener(new CarouselZoomPostLayoutListener());
 
         likeAdapter.setOnClickListener(this);
+        likeAdapter.setOnScrollToBottomListener(this);
         layoutManager.addOnItemSelectionListener(this);
 
         layoutManager.scrollToPosition(position);
     }
 
     private void initPresenter() {
-        presenter = new LikePresent(this);
+        presenter = new LikePresent();
+        presenter.viewCreated(this);
         presenter.start(this);
     }
 
@@ -103,6 +117,12 @@ public class LikeActivity extends AppCompatActivity implements LikeContract.View
 
     @Override
     public void likeDataChanged(List<TestBean.DataBean> dataBeans) {
+
+        if(dataBeans!=null && dataBeans.size()!=0)
+            needLoad =true;
+        else
+            needLoad=false;
+
         int oldSize = this.dataBeans.size();
         this.dataBeans.addAll(dataBeans);
         int newSize = this.dataBeans.size();
@@ -122,5 +142,14 @@ public class LikeActivity extends AppCompatActivity implements LikeContract.View
             if(dataBean!=null&& !TextUtils.isEmpty(dataBean.getImage_url()))
                 Picasso.get().load(dataBean.getImage_url()).into(background);
         }
+    }
+
+    @Override
+    public void onScrollToBottom() {
+        if(needLoad){
+            page+=30;
+            presenter.loadLikeData(this, page);
+        }
+
     }
 }

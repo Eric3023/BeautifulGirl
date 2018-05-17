@@ -25,15 +25,15 @@ public class HomePresenter implements HomeContract.Presenter, HomeServerHelper.O
 
     @Override
     public void start(Context context) {
-        loadHomeData(context);
+        loadHomeData(context, 0);
         loadHomeHeadData(context);
         loadHomeCardData(context);
     }
 
 
     @Override
-    public void loadHomeData(Context context) {
-        homeServerHelper.loadHomeData(context);
+    public void loadHomeData(Context context, int page) {
+        homeServerHelper.loadHomeData(context, page);
     }
 
     @Override

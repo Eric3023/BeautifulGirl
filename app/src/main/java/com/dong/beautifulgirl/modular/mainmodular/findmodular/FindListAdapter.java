@@ -22,6 +22,7 @@ public class FindListAdapter extends BaseAdapter {
     private List<TestBean.DataBean> list;
     private Context context;
     private OnCardItemClickListener onCardItemClickListener;
+    private OnScrollToBottomListener onScrollToBottomListener;
 
     public FindListAdapter(Context context, List<TestBean.DataBean> list) {
         this.context = context;
@@ -30,6 +31,10 @@ public class FindListAdapter extends BaseAdapter {
 
     public void setOnCardItemClickListener(OnCardItemClickListener onCardItemClickListener) {
         this.onCardItemClickListener = onCardItemClickListener;
+    }
+
+    public void setOnScrollToBottomListener(OnScrollToBottomListener onScrollToBottomListener) {
+        this.onScrollToBottomListener = onScrollToBottomListener;
     }
 
     @Override
@@ -76,6 +81,10 @@ public class FindListAdapter extends BaseAdapter {
                 }
             });
         }
+
+        if(i == getCount() -1&& onScrollToBottomListener!=null)
+            onScrollToBottomListener.onScrollToBottom();
+
         return view;
     }
 
@@ -83,6 +92,11 @@ public class FindListAdapter extends BaseAdapter {
 
         void onCardItemClick(int i);
     }
+    public interface OnScrollToBottomListener{
+
+        void onScrollToBottom();
+    }
+
 }
 
 class ViewHolder {

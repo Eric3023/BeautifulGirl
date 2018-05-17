@@ -4,6 +4,7 @@ import android.content.Context;
 
 import com.dong.beautifulgirl.base.BasePresenter;
 import com.dong.beautifulgirl.base.BaseView;
+import com.dong.beautifulgirl.modular.likemodular.LikeContract;
 
 /**
  * Created by donghuadong on 2018/4/10.
@@ -12,6 +13,10 @@ import com.dong.beautifulgirl.base.BaseView;
 public interface LogicContract {
 
     interface Presenter extends BasePresenter{
+
+        void viewCreated(LogicContract.View view);
+
+        void viewDestroyed();
 
         void loadLogicData(Context context, String account, String password);
 

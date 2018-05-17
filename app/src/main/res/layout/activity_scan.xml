@@ -11,14 +11,44 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
+    <RelativeLayout
+        android:id="@+id/scan_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fitsSystemWindows="true"
+        android:background="#aa000000">
+
+        <TextView
+            android:id="@+id/scan_title_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="二维码/条码"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/x16"
+            android:layout_margin="@dimen/y5"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true"/>
+
+        <TextView
+            android:id="@+id/scan_photo_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="相册"
+            android:layout_alignBaseline="@id/scan_title_text"
+            android:textColor="@android:color/white"
+            android:textSize="@dimen/x15"
+            android:layout_margin="@dimen/y5"
+            android:layout_alignParentRight="true"/>
+    </RelativeLayout>
+
     <Button
         android:id="@+id/btn_switch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="SwitchLight"
-        android:layout_marginBottom="@dimen/y50"
+        android:layout_width="@dimen/y25"
+        android:layout_height="@dimen/y25"
+        android:layout_marginBottom="@dimen/y160"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true" />
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/scan_switch"/>
 
 
 </RelativeLayout>

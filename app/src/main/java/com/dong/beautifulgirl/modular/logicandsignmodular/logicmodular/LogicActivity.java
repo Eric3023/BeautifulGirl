@@ -54,8 +54,15 @@ public class LogicActivity extends BaseActivity implements View.OnClickListener,
         initPresenter();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        presenter.viewDestroyed();
+    }
+
     private void initPresenter() {
-        presenter = new LogicPresent(this);
+        presenter = new LogicPresent();
+        presenter.viewCreated(this);
     }
 
     private void initView() {

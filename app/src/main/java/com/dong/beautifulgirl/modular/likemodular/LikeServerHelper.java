@@ -18,17 +18,16 @@ import io.reactivex.disposables.Disposable;
 
 public class LikeServerHelper {
 
-    private int pn_like;//页码
     private final int rn_like = 30;//一页显示的数量
 
     private OnLikeDataChangedListener listener;
     private ArrayList<TestBean.DataBean> dataBeans;
 
-    public void loadLikeData(Context context){
+    public void loadLikeData(Context context, int page){
 
         dataBeans = new ArrayList<TestBean.DataBean>();
 
-        HeadModel.getTestData(context, pn_like ,rn_like, UrlConfig.TAG_ROOT, UrlConfig.TAG_THIRD, UrlConfig.IE)
+        HeadModel.getTestData(context, page ,rn_like, UrlConfig.TAG_ROOT, UrlConfig.TAG_THIRD, UrlConfig.IE)
                 .subscribe(new Observer<TestBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {

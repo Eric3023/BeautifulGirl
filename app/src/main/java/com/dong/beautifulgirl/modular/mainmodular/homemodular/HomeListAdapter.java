@@ -22,6 +22,7 @@ public class HomeListAdapter extends BaseAdapter {
     private List<TestBean.DataBean> list;
     private Context context;
     private OnCardItemClickListener onCardItemClickListener;
+    private OnScrollToBottomListener onScrollToBottomListener;
 
     public HomeListAdapter(Context context, List<TestBean.DataBean> list) {
         this.context = context;
@@ -30,6 +31,10 @@ public class HomeListAdapter extends BaseAdapter {
 
     public void setOnCardItemClickListener(OnCardItemClickListener onCardItemClickListener) {
         this.onCardItemClickListener = onCardItemClickListener;
+    }
+
+    public void setOnScrollToBottomListener(OnScrollToBottomListener onScrollToBottomListener) {
+        this.onScrollToBottomListener = onScrollToBottomListener;
     }
 
     @Override
@@ -79,12 +84,21 @@ public class HomeListAdapter extends BaseAdapter {
                 }
             });
         }
+
+        if(i == getCount() -1&& onScrollToBottomListener!=null)
+            onScrollToBottomListener.onScrollToBottom();
+
         return view;
     }
 
     public interface OnCardItemClickListener{
 
         void onCardItemClick(ImageView shareImg, int i);
+    }
+
+    public interface OnScrollToBottomListener{
+
+        void onScrollToBottom();
     }
 }
 

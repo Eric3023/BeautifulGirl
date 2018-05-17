@@ -1,6 +1,7 @@
 package com.dong.beautifulgirl.modular.searchdetailmodular;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.dong.beautifulgirl.http.HeadModel;
 import com.dong.beautifulgirl.http.UrlConfig;
@@ -21,7 +22,6 @@ public class SearchDetailServerHelper {
 
     private final String TN = "resultjson_com";
     private final String IPN = "rj";
-    private int pn;//页码
     private final int rn = 30;//一页显示的数量
 
     private OnSearchDetailDataChangedListener listener;
@@ -31,11 +31,11 @@ public class SearchDetailServerHelper {
         this.listener = listener;
     }
 
-    public void loadSearchDetail(Context context, String tag) {
+    public void loadSearchDetail(Context context, String tag, int page) {
 
         resultsBeans = new ArrayList<SearchDetailBean.DataBean>();
 
-        HeadModel.getSearchDetailData(context, TN ,IPN, tag, pn, rn, UrlConfig.IE)
+        HeadModel.getSearchDetailData(context, TN ,IPN, tag, page, rn, UrlConfig.IE)
                 .subscribe(new Observer<SearchDetailBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {

@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.dong.beautifulgirl.base.BasePresenter;
 import com.dong.beautifulgirl.base.BaseView;
-import com.dong.beautifulgirl.modular.mainmodular.minemodular.MineLikeBean;
+import com.dong.beautifulgirl.modular.detailmodular.DetailContract;
 import com.dong.beautifulgirl.test.TestBean;
 
 import java.util.List;
@@ -17,7 +17,11 @@ public interface LikeContract {
 
     interface Presenter extends BasePresenter{
 
-        void loadLikeData(Context context);
+        void viewCreated(LikeContract.View view);
+
+        void viewDestroyed();
+
+        void loadLikeData(Context context, int page);
 
     }
 

@@ -29,7 +29,7 @@ public class RecommendPresent implements RecommendContract.Presenter, RecommendS
     @Override
     public void start(Context context) {
         loadRecommendTab(context);
-        loadRecommend(context, UrlConfig.TAG_FIRST);
+        loadRecommend(context, UrlConfig.TAG_FIRST, 0);
     }
 
     @Override
@@ -38,8 +38,8 @@ public class RecommendPresent implements RecommendContract.Presenter, RecommendS
     }
 
     @Override
-    public void loadRecommend(Context context, String tag) {
-        serverHelper.loadRecommend(context, tag);
+    public void loadRecommend(Context context, String tag, int page) {
+        serverHelper.loadRecommend(context, tag, page);
     }
 
     @Override

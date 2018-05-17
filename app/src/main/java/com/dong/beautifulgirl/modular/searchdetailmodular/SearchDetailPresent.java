@@ -1,11 +1,6 @@
 package com.dong.beautifulgirl.modular.searchdetailmodular;
 
 import android.content.Context;
-import android.util.Log;
-
-import com.dong.beautifulgirl.http.UrlConfig;
-import com.dong.beautifulgirl.modular.mainmodular.recommendmodular.RecommendTabBean;
-import com.dong.beautifulgirl.test.TestBean;
 
 import java.util.List;
 
@@ -33,8 +28,8 @@ public class SearchDetailPresent implements SearchDetailContract.Presenter, Sear
     }
 
     @Override
-    public void loadSearchDetail(Context context, String tag) {
-        serverHelper.loadSearchDetail(context, tag);
+    public void loadSearchDetail(Context context, String tag, int page) {
+        serverHelper.loadSearchDetail(context, tag, page);
     }
 
     @Override

@@ -28,6 +28,7 @@ public class SearchDetailAdapter extends RecyclerView.Adapter <SearchDetailAdapt
     private Context context;
     private List<SearchDetailBean.DataBean> resultsBeans;
     private OnClickListener onClickListener;
+    private OnScrollToBottomListener onScrollToBottomListener;
 
     public static class ViewHolder extends RecyclerView.ViewHolder{
 
@@ -41,8 +42,12 @@ public class SearchDetailAdapter extends RecyclerView.Adapter <SearchDetailAdapt
         }
     }
 
-    public  interface   OnClickListener{
-        void onClick(List<SearchDetailBean.DataBean> resultsBeans, int position);
+    public interface OnClickListener{
+        void onClick(List<SearchDetailBean.DataBean> resultsBeans, ImageView img, int position);
+    }
+
+    public interface OnScrollToBottomListener{
+        void onScrollToBottom();
     }
 
     public SearchDetailAdapter(Context context, List<SearchDetailBean.DataBean> resultsBeans) {
@@ -54,6 +59,10 @@ public class SearchDetailAdapter extends RecyclerView.Adapter <SearchDetailAdapt
         this.onClickListener = onClickListener;
     }
 
+    public void setOnScrollToBottomListener(OnScrollToBottomListener onScrollToBottomListener) {
+        this.onScrollToBottomListener = onScrollToBottomListener;
+    }
+
     @Override
     public SearchDetailAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_search_detail,parent,false);
@@ -63,6 +72,10 @@ public class SearchDetailAdapter extends RecyclerView.Adapter <SearchDetailAdapt
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+
+        if(position == getItemCount() -1&&onScrollToBottomListener!=null)
+            onScrollToBottomListener.onScrollToBottom();
+
         if(resultsBeans!=null){
             final SearchDetailBean.DataBean resultsBean = resultsBeans.get(position);
             if(resultsBean!=null){
@@ -79,7 +92,7 @@ public class SearchDetailAdapter extends RecyclerView.Adapter <SearchDetailAdapt
                     @Override
                     public void onClick(View view) {
                         if(onClickListener!=null)
-                            onClickListener.onClick(resultsBeans, position);
+                            onClickListener.onClick(resultsBeans,holder.imageView, position);
                     }
                 });
             }

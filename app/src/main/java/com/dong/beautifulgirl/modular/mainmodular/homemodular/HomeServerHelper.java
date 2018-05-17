@@ -30,9 +30,9 @@ public class HomeServerHelper {
 
     public OnHomeDataChangedListener onHomeDataChangedListener;
 
-    public void loadHomeData(Context context) {
+    public void loadHomeData(Context context, int page) {
 
-        HeadModel.getTestData(context, pn_con, rn_con, UrlConfig.TAG_ROOT, UrlConfig.TAG_THIRD, UrlConfig.IE)
+        HeadModel.getTestData(context, page, rn_con, UrlConfig.TAG_ROOT, UrlConfig.TAG_THIRD, UrlConfig.IE)
                 .subscribe(new Observer<TestBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {

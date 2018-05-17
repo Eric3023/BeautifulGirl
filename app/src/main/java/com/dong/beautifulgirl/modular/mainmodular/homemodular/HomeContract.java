@@ -15,7 +15,7 @@ import java.util.List;
 public class HomeContract {
 
     interface Presenter extends BasePresenter{
-        void loadHomeData(Context context);
+        void loadHomeData(Context context, int page);
 
         void loadHomeHeadData(Context context);
 

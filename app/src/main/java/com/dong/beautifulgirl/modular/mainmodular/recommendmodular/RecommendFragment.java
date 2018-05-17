@@ -28,7 +28,7 @@ import java.util.List;
  * Use the {@link RecommendFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class RecommendFragment extends Fragment implements RecommendContract.View, View.OnClickListener {
+public class RecommendFragment extends Fragment implements RecommendContract.View, View.OnClickListener, RecommendAdapter.OnScrollToBottomListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -50,6 +50,9 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
     private List<TestBean.DataBean> resultsBeans;
     private List<RecommendTabBean> tabBeans;
     private String tag = UrlConfig.TAG_FIRST;
+
+    private int page;
+    private boolean needLoad;
 
     public RecommendFragment() {
         // Required empty public constructor
@@ -90,6 +93,9 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
 
         initView(view);
 
+        page = 0 ;
+        needLoad = true;
+
         if (presenter != null)
             presenter.start(getContext());
 
@@ -126,7 +132,9 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
                     resultsBeans.clear();
                     recommendAdapter.notifyItemRangeRemoved(0, size);
                     tag = tabBeans.get(position).getTab();
-                    presenter.loadRecommend(RecommendFragment.this.getActivity(), tabBeans.get(position).getTab());
+                    page = 0;
+                    needLoad = true;
+                    presenter.loadRecommend(RecommendFragment.this.getActivity(), tabBeans.get(position).getTab(), page);
                 }
             }
         });
@@ -155,6 +163,7 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
                 }
             }
         });
+        recommendAdapter.setOnScrollToBottomListener(this);
         recyclerView.setAdapter(recommendAdapter);
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -183,6 +192,12 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
 
     @Override
     public void RecommendDataChanged(List<TestBean.DataBean> resultsBeans) {
+
+        if(resultsBeans!=null&&resultsBeans.size()!=0)
+            needLoad = true;
+        else
+            needLoad = false;
+
         if (resultsBeans != null) {
             int size = this.resultsBeans.size();
             this.resultsBeans.addAll(resultsBeans);
@@ -214,6 +229,14 @@ public class RecommendFragment extends Fragment implements RecommendContract.Vie
                     mainActivity.startComponent(SearchActivity.class);
                 }
                 break;
+        }
+    }
+
+    @Override
+    public void onScrollToBottom() {
+        if(needLoad){
+            page+=30;
+            presenter.loadRecommend(getActivity(), tag, page);
         }
     }
 }

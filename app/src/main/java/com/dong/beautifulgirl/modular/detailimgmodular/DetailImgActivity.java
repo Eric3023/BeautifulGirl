@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.dong.beautifulgirl.R;
 import com.squareup.picasso.Picasso;
 
@@ -31,7 +32,7 @@ public class DetailImgActivity extends AppCompatActivity {
 
     private void initView() {
         img = findViewById(R.id.detail_img);
-        Picasso.get().load(url).fit().centerInside().into(img);
+        Glide.with(this).load(url).fitCenter().into(img);
     }
 
 }

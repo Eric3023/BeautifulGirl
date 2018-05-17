@@ -12,17 +12,25 @@ public class LogicPresent implements LogicContract.Presenter, LogicServerHelper.
     private LogicContract.View view;
     private LogicServerHelper serverHelper;
 
-    public LogicPresent(LogicContract.View view) {
-        this.view = view;
-        if(view!=null)
-            view.setPresenter(this);
-
+    public LogicPresent() {
         serverHelper = new LogicServerHelper();
         serverHelper.setOnRecommendDataChangedListener(this);
     }
 
     @Override
     public void start(Context context) {
+    }
+
+    @Override
+    public void viewCreated(LogicContract.View view) {
+        this.view = view;
+        if(view!=null)
+            view.setPresenter(this);
+    }
+
+    @Override
+    public void viewDestroyed() {
+        this.view =null;
     }
 
     @Override

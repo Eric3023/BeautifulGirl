@@ -41,8 +41,15 @@ public class SignActivity extends BaseActivity implements View.OnClickListener, 
         initPresent();
     }
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        present.viewDestroyed();
+    }
+
     private void initPresent() {
-        present = new SignPresent(this);
+        present = new SignPresent();
+        present.viewCreated(this);
     }
 
     private void initView() {

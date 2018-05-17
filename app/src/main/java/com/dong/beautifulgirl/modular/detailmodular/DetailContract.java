@@ -16,7 +16,11 @@ public interface DetailContract {
 
     interface Presenter extends BasePresenter{
 
-        void loadDetailData(Context context, String tag, int rn);
+        void viewCreated(View view);
+
+        void viewDestroyed();
+
+        void loadDetailData(Context context, String tag, int rn, int page);
 
     }
 

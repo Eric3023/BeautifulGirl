@@ -1,5 +1,6 @@
 package com.dong.beautifulgirl.modular.searchdetailmodular;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,16 +9,17 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
 import android.util.Log;
+import android.util.Pair;
+import android.widget.ImageView;
 
 import com.dong.beautifulgirl.R;
 import com.dong.beautifulgirl.base.BaseActivity;
-import com.dong.beautifulgirl.modular.detailmodular.DetailActivity;
-import com.dong.beautifulgirl.test.TestBean;
+import com.dong.beautifulgirl.modular.detailimgmodular.DetailImgActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SearchDetailActivity extends BaseActivity implements SearchDetailContract.View {
+public class SearchDetailActivity extends BaseActivity implements SearchDetailContract.View, SearchDetailAdapter.OnScrollToBottomListener {
 
     private String tag;
     private RecyclerView recyclerView;
@@ -28,13 +30,16 @@ public class SearchDetailActivity extends BaseActivity implements SearchDetailCo
 
     private SearchDetailContract.Presenter presenter;
 
+    private int page;
+    private boolean needLoad;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_detail);
 
         initIntent();
-        initTransition();
+//        initTransition();
         initRecycleView();
         initPresenter();
     }
@@ -43,18 +48,20 @@ public class SearchDetailActivity extends BaseActivity implements SearchDetailCo
         Intent intent = getIntent();
         Bundle bundle = intent.getExtras();
         tag = bundle.getString("TAG");
+        page = 0;
+        needLoad = true;
     }
 
     private void initTransition() {
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Transition explode = TransitionInflater.from(this).inflateTransition(R.transition.explode);
+            Transition fade= TransitionInflater.from(this).inflateTransition(R.transition.fade);
 
-            getWindow().setEnterTransition(explode);
-            getWindow().setReturnTransition(explode);
+            getWindow().setEnterTransition(fade);
+            getWindow().setReturnTransition(fade);
 
-            getWindow().setExitTransition(explode);
-            getWindow().setReenterTransition(explode);
+            getWindow().setExitTransition(fade);
+            getWindow().setReenterTransition(fade);
         }
 
     }
@@ -70,16 +77,21 @@ public class SearchDetailActivity extends BaseActivity implements SearchDetailCo
         searchDetailAdapter = new SearchDetailAdapter(this, resultsBeans);
         searchDetailAdapter.setOnClickListener(new SearchDetailAdapter.OnClickListener() {
             @Override
-            public void onClick(List<SearchDetailBean.DataBean> resultsBeans, int position) {
+            public void onClick(List<SearchDetailBean.DataBean> resultsBeans,ImageView shareImg, int position) {
                 if (resultsBeans != null && resultsBeans.get(position) != null){
-                    Intent intent = new Intent(mContext, DetailActivity.class);
-                    intent.putExtra("POSITION", position);
-                    intent.putExtra("TAG", tag);
-                    intent.putExtra("RN", 30);
-//                    mContext.startActivity(intent);
+                    Intent intent = new Intent(mContext, DetailImgActivity.class);
+                    intent.putExtra("URL", resultsBeans.get(position).getThumbURL());
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        Pair<ImageView, String> imgPair = Pair.create(shareImg, "share detail img");
+                        ActivityOptions activityOptions = ActivityOptions.makeSceneTransitionAnimation(SearchDetailActivity.this, new Pair[]{imgPair});
+                        startActivity(intent, activityOptions.toBundle());
+                    } else {
+                        startActivity(intent);
+                    }
                 }
             }
         });
+        searchDetailAdapter.setOnScrollToBottomListener(this);
         recyclerView.setAdapter(searchDetailAdapter);
 
         recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -98,7 +110,7 @@ public class SearchDetailActivity extends BaseActivity implements SearchDetailCo
 
     private void initPresenter() {
         presenter= new SearchDetailPresent(this);
-        presenter.loadSearchDetail(this, tag);
+        presenter.loadSearchDetail(this, tag, page);
     }
 
     @Override
@@ -108,12 +120,23 @@ public class SearchDetailActivity extends BaseActivity implements SearchDetailCo
 
     @Override
     public void searchDetailDataChanged(List<SearchDetailBean.DataBean> dataBeans) {
+        if(dataBeans!=null&&dataBeans.size()!=0)
+            needLoad = true;
+        else
+            needLoad = false;
+
         int oldSize = resultsBeans.size();
-        resultsBeans.clear();
-        searchDetailAdapter.notifyItemRangeRemoved(0, oldSize);
         if(dataBeans!=null){
             resultsBeans.addAll(dataBeans);
-            searchDetailAdapter.notifyItemRangeInserted(0 , this.resultsBeans.size());
+            searchDetailAdapter.notifyItemRangeInserted(oldSize , this.resultsBeans.size());
+        }
+    }
+
+    @Override
+    public void onScrollToBottom() {
+        if(needLoad){
+            page+=30;
+            presenter.loadSearchDetail(this, tag, page);
         }
     }
 }

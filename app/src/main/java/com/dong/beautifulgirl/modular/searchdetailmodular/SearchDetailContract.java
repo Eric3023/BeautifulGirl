@@ -4,8 +4,6 @@ import android.content.Context;
 
 import com.dong.beautifulgirl.base.BasePresenter;
 import com.dong.beautifulgirl.base.BaseView;
-import com.dong.beautifulgirl.modular.mainmodular.recommendmodular.RecommendTabBean;
-import com.dong.beautifulgirl.test.TestBean;
 
 import java.util.List;
 
@@ -17,7 +15,7 @@ public interface SearchDetailContract {
 
     interface Presenter extends BasePresenter{
 
-        void loadSearchDetail(Context context, String tag);
+        void loadSearchDetail(Context context, String tag, int page);
 
     }
 

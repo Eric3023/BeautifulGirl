@@ -24,10 +24,15 @@ public class DetailAdapter extends PagerAdapter {
 
     private List<TestBean.DataBean> dataBeans;
     private Context context;
+    private OnScrollToBottomListener onScrollToBottomListener;
 
     public DetailAdapter(Context context, List<TestBean.DataBean> dataBeans) {
         this.dataBeans = dataBeans;
         this.context = context;
+    }
+
+    public void setOnScrollToBottomListener(OnScrollToBottomListener onScrollToBottomListener) {
+        this.onScrollToBottomListener = onScrollToBottomListener;
     }
 
     @Override
@@ -59,11 +64,18 @@ public class DetailAdapter extends PagerAdapter {
         }
         view.setId(position);
         container.addView(view);
+
+        if(position == getCount()-1&&onScrollToBottomListener!=null)
+            onScrollToBottomListener.onScrollToBottom();
         return view;
     }
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView(container.findViewById(position));
+    }
+
+    public interface OnScrollToBottomListener{
+        void onScrollToBottom();
     }
 }

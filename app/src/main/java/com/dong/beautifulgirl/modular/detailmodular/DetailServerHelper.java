@@ -21,16 +21,14 @@ import io.reactivex.disposables.Disposable;
 
 public class DetailServerHelper {
 
-    private int pn;//页码
-
     private OnDetailDataChangedListener listener;
     private ArrayList<TestBean.DataBean> dataBeans;
 
-    public void loadLDetailData(Context context, String tag, int rn){
+    public void loadLDetailData(Context context, String tag, int rn, int page){
 
         dataBeans = new ArrayList<TestBean.DataBean>();
 
-        HeadModel.getTestData(context, pn ,rn, UrlConfig.TAG_ROOT, tag, UrlConfig.IE)
+        HeadModel.getTestData(context, page ,rn, UrlConfig.TAG_ROOT, tag, UrlConfig.IE)
                 .subscribe(new Observer<TestBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {

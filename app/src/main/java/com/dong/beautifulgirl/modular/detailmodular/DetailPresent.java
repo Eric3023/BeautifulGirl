@@ -1,7 +1,6 @@
 package com.dong.beautifulgirl.modular.detailmodular;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.dong.beautifulgirl.test.TestBean;
 
@@ -16,11 +15,7 @@ public class DetailPresent implements DetailContract.Presenter, DetailServerHelp
     private DetailContract.View view;
     private DetailServerHelper serverHelper;
 
-    public DetailPresent(DetailContract.View view) {
-        this.view = view;
-        if(view!=null)
-            view.setPresenter(this);
-
+    public DetailPresent() {
         serverHelper = new DetailServerHelper();
         serverHelper.setOnRecommendDataChangedListener(this);
     }
@@ -31,8 +26,20 @@ public class DetailPresent implements DetailContract.Presenter, DetailServerHelp
     }
 
     @Override
-    public void loadDetailData(Context context, String tag, int rn) {
-        serverHelper.loadLDetailData(context, tag, rn);
+    public void viewCreated(DetailContract.View view) {
+        this.view = view;
+        if(view!=null)
+            view.setPresenter(this);
+    }
+
+    @Override
+    public void viewDestroyed() {
+        this.view = null;
+    }
+
+    @Override
+    public void loadDetailData(Context context, String tag, int rn, int page) {
+        serverHelper.loadLDetailData(context, tag, rn, page);
     }
 
     @Override

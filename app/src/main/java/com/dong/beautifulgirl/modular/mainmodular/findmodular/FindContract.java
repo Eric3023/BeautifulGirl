@@ -15,7 +15,7 @@ import java.util.List;
 public class FindContract {
 
     interface Presenter extends BasePresenter{
-        void loadFindData(Context context);
+        void loadFindData(Context context, int page);
 
         void loadFindHeadData(Context context);
     }

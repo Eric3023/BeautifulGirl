@@ -19,17 +19,18 @@ import io.reactivex.disposables.Disposable;
 
 public class RecommendServerHelper {
 
-    private int pn;//页码
     private final int rn = 30;//一页显示的数量
 
     private OnRecommendDataChangedListener listener;
     private List<TestBean.DataBean> resultsBeans;
 
-    public void loadRecommend(Context context, String tag){
+    public void loadRecommend(Context context, String tag, int page){
 
         resultsBeans = new ArrayList<TestBean.DataBean>();
 
-        HeadModel.getTestData(context, pn ,rn, UrlConfig.TAG_ROOT, tag, UrlConfig.IE)
+        Log.i("Dong", "page:"+page);
+
+        HeadModel.getTestData(context, page ,rn, UrlConfig.TAG_ROOT, tag, UrlConfig.IE)
                 .subscribe(new Observer<TestBean>() {
                     @Override
                     public void onSubscribe(Disposable d) {
